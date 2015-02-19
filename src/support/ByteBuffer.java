@@ -1,6 +1,11 @@
 package support;
 
-import java.io.*;                  //Network classes
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+//Network classes
 
 /**
  * <B>ByteBuffer</B> is a container for bytes. A ByteBuffer is to bytes, what a StringBuffer is to

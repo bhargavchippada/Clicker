@@ -15,21 +15,24 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.iitbombay.datahandler.ConnectWebService;
-import com.iitbombay.datahandler.PingWebService;
+
+//connection settings page, uses ConnectWebService class 
 
 public class MainActivity extends Activity{
-	String ClassName = "MainActivity";
+	public static String ClassName = "MainActivity";
 	
 	EditText edtxt_ipaddress;
 	EditText edtxt_port;
 	EditText edtxt_url;
 	CheckBox cbox_savesettings;
+	
+	Button btn_connect;
 	TextView txtvw_status;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
 		super.onCreate(savedInstanceState);
+		ApplicationContext appcontext = (ApplicationContext)getApplicationContext();
 		setContentView(R.layout.main_activity);
 		
 		edtxt_ipaddress = (EditText) findViewById(R.id.edtxt_ipaddress);
@@ -37,9 +40,10 @@ public class MainActivity extends Activity{
 		edtxt_url = (EditText) findViewById(R.id.edtxt_url);
 		cbox_savesettings = (CheckBox) findViewById(R.id.cbox_savesettings);
 		
-		Button btn_connect = (Button) findViewById(R.id.btn_connect);
+		btn_connect = (Button) findViewById(R.id.btn_connect);
 		txtvw_status = (TextView) findViewById(R.id.txtvw_status);
 		
+		//initializes view values
 		initializeViews();
 		
 		btn_connect.setOnClickListener(new OnClickListener() {
@@ -60,10 +64,12 @@ public class MainActivity extends Activity{
 		
 	}
 	
+	//Update the status....
 	public void updateUI(String msg){
 		txtvw_status.setText(msg);
 	}
 	
+	// bool == 0 means nothing is saved, bool == 1 means the settings are saved
 	void updateSharedPref(int bool){
 		String ip="",p="",urlp="";
 		boolean check = false;

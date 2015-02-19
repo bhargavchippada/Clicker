@@ -11,15 +11,15 @@ public class Utils {
 		System.out.println(s);
 	}
 	
-	public static void logv(String Classname, String s, Exception e){
-		if(e!=null) Log.v("Clicker", Classname+": "+s, e);
+	public static void logv(String classname, String s, Exception e){
+		if(e!=null) Log.v("Clicker", classname+": "+s, e);
 		else{
-			Log.v("Clicker", Classname+": "+s);
+			Log.v("Clicker", classname+": "+s);
 		}
 	}
 	
-	public static void logi(String classname, String msg){
-		System.out.println(classname+" : "+msg);
+	public static void logv(String classname, String msg){
+		Log.v("Clicker",classname+" : "+msg);
 	}
 	
 	public static String getIpAddress(Context context){

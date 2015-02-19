@@ -61,7 +61,7 @@ public class QuizPage extends Activity{
 			
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				Utils.logi(ClassName, checkedId+" is checked now");
+				Utils.logv(ClassName, checkedId+" is checked now");
 				UserProfile.answers.clear();
 				UserProfile.answers.add(optionIds.get(checkedId)+"");
 			}

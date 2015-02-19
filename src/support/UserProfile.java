@@ -2,8 +2,6 @@ package support;
 
 import java.util.ArrayList;
 
-import support.Utils;
-
 
 public class UserProfile {
 	public static String classname = "UserProfile";
@@ -27,7 +25,7 @@ public class UserProfile {
 	}
 	
 	void print(){
-		Utils.logi(classname, rollnumber+","+password+","+name);
+		Utils.logv(classname, rollnumber+","+password+","+name);
 	}
 	
 	public String getPassword(){

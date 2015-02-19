@@ -14,9 +14,6 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 import support.AppSettings;
@@ -26,6 +23,7 @@ import support.Utils;
 import android.os.Handler;
 import android.widget.Toast;
 
+import com.iitbombay.clicker.ApplicationContext;
 import com.iitbombay.clicker.LoginPage;
 
 /**
@@ -90,6 +88,7 @@ public class AuthenticateWS {
 	  request_map.put("uid",uid);
 	  request_map.put("pwd",pwd);
 	  try {
+		  /*
 	    HttpParams params = new BasicHttpParams();
 	
 	    // set params for connection...
@@ -97,7 +96,7 @@ public class AuthenticateWS {
 	    HttpConnectionParams.setConnectionTimeout(params, NetworkConnectionTimeout_ms);
 	    HttpConnectionParams.setSoTimeout(params, NetworkConnectionTimeout_ms);
 	    DefaultHttpClient httpClient = new DefaultHttpClient(params);
-	
+		*/
 	    // create post method
 	    HttpPost postMethod = new HttpPost(AppSettings.LoginServiceUri+SharedSettings.authenticate);
 	
@@ -110,7 +109,8 @@ public class AuthenticateWS {
 	
 	    // associating entity with method
 	    postMethod.setEntity(req_entity);
-	
+	    
+	    DefaultHttpClient httpClient = ApplicationContext.getThreadSafeClient();
 	    // RESPONSE
 	    httpClient.execute(postMethod, new ResponseHandler<Void>() {
 	      public Void handleResponse(HttpResponse response) throws ClientProtocolException, IOException {

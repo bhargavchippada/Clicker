@@ -24,18 +24,20 @@ public class LoginPage extends Activity{
 	EditText edtxt_username;
 	EditText edtxt_password;
 	CheckBox cbox_savedetails;
+	
+	Button btn_login;
 	TextView txtvw_status;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.login_page);
+		
 		edtxt_username = (EditText) findViewById(R.id.edtxt_username);
 		edtxt_password = (EditText) findViewById(R.id.edtxt_password);
 		cbox_savedetails = (CheckBox) findViewById(R.id.cbox_savedetails);
 		
-		Button btn_login = (Button) findViewById(R.id.btn_login);
+		btn_login = (Button) findViewById(R.id.btn_login);
 		txtvw_status = (TextView) findViewById(R.id.txtvw_status);
 		
 		initializeViews();
@@ -57,10 +59,12 @@ public class LoginPage extends Activity{
 		
 	}
 	
+	//Update the status....
 	public void updateUI(String msg){
 		txtvw_status.setText(msg);
 	}
 	
+	// bool == 0 means nothing is saved, bool == 1 means the settings are saved
 	void updateSharedPref(int bool){
 		String user="",pass="";
 		boolean check = false;

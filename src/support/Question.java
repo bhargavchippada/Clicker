@@ -32,7 +32,7 @@ public class Question{
 	}
 	
 	public static void print(){
-		Utils.logi(classname, questionContent);
-		for(int i=0; i<options.size();i++) Utils.logi(classname, options.get(i));
+		Utils.logv(classname, questionContent);
+		for(int i=0; i<options.size();i++) Utils.logv(classname, options.get(i));
 	}
 }
