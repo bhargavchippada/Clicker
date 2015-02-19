@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import support.Question;
-import support.UserProfile;
+import support.UserSession;
 import support.Utils;
 import android.app.Activity;
 import android.content.Intent;
@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.iitbombay.datahandler.LoadQuizFromWS;
 
 public class HomePage extends Activity{
+	String classname = "HomePage";
 	
 	TextView txtvw_roll_number;
 	TextView txtvw_name;
@@ -28,6 +29,8 @@ public class HomePage extends Activity{
 	
 	Button btn_startquiz;
 	ProgressBar pbar_startquiz;
+	
+	UserSession usersession;
 	
 	int status; //0 means start button can ask server, 1 means it can't ask
 	
@@ -44,17 +47,17 @@ public class HomePage extends Activity{
 		txtvw_clsnm = (TextView) findViewById(R.id.txtvw_clsnm);
 		txtvw_status = (TextView) findViewById(R.id.txtvw_status);
 		
-		Intent intent = getIntent();
-		UserProfile.initialize();
-		UserProfile.rollnumber = intent.getStringExtra("uid");
-		UserProfile.name = intent.getStringExtra("name");
-		UserProfile.clsnm = intent.getStringExtra("clsnm");
-		UserProfile.ipaddress = Utils.getIpAddress(getBaseContext());
+		usersession = ((ApplicationContext) getApplicationContext()).getThreadSafeUserSession();
+		if(!usersession.isSessionValid()){
+			Utils.logv(classname, "UserSession is invalid");
+			gotoLoginPage();
+		}
 		
-		txtvw_roll_number.setText(UserProfile.rollnumber);
-		txtvw_name.setText(UserProfile.name);
-		txtvw_clsnm.setText(UserProfile.clsnm);
-		txtvw_ipaddress.setText(UserProfile.ipaddress);
+		String ipaddress = Utils.getIpAddress(getBaseContext());
+		txtvw_roll_number.setText(usersession.username);
+		txtvw_name.setText(usersession.name);
+		txtvw_clsnm.setText(usersession.clsnm);
+		txtvw_ipaddress.setText(ipaddress);
 		
 		btn_startquiz = (Button) findViewById(R.id.btn_startquiz);
 		pbar_startquiz = (ProgressBar) findViewById(R.id.pbar_startquiz);

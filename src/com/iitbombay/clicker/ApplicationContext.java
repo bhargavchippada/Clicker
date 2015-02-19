@@ -9,6 +9,7 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
+import support.UserSession;
 import support.Utils;
 import android.app.Application;
 
@@ -18,6 +19,8 @@ public class ApplicationContext extends Application{
 	private int NetworkConnectionTimeout_ms = 5000;
 	private DefaultHttpClient httpClient;
 	private CookieStore cookieStore;
+	private UserSession usersession;
+	//private HashMap<String,String> cookiesMap;
 	
 	@Override
 	public void onCreate() {
@@ -45,5 +48,40 @@ public class ApplicationContext extends Application{
 	    httpClient.setCookieStore(cookieStore);
         return httpClient;
     }
+	
+	public synchronized UserSession getThreadSafeUserSession(){
+		if(usersession==null) usersession = new UserSession();
+		return usersession;
+	}
+	
+	/*
+	public synchronized HashMap<String, String> getThreadSafeCookiesMap(){
+		if(cookiesMap==null){
+			cookiesMap = new HashMap<String, String>();
+		}
+		updateThreadSafeCookiesMap();
+		return cookiesMap;
+	}
+	
+	public synchronized void updateThreadSafeCookiesMap(){
+		if(cookiesMap==null){
+			cookiesMap = new HashMap<String, String>();
+		}
+		List<Cookie> cookies = httpClient.getCookieStore().getCookies();
+		
+		if(cookies != null)
+        {
+            for(Cookie cookie : cookies)
+            {
+            	cookiesMap.put(cookie.getName(), cookie.getValue());
+            }
+        }
+	}
+	*/
+	public synchronized void invalidateSession(){
+		httpClient.getCookieStore().clear();
+		usersession.clear();
+		//cookiesMap.clear();
+	}
 	
 }

@@ -31,7 +31,7 @@ public class GetDataFromWebServer {
 	}
 
 	// this method is called in a non-"edt" thread
-	public void doInBackgroundPost(String path, StringEntity req_entity, Activity _activity) {
+	public void doInBackgroundPost(String path, StringEntity req_entity, final Activity _activity) {
 		Utils.logv(classname, "background task - start");
 		long startTime = System.currentTimeMillis();
 		
@@ -51,7 +51,6 @@ public class GetDataFromWebServer {
 					HttpEntity resp_entity = response.getEntity();
 					
 					List<Cookie> cookies = httpClient.getCookieStore().getCookies();
-					
 					if(cookies != null)
 		            {
 		                for(Cookie cookie : cookies)
@@ -60,6 +59,8 @@ public class GetDataFromWebServer {
 		                    Utils.logv(classname, cookieString);  
 		                }
 		            }
+					
+					//((ApplicationContext)_activity.getApplicationContext()).updateThreadSafeCookiesMap();
 					
 					
 					if (resp_entity != null) {

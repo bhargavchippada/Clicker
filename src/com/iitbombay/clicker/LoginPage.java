@@ -65,7 +65,7 @@ public class LoginPage extends Activity{
 				}
 				
 				new AuthenticateWS().execute(LoginPage.this);
-				Utils.logv(ClassName, "Login button os pressed",null);
+				Utils.logv(ClassName, "Login button is pressed",null);
 			}
 		});
 		
@@ -125,9 +125,6 @@ public class LoginPage extends Activity{
 	
 	public void gotoHomePage(JSONObject dataFromServlet) throws JSONException{
 		Intent intent = new Intent(this,HomePage.class);
-		intent.putExtra("uid", dataFromServlet.getString("uid"));
-		intent.putExtra("name", dataFromServlet.getString("name"));
-		intent.putExtra("clsnm", dataFromServlet.getString("clsnm"));
 		startActivity(intent);
 	}
 	

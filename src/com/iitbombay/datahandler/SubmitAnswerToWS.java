@@ -23,11 +23,11 @@ import org.apache.http.util.EntityUtils;
 import support.AppSettings;
 import support.MIMETypeConstantsIF;
 import support.SharedSettings;
-import support.UserProfile;
 import support.Utils;
 import android.os.Handler;
 import android.widget.Toast;
 
+import com.iitbombay.clicker.ApplicationContext;
 import com.iitbombay.clicker.QuizPage;
 
 /**
@@ -88,7 +88,7 @@ public class SubmitAnswerToWS {
 	  uid =  _activity.getUsername();
 	  HashMap<String, Serializable> request_map = new HashMap<String,Serializable>();
 	  request_map.put("uid",uid);
-	  request_map.put("answer", UserProfile.answers);
+	  request_map.put("answer", ((ApplicationContext)_activity.getApplicationContext()).getThreadSafeUserSession().answers);
 	  try {
 	    HttpParams params = new BasicHttpParams();
 	

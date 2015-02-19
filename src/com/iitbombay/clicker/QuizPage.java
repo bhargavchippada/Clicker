@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import support.Question;
-import support.UserProfile;
+import support.UserSession;
 import support.Utils;
 import android.app.Activity;
 import android.content.Intent;
@@ -33,12 +33,15 @@ public class QuizPage extends Activity{
 	
 	HashMap<Integer,Integer> optionIds;
 	
+	UserSession userSession;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.quiz_page);
 		
-		UserProfile.answers.clear();
+		userSession = ((ApplicationContext)getApplicationContext()).getThreadSafeUserSession();
+		userSession.answers.clear();
 		optionIds = new HashMap<Integer, Integer>();
 		
 		txtvw_username = (TextView) findViewById(R.id.txtvw_username);
@@ -48,7 +51,7 @@ public class QuizPage extends Activity{
 		btn_submit = (Button) findViewById(R.id.btn_submit);
 		btn_exit = (Button) findViewById(R.id.btn_exit);
 		
-		txtvw_username.setText(UserProfile.rollnumber);
+		txtvw_username.setText(userSession.username);
 		txtvw_quizContent.setText(Question.questionContent);
 		for(int i=0;i<Question.options.size();i++){
 			RadioButton row = (RadioButton) getLayoutInflater().inflate(R.layout.singleoption_radiobtn, rg_options, false);
@@ -62,8 +65,8 @@ public class QuizPage extends Activity{
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				Utils.logv(ClassName, checkedId+" is checked now");
-				UserProfile.answers.clear();
-				UserProfile.answers.add(optionIds.get(checkedId)+"");
+				userSession.answers.clear();
+				userSession.answers.add(optionIds.get(checkedId)+"");
 			}
 		});
 		
@@ -71,7 +74,7 @@ public class QuizPage extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				if(UserProfile.answers.size()!=0){
+				if(userSession.answers.size()!=0){
 					new SubmitAnswerToWS().execute(QuizPage.this);
 				}else{
 					Toast.makeText(getBaseContext(),"Please Select an Option...", Toast.LENGTH_SHORT).show();

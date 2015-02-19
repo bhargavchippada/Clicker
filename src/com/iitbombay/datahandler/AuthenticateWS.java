@@ -8,10 +8,12 @@ import org.json.JSONObject;
 
 import support.AppSettings;
 import support.SharedSettings;
+import support.UserSession;
 import support.Utils;
 import android.os.Handler;
 import android.widget.Toast;
 
+import com.iitbombay.clicker.ApplicationContext;
 import com.iitbombay.clicker.LoginPage;
 
 
@@ -66,7 +68,7 @@ public class AuthenticateWS {
 		new Thread() {
 			@Override public void run() {
 				uiThreadCallback.post(runInUIThread1);
-				data.doInBackgroundPost(AppSettings.LoginServiceUri+SharedSettings.ping, req_entity, _activity);
+				data.doInBackgroundPost(AppSettings.LoginServiceUri+SharedSettings.authentication, req_entity, _activity);
 				uiThreadCallback.post(runInUIThread2);
 			}
 		}.start();
@@ -90,7 +92,12 @@ public class AuthenticateWS {
 					}else if(status==2){
 						Toast.makeText(_activity,"Login success",Toast.LENGTH_SHORT).show();
 						_activity.updateUI("Login success");
-						data.dataFromServlet.put("uid", _activity.getUsername());
+						ApplicationContext applicationcontext = (ApplicationContext)_activity.getApplicationContext();
+						UserSession usersession =applicationcontext.getThreadSafeUserSession();
+						usersession.clear();
+						usersession.username = _activity.getUsername();
+						usersession.name = data.dataFromServlet.getString("name");
+						usersession.clsnm = data.dataFromServlet.getString("clsnm");
 						_activity.gotoHomePage(data.dataFromServlet);
 					}else if(status==3){
 						Toast.makeText(_activity,"Server: error processing request",Toast.LENGTH_SHORT).show();

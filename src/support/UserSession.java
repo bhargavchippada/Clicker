@@ -5,21 +5,27 @@ import java.util.ArrayList;
 public class UserSession {
 	String classname = "UserSession";
 	
-	public String rollnumber;
+	public String username;
 	public String name;
 	public String clsnm;
-	public String SESSIONID;
 	public ArrayList<String> answers = new ArrayList<String>();
 	
-	public void initialize(){
-		rollnumber = null;
+	public void clear(){
+		username = null;
 		name= null;
 		clsnm= null;
-		SESSIONID = null;
 		answers.clear();
 	}
 	
-	void print(){
-		Utils.logv(classname, rollnumber+","+name+","+clsnm+","+SESSIONID+","+answers);
+	public boolean isSessionValid(){
+		if(username==null || name==null || clsnm==null){
+			return false;
+		}else return true;
+	}
+	
+	public void print(){
+		if(isSessionValid()){
+			Utils.logv(classname, username+","+name+","+clsnm+","+answers);
+		}
 	}
 }
