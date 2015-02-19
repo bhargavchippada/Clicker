@@ -173,7 +173,7 @@ public class LoadQuizFromWS {
 		                   ex.getMessage() == null ? "Error" : "Error - " + ex.getMessage(),
 		                   Toast.LENGTH_SHORT).show();
 		    _activity.updateUI("Connection failed",View.INVISIBLE);
-		    _activity.gotoConnectPage();
+		    _activity.gotoLoginPage();
 		  }
 	  
 	  }

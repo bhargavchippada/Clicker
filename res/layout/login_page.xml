@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
 <LinearLayout 
@@ -8,24 +8,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center_horizontal">
-    	<TextView
+    	<LinearLayout 
     	    android:layout_width="match_parent"
     	    android:layout_height="48dp"
-    	    android:paddingLeft="16dp"
-    	    android:text="Clicker! Welcome!"
-    	    android:textSize="20sp"
-    	    android:textStyle="italic"
-    	    android:textColor="@android:color/white"
-    	    android:gravity="center_vertical"
-    	    android:background="@color/app_background"/>
-    	<ImageView
-    	    android:layout_width="128dp"
-    	    android:layout_height="128dp"
-    	    android:layout_margin="16dp"
-    	    android:background="@drawable/inverted_launcher"/>
+    	    android:orientation="horizontal"
+    	    android:background="@color/app_background">
+    	    <ImageView
+	    	    android:layout_width="32dp"
+	    	    android:layout_height="match_parent"
+	    	    android:layout_margin="8dp"
+	    	    android:background="@drawable/launcher"/>
+    	    <TextView
+	    	    android:layout_width="match_parent"
+	    	    android:layout_height="48dp"
+	    	    android:text="Clicker!"
+	    	    android:textSize="20sp"
+	    	    android:textColor="@android:color/white"
+	    	    android:gravity="center_vertical"/>
+    	</LinearLayout>
     	<LinearLayout
 			    android:layout_width="256dp"
 			    android:layout_height="match_parent"
+			    android:layout_marginTop="16dp"
 			    android:orientation="vertical">
 	    	<TextView 
 	    	    android:layout_width="wrap_content"
@@ -35,6 +39,26 @@
 	    	    android:textSize="24sp"
 	    	    android:textStyle="bold"
 	    	    android:layout_marginBottom="16dp"/>
+	    	<EditText
+	    	    android:id="@+id/edtxt_ipaddress"
+	    	    android:layout_width="256dp"
+	    	    android:layout_height="48dp"
+	    	    android:inputType="text"
+	    	    android:hint="Type IP address"/>
+	    	<EditText 
+	    	    android:id="@+id/edtxt_port"
+	    	    android:layout_width="256dp"
+	    	    android:layout_height="48dp"
+	    	    android:layout_marginTop="8dp"
+	    	    android:inputType="text"
+	    	    android:hint="Type Port Number"/>
+	    	<EditText 
+	    	    android:id="@+id/edtxt_url"
+	    	    android:layout_width="256dp"
+	    	    android:layout_height="48dp"
+	    	    android:layout_marginTop="8dp"
+	    	    android:inputType="text"
+	    	    android:hint="Type URL"/>
 	    	<EditText
 	    	    android:id="@+id/edtxt_username"
 	    	    android:layout_width="256dp"
@@ -46,30 +70,30 @@
 	    	    android:layout_width="256dp"
 	    	    android:layout_height="48dp"
 	    	    android:layout_marginTop="8dp"
-	    	    android:inputType="text"
+	    	    android:inputType="textPassword"
 	    	    android:hint="Password"/>
 	    	<CheckBox
-	    	    android:id="@+id/cbox_savedetails"
+	    	    android:id="@+id/cbox_savesettings"
 	    	    android:layout_width="wrap_content"
 	    	    android:layout_height="wrap_content"
 	    	    android:layout_marginTop="8dp"
-	    	    android:text="Save details" />
+	    	    android:text="Save settings" />
 	    	<Button 
-	    	    android:id="@+id/btn_login"
+	    	    android:id="@+id/btn_connect"
 	    	    android:layout_width="128dp"
 	    	    android:layout_height="48dp"
 	    	    android:layout_marginTop="8dp"
 	    	    android:layout_gravity="center_horizontal"
 	    	    android:text="Login"/>
-	    	<TextView 
-	    	    android:id="@+id/txtvw_status"
-	    	    android:layout_width="wrap_content"
-	    	    android:layout_height="wrap_content"
-	    	    android:layout_margin="4dp"
-	    	    android:layout_gravity="center"
-	    	    android:text="Press 'Login' to login..."
-	    	    android:textSize="20sp"
-	    	    android:textStyle="italic"/>
     	</LinearLayout>
+    	<TextView 
+    	    android:id="@+id/txtvw_status"
+    	    android:layout_width="wrap_content"
+    	    android:layout_height="wrap_content"
+    	    android:layout_margin="4dp"
+    	    android:layout_gravity="center"
+    	    android:text="Click to login"
+    	    android:textSize="20sp"
+    	    android:textStyle="italic"/>
 </LinearLayout>
 </ScrollView>

@@ -46,8 +46,7 @@ public class HomePage extends Activity{
 		
 		Intent intent = getIntent();
 		UserProfile.initialize();
-		UserProfile.rollnumber = intent.getStringExtra("rollnum");
-		UserProfile.password = intent.getStringExtra("password");
+		UserProfile.rollnumber = intent.getStringExtra("uid");
 		UserProfile.name = intent.getStringExtra("name");
 		UserProfile.clsnm = intent.getStringExtra("clsnm");
 		UserProfile.ipaddress = Utils.getIpAddress(getBaseContext());
@@ -97,8 +96,8 @@ public class HomePage extends Activity{
 		startActivity(new Intent(this,QuizPage.class));
 	}
 	
-	public void gotoConnectPage(){
-		Intent intent = new Intent(this,MainActivity.class);
+	public void gotoLoginPage(){
+		Intent intent = new Intent(this,LoginPage.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 	}

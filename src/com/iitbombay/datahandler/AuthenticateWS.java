@@ -1,185 +1,115 @@
 package com.iitbombay.datahandler;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.HashMap;
+import java.io.UnsupportedEncodingException;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ByteArrayEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.util.EntityUtils;
+import org.apache.http.entity.StringEntity;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import support.AppSettings;
-import support.MIMETypeConstantsIF;
 import support.SharedSettings;
 import support.Utils;
 import android.os.Handler;
 import android.widget.Toast;
 
-import com.iitbombay.clicker.ApplicationContext;
 import com.iitbombay.clicker.LoginPage;
 
-/**
- * This class connects to the Ping Servlet and sends a String and gets a String.
- */
+
+// This class connects to the Ping Servlet and sends a String and gets a String.
 public class AuthenticateWS {
-	String ClassName = "AuthenticateWS";
-	
-	int NetworkConnectionTimeout_ms = 5000;
-	
-	// data
-	
-	/* ref to the calling activity */
+	String classname = "AuthenticateWS";
+
+	// reference  to the calling activity
 	private LoginPage _activity;
-	private Exception ex;
-	private HashMap<String, String> dataFromServlet;
-	String uid;
-	String pwd;
-	// methods
-	
+	private GetDataFromWebServer data;
+
 	public void execute(LoginPage activity) {
-	
-	  _activity = activity;
-	
-	  // allows non-"edt" thread to be re-inserted into the "edt" queue
-	  final Handler uiThreadCallback = new Handler();
-	
-	  // performs rendering in the "edt" thread, before background operation starts
-	  final Runnable runInUIThread1 = new Runnable() {
-	    public void run() {
-	      _showInUI(0);
-	    }
-	  };
-	  
-	  // performs rendering in the "edt" thread, after background operation is complete
-	  final Runnable runInUIThread2 = new Runnable() {
-	    public void run() {
-	      _showInUI(1);
-	    }
-	  };
-	
-	  new Thread() {
-	    @Override public void run() {
-	      uiThreadCallback.post(runInUIThread1);
-	      _doInBackgroundPost();
-	      uiThreadCallback.post(runInUIThread2);
-	    }
-	  }.start();
-	
-	  //Toast.makeText(_activity, "Getting data from servlet", Toast.LENGTH_SHORT).show();
-	
+		_activity = activity;
+
+		// performs rendering in the "edt" thread, before background operation starts
+		final Runnable runInUIThread1 = new Runnable() {
+			public void run() {
+				_showInUI(0);
+			}
+		};
+
+		// performs rendering in the "edt" thread, after background operation is complete
+		final Runnable runInUIThread2 = new Runnable() {
+			public void run() {
+				_showInUI(1);
+			}
+		};
+
+		// create the request object
+		JSONObject jsonreq = new JSONObject();
+		final StringEntity req_entity;
+		try {
+			jsonreq.put("uid", _activity.getUsername());
+			jsonreq.put("pwd", _activity.getPassword());		
+			req_entity = new StringEntity(jsonreq.toString());
+			Utils.logv(classname, "client request: "+jsonreq.toString());
+		} catch (JSONException e1) {
+			Utils.logv(classname, "JSON object creation error!",e1);
+			e1.printStackTrace();
+			return;
+		} catch (UnsupportedEncodingException e) {
+			Utils.logv(classname, "JSON object creation error: UnsupportedEncodingException!",e);
+			e.printStackTrace();
+			return;
+		}
+
+		// link: http://docs.oracle.com/javase/tutorial/uiswing/concurrency/dispatch.html
+		// allows non-"edt" thread to be re-inserted into the "edt" queue
+		final Handler uiThreadCallback = new Handler();
+
+		data = new GetDataFromWebServer(classname);
+		new Thread() {
+			@Override public void run() {
+				uiThreadCallback.post(runInUIThread1);
+				data.doInBackgroundPost(AppSettings.LoginServiceUri+SharedSettings.ping, req_entity, _activity);
+				uiThreadCallback.post(runInUIThread2);
+			}
+		}.start();
 	}
 
-	/** this method is called in a non-"edt" thread */
-	private void _doInBackgroundPost() {
-	  Utils.logv(ClassName, "background task - start",null);
-	  long startTime = System.currentTimeMillis();
-	  
-	  uid =  _activity.getUsername();
-	  pwd = _activity.getPassword();
-	  HashMap<String, String> request_map = new HashMap<String,String>();
-	  request_map.put("uid",uid);
-	  request_map.put("pwd",pwd);
-	  try {
-		  /*
-	    HttpParams params = new BasicHttpParams();
-	
-	    // set params for connection...
-	    HttpConnectionParams.setStaleCheckingEnabled(params, false);
-	    HttpConnectionParams.setConnectionTimeout(params, NetworkConnectionTimeout_ms);
-	    HttpConnectionParams.setSoTimeout(params, NetworkConnectionTimeout_ms);
-	    DefaultHttpClient httpClient = new DefaultHttpClient(params);
-		*/
-	    // create post method
-	    HttpPost postMethod = new HttpPost(AppSettings.LoginServiceUri+SharedSettings.authenticate);
-	
-	    // create request entity
-	    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	    ObjectOutputStream oos = new ObjectOutputStream(baos);
-	    oos.writeObject(request_map);
-	    ByteArrayEntity req_entity = new ByteArrayEntity(baos.toByteArray());
-	    req_entity.setContentType(MIMETypeConstantsIF.BINARY_TYPE);
-	
-	    // associating entity with method
-	    postMethod.setEntity(req_entity);
-	    
-	    DefaultHttpClient httpClient = ApplicationContext.getThreadSafeClient();
-	    // RESPONSE
-	    httpClient.execute(postMethod, new ResponseHandler<Void>() {
-	      public Void handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
-	        HttpEntity resp_entity = response.getEntity();
-	        if (resp_entity != null) {
-	
-	          try {
-	            byte[] data = EntityUtils.toByteArray(resp_entity);
-	            ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(data));
-	            dataFromServlet = (HashMap<String, String>) ois.readObject();
-	            Utils.logv(ClassName,"data size from servlet=" + data.length,null);
-	            Utils.logv(ClassName,"data hashmap from servlet=" + dataFromServlet.toString(),null);
-	          }
-	          catch (Exception e) {
-	        	  ex = e;
-	        	  //e.printStackTrace();
-	        	  Utils.logv(ClassName,"problem processing post response",e);
-	          }
-	
-	        }
-	        else {
-	          Utils.logv(ClassName,"No response entity",null);
-	          throw new IOException(
-	              new StringBuffer()
-	                  .append("HTTP response : ").append(response.getStatusLine())
-	                  .toString());
-	        }
-	        return null;
-	      }
-	    });
-	
-	  }
-	  catch (Exception e) {
-	    ex = e;
-	    Utils.logv(ClassName,"Error Establishing Connection to Server",e);
-	  }
-	
-	 	Utils.logv(ClassName,"background task - end",null);
-	 	long stopTime = System.currentTimeMillis();
-	    long elapsedTime = stopTime - startTime;
-	    Utils.logv(ClassName,elapsedTime+"ms",null);
-	}
-	
-	/** this method is called in the "edt" */
-	private void _showInUI(int status) {
-	  if(status==0){
-		  _activity.updateUI("Trying to authenticate..");
-	  }else{
-		
-		  if (dataFromServlet != null){
-			if(dataFromServlet.get("status").equals("1")){
-			    Toast.makeText(_activity,"Login Success",Toast.LENGTH_SHORT).show();
-			    _activity.updateUI("Login Success");
-			    dataFromServlet.put("uid", uid);
-			    dataFromServlet.put("pwd", pwd);
-			    _activity.gotoHomePage(dataFromServlet);
-			}else{
-				Toast.makeText(_activity,"Login Failed",Toast.LENGTH_SHORT).show();
-			    _activity.updateUI("Login Failed");
+	// this method is called in the "edt"
+	private void _showInUI(int uiStatus) {
+		if(uiStatus==0){
+			_activity.updateUI("Trying to connect to Server..");
+		}else{
+
+			if (data.dataFromServlet != null){
+				try {
+					int status = (int)data.dataFromServlet.get("status");
+					if(status==0){
+						Toast.makeText(_activity,"Server is not ready, Wait!",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Server is not ready, Wait!");
+					}else if(status==1){
+						Toast.makeText(_activity,"Incorrect username or password",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Incorrect username or password");
+					}else if(status==2){
+						Toast.makeText(_activity,"Login success",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Login success");
+						data.dataFromServlet.put("uid", _activity.getUsername());
+						_activity.gotoHomePage(data.dataFromServlet);
+					}else if(status==3){
+						Toast.makeText(_activity,"Server: error processing request",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Server: error processing request");
+					}else{
+						Toast.makeText(_activity,"Invalid satus code",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Invalid satus code");
+					}
+				} catch (JSONException e) {
+					Utils.logv(classname, "dataFromServlet retrieval error!",e);
+					e.printStackTrace();
+				}
+			}else if (data.ex != null){
+				Toast.makeText(_activity,
+						data.ex.getMessage() == null ? "Error" : "Error - " + data.ex.getMessage(),
+								Toast.LENGTH_SHORT).show();
+				_activity.updateUI("Connection failed");
 			}
-		  }else if (ex != null){
-		    Toast.makeText(_activity,
-		                   ex.getMessage() == null ? "Error" : "Error - " + ex.getMessage(),
-		                   Toast.LENGTH_SHORT).show();
-		    _activity.updateUI("Connection failed");
-		    _activity.gotoConnectPage();
-		  }
-	  
-	  }
+		}
 	}
 
 }

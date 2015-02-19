@@ -83,7 +83,7 @@ public class QuizPage extends Activity{
 			
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getBaseContext(), MainActivity.class);
+				Intent intent = new Intent(getBaseContext(), LoginPage.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
 			}
@@ -120,8 +120,8 @@ public class QuizPage extends Activity{
 		}
 	}
 	
-	public void gotoConnectPage(){
-		Intent intent = new Intent(this,MainActivity.class);
+	public void gotoLoginPage(){
+		Intent intent = new Intent(this,LoginPage.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
 	}

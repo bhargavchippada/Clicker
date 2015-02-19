@@ -11,28 +11,21 @@ import org.apache.http.params.HttpParams;
 
 import support.Utils;
 import android.app.Application;
-import android.os.Handler;
-import android.widget.Toast;
 
 public class ApplicationContext extends Application{
 	public static String classname = "ApplicationContext";
 	
-	private static int NetworkConnectionTimeout_ms = 5000;
-	private static DefaultHttpClient httpClient;
-	private static CookieStore cookieStore;
-	
-	// link: http://docs.oracle.com/javase/tutorial/uiswing/concurrency/dispatch.html
-	// allows non-"edt" thread to be re-inserted into the "edt" queue
-	public static final Handler uiThreadCallback = new Handler();
+	private int NetworkConnectionTimeout_ms = 5000;
+	private DefaultHttpClient httpClient;
+	private CookieStore cookieStore;
 	
 	@Override
 	public void onCreate() {
-		Toast.makeText(getApplicationContext(), "Welcome to Clicker", Toast.LENGTH_SHORT).show();
 	}
 	
 	
 	// link: http://foo.jasonhudgins.com/2009/08/http-connection-reuse-in-android.html
-	public synchronized static DefaultHttpClient getThreadSafeClient() {
+	public synchronized DefaultHttpClient getThreadSafeClient() {
 		if(httpClient!=null) return httpClient;
 		Utils.logv(classname, "New httpClient is created");
 		
@@ -52,13 +45,5 @@ public class ApplicationContext extends Application{
 	    httpClient.setCookieStore(cookieStore);
         return httpClient;
     }
-	
-	public synchronized static CookieStore getThreadSafeCookieStore(){
-		if(cookieStore==null) {
-			Utils.logv(classname, "New CookieStore is created");
-			cookieStore = new BasicCookieStore();
-		}
-		return cookieStore;
-	}
 	
 }

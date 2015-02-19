@@ -8,17 +8,16 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
 import support.MIMETypeConstantsIF;
 import support.Utils;
+
+import android.app.Activity;
 
 import com.iitbombay.clicker.ApplicationContext;
 
@@ -32,15 +31,11 @@ public class GetDataFromWebServer {
 	}
 
 	// this method is called in a non-"edt" thread
-	public void doInBackgroundPost(String path, StringEntity req_entity) {
+	public void doInBackgroundPost(String path, StringEntity req_entity, Activity _activity) {
 		Utils.logv(classname, "background task - start");
 		long startTime = System.currentTimeMillis();
 		
 		try {
-			 // Create local HTTP context
-		    //HttpContext localContext = new BasicHttpContext();
-			//localContext.setAttribute(ClientContext.COOKIE_STORE, ApplicationContext.getThreadSafeCookieStore());
-		    
 			// create the post method
 			HttpPost postMethod = new HttpPost(path);
 			
@@ -49,7 +44,7 @@ public class GetDataFromWebServer {
 			// associating request entity with post method
 			postMethod.setEntity(req_entity);
 
-			final DefaultHttpClient httpClient = ApplicationContext.getThreadSafeClient();
+			final DefaultHttpClient httpClient = ((ApplicationContext)_activity.getApplicationContext()).getThreadSafeClient();
 			// response
 			httpClient.execute(postMethod, new ResponseHandler<Void>() {
 				public Void handleResponse(HttpResponse response) throws ClientProtocolException, IOException {

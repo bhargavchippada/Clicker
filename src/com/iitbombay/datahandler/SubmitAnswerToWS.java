@@ -175,7 +175,7 @@ public class SubmitAnswerToWS {
 		                   ex.getMessage() == null ? "Error" : "Error - " + ex.getMessage(),
 		                   Toast.LENGTH_SHORT).show();
 		    _activity.updateUI("Connection failed");
-		    _activity.gotoConnectPage();
+		    _activity.gotoLoginPage();
 		  }
 	  }
 	}
