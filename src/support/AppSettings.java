@@ -1,7 +1,7 @@
 package support;
 
-public class AppSettings {
-	public static String ClassName = "AppSettings";
+public class AppSettings{
+	public static String classname = "AppSettings";
 	
 	//default server service uri
 	public static String LoginServiceUri = "";
@@ -9,10 +9,15 @@ public class AppSettings {
 	//Android shared preference key 
 	public static String preference_file_key = "clickerSP";
 	
+	//format of sending data
+	public static String JSON_TYPE = "application/json";
 	
-	//
-	public static void updateUrl(String ip, String p, String urlpath){
+	public static String authentication = "authentication";
+	public static String loadquiz = "pushquiz";
+	public static String submitanswer = "receiveanswer";
+	
+	public static synchronized void updateUrl(String ip, String p, String urlpath){
 		LoginServiceUri = "http://"+ip+":"+p+"/"+urlpath+"/";
-		Utils.logv(ClassName,LoginServiceUri, null);
+		Utils.logv(classname,LoginServiceUri, null);
 	}
 }

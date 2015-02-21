@@ -14,7 +14,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
-import support.MIMETypeConstantsIF;
+import support.AppSettings;
 import support.Utils;
 
 import com.iitbombay.clicker.ApplicationContext;
@@ -37,7 +37,7 @@ public class GetDataFromWebServer {
 			// create the post method
 			HttpPost postMethod = new HttpPost(path);
 
-			req_entity.setContentType(MIMETypeConstantsIF.JSON_TYPE);
+			req_entity.setContentType(AppSettings.JSON_TYPE);
 			// associating request entity with post method
 			postMethod.setEntity(req_entity);
 

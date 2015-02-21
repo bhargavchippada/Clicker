@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 import support.AppSettings;
 import support.Question;
-import support.SharedSettings;
 import support.Utils;
 import android.os.Handler;
 import android.view.View;
@@ -79,7 +78,7 @@ public class LoadQuizFromWS {
 		new Thread() {
 			@Override public void run() {
 				uiThreadCallback.post(runInUIThread1);
-				data.doInBackgroundPost(AppSettings.LoginServiceUri+SharedSettings.pushquiz, req_entity);
+				data.doInBackgroundPost(AppSettings.LoginServiceUri+AppSettings.loadquiz, req_entity);
 				uiThreadCallback.post(runInUIThread2);
 			}
 		}.start();

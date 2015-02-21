@@ -9,7 +9,6 @@ import org.json.JSONObject;
 
 import support.AppSettings;
 import support.Question;
-import support.SharedSettings;
 import support.UserSession;
 import support.Utils;
 import android.os.Handler;
@@ -81,7 +80,7 @@ public class SubmitAnswerToWS {
 		new Thread() {
 			@Override public void run() {
 				uiThreadCallback.post(runInUIThread1);
-				data.doInBackgroundPost(AppSettings.LoginServiceUri+SharedSettings.receiveanswer, req_entity);
+				data.doInBackgroundPost(AppSettings.LoginServiceUri+AppSettings.submitanswer, req_entity);
 				uiThreadCallback.post(runInUIThread2);
 			}
 		}.start();
@@ -93,10 +92,12 @@ public class SubmitAnswerToWS {
 		if(uiStatus==0){
 			_activity.updateUI("Trying to submit answer..");
 		}else{
-
 			if (data.dataFromServlet != null){
 				int status = (int)data.dataFromServlet.get("status");
-				if(status==1){
+				if(status==0){
+					Toast.makeText(_activity,"Failed to submit answer",Toast.LENGTH_SHORT).show();
+					_activity.updateUI("Failed to submit answer");
+				}else if(status==1){
 					Toast.makeText(_activity,"Answer submitted!",Toast.LENGTH_SHORT).show();
 					_activity.updateUI("Answer submitted!");
 					JSONArray answer = (JSONArray) data.dataFromServlet.get("answer");
@@ -114,9 +115,9 @@ public class SubmitAnswerToWS {
 						_activity.updateUI(output);
 					}
 					_activity.disableBtns();
-				}else{
-					Toast.makeText(_activity,"Failed to submit answer..",Toast.LENGTH_SHORT).show();
-					_activity.updateUI("Failed to submit answer..");
+				}else if(status==2){
+					Toast.makeText(_activity,"You have already submitted",Toast.LENGTH_SHORT).show();
+					_activity.updateUI("You have already submitted");
 				}
 			}else if (data.ex != null){
 				Toast.makeText(_activity,

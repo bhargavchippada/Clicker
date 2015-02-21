@@ -7,7 +7,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import support.AppSettings;
-import support.SharedSettings;
 import support.UserSession;
 import support.Utils;
 import android.os.Handler;
@@ -68,7 +67,7 @@ public class AuthenticateWS {
 		new Thread() {
 			@Override public void run() {
 				uiThreadCallback.post(runInUIThread1);
-				data.doInBackgroundPost(AppSettings.LoginServiceUri+SharedSettings.authentication, req_entity);
+				data.doInBackgroundPost(AppSettings.LoginServiceUri+AppSettings.authentication, req_entity);
 				uiThreadCallback.post(runInUIThread2);
 			}
 		}.start();
