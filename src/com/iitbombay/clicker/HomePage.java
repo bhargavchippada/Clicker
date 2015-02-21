@@ -47,7 +47,7 @@ public class HomePage extends Activity{
 		txtvw_clsnm = (TextView) findViewById(R.id.txtvw_clsnm);
 		txtvw_status = (TextView) findViewById(R.id.txtvw_status);
 		
-		usersession = ((ApplicationContext) getApplicationContext()).getThreadSafeUserSession();
+		usersession = ApplicationContext.getThreadSafeUserSession();
 		if(!usersession.isSessionValid()){
 			Utils.logv(classname, "UserSession is invalid");
 			gotoLoginPage();

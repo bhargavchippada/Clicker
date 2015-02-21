@@ -17,8 +17,6 @@ import org.json.JSONObject;
 import support.MIMETypeConstantsIF;
 import support.Utils;
 
-import android.app.Activity;
-
 import com.iitbombay.clicker.ApplicationContext;
 
 public class GetDataFromWebServer {
@@ -31,20 +29,19 @@ public class GetDataFromWebServer {
 	}
 
 	// this method is called in a non-"edt" thread
-	public void doInBackgroundPost(String path, StringEntity req_entity, final Activity _activity) {
+	public void doInBackgroundPost(String path, StringEntity req_entity) {
 		Utils.logv(classname, "background task - start");
 		long startTime = System.currentTimeMillis();
 		
 		try {
 			// create the post method
 			HttpPost postMethod = new HttpPost(path);
-			
 
 			req_entity.setContentType(MIMETypeConstantsIF.JSON_TYPE);
 			// associating request entity with post method
 			postMethod.setEntity(req_entity);
 
-			final DefaultHttpClient httpClient = ((ApplicationContext)_activity.getApplicationContext()).getThreadSafeClient();
+			final DefaultHttpClient httpClient = ApplicationContext.getThreadSafeClient();
 			// response
 			httpClient.execute(postMethod, new ResponseHandler<Void>() {
 				public Void handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
@@ -61,7 +58,6 @@ public class GetDataFromWebServer {
 		            }
 					
 					//((ApplicationContext)_activity.getApplicationContext()).updateThreadSafeCookiesMap();
-					
 					
 					if (resp_entity != null) {
 

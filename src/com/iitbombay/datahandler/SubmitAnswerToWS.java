@@ -88,7 +88,7 @@ public class SubmitAnswerToWS {
 	  uid =  _activity.getUsername();
 	  HashMap<String, Serializable> request_map = new HashMap<String,Serializable>();
 	  request_map.put("uid",uid);
-	  request_map.put("answer", ((ApplicationContext)_activity.getApplicationContext()).getThreadSafeUserSession().answers);
+	  request_map.put("answer", ApplicationContext.getThreadSafeUserSession().answers);
 	  try {
 	    HttpParams params = new BasicHttpParams();
 	

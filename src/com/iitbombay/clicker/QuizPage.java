@@ -40,8 +40,7 @@ public class QuizPage extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.quiz_page);
 		
-		userSession = ((ApplicationContext)getApplicationContext()).getThreadSafeUserSession();
-		userSession.answers.clear();
+		userSession = ApplicationContext.getThreadSafeUserSession();
 		optionIds = new HashMap<Integer, Integer>();
 		
 		txtvw_username = (TextView) findViewById(R.id.txtvw_username);

@@ -2,6 +2,7 @@ package com.iitbombay.clicker;
 
 import org.apache.http.client.CookieStore;
 import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.params.ConnManagerParams;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
@@ -16,19 +17,15 @@ import android.app.Application;
 public class ApplicationContext extends Application{
 	public static String classname = "ApplicationContext";
 	
-	private int NetworkConnectionTimeout_ms = 5000;
-	private DefaultHttpClient httpClient;
-	private CookieStore cookieStore;
-	private UserSession usersession;
+	private static int NetworkConnectionTimeout_ms = 5000;
+	private static DefaultHttpClient httpClient;
+	private static CookieStore cookieStore;
+	private static UserSession usersession;
 	//private HashMap<String,String> cookiesMap;
-	
-	@Override
-	public void onCreate() {
-	}
 	
 	
 	// link: http://foo.jasonhudgins.com/2009/08/http-connection-reuse-in-android.html
-	public synchronized DefaultHttpClient getThreadSafeClient() {
+	public synchronized static DefaultHttpClient getThreadSafeClient() {
 		if(httpClient!=null) return httpClient;
 		Utils.logv(classname, "New httpClient is created");
 		
@@ -37,6 +34,7 @@ public class ApplicationContext extends Application{
 	    HttpConnectionParams.setStaleCheckingEnabled(params, false);
 	    HttpConnectionParams.setConnectionTimeout(params, NetworkConnectionTimeout_ms);
 	    HttpConnectionParams.setSoTimeout(params, NetworkConnectionTimeout_ms);
+	    ConnManagerParams.setMaxTotalConnections(params, 5);
 	    
 	    //creating cookie
 	    if(cookieStore == null)  cookieStore = new BasicCookieStore();
@@ -49,11 +47,11 @@ public class ApplicationContext extends Application{
         return httpClient;
     }
 	
-	public synchronized UserSession getThreadSafeUserSession(){
+	public synchronized static UserSession getThreadSafeUserSession(){
 		if(usersession==null) usersession = new UserSession();
 		return usersession;
 	}
-	
+
 	/*
 	public synchronized HashMap<String, String> getThreadSafeCookiesMap(){
 		if(cookiesMap==null){
@@ -78,10 +76,11 @@ public class ApplicationContext extends Application{
         }
 	}
 	*/
-	public synchronized void invalidateSession(){
+	public synchronized static void invalidateSession(){
 		httpClient.getCookieStore().clear();
 		usersession.clear();
 		//cookiesMap.clear();
 	}
+	
 	
 }
