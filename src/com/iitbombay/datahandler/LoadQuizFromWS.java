@@ -36,6 +36,7 @@ public class LoadQuizFromWS {
 				try {
 					_showInUI(0);
 				} catch (JSONException e) {
+					Utils.logv(classname, "Json exception",e);
 					e.printStackTrace();
 				}
 			}
@@ -47,6 +48,7 @@ public class LoadQuizFromWS {
 				try {
 					_showInUI(1);
 				} catch (JSONException e) {
+					Utils.logv(classname, "Json exception",e);
 					e.printStackTrace();
 				}
 			}
