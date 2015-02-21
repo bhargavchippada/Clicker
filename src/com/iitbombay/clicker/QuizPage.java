@@ -36,6 +36,7 @@ public class QuizPage extends Activity{
 	HashMap<Integer,Integer> optionIds;
 	
 	UserSession userSession;
+	Question question;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,8 @@ public class QuizPage extends Activity{
 		setContentView(R.layout.quiz_page);
 		
 		userSession = ApplicationContext.getThreadSafeUserSession();
+		question = ApplicationContext.getThreadSafeQuestion();
+		
 		optionIds = new HashMap<Integer, Integer>();
 		
 		txtvw_username = (TextView) findViewById(R.id.txtvw_username);
@@ -53,11 +56,11 @@ public class QuizPage extends Activity{
 		btn_exit = (Button) findViewById(R.id.btn_exit);
 		
 		txtvw_username.setText(userSession.username);
-		txtvw_quizContent.setText(Question.questionContent);
-		for(int i=0;i<Question.options.length();i++){
+		txtvw_quizContent.setText(question.questionContent);
+		for(int i=0;i<question.options.length();i++){
 			RadioButton row = (RadioButton) getLayoutInflater().inflate(R.layout.singleoption_radiobtn, rg_options, false);
 			try {
-				row.setText(Question.options.get(i).toString());
+				row.setText(question.options.get(i).toString());
 			} catch (JSONException e) {
 				Utils.logv(classname,"JSon Error while setting the options", e);
 				e.printStackTrace();
@@ -117,7 +120,7 @@ public class QuizPage extends Activity{
 		int op;
 		for(int i=0;i<answer.size();i++){
 			op = Integer.parseInt(answer.get(i));
-			output+="\n"+op+": "+Question.options.get(op-1);
+			output+="\n"+op+": "+question.options.get(op-1);
 		}
 		txtvw_status.setText(output);
 	}

@@ -1,31 +1,14 @@
 package com.iitbombay.datahandler;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.BasicHttpParams;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
-import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import support.AppSettings;
-import support.MIMETypeConstantsIF;
+import support.Question;
 import support.SharedSettings;
 import support.Utils;
 import android.os.Handler;
@@ -90,6 +73,7 @@ public class LoadQuizFromWS {
 		// allows non-"edt" thread to be re-inserted into the "edt" queue
 		final Handler uiThreadCallback = new Handler();
 
+		data = new GetDataFromWebServer(classname);
 		new Thread() {
 			@Override public void run() {
 				uiThreadCallback.post(runInUIThread1);
@@ -110,7 +94,13 @@ public class LoadQuizFromWS {
 				if(status==1){
 					Toast.makeText(_activity,"Quiz retrievel Success!",Toast.LENGTH_SHORT).show();
 					_activity.updateUI("Quiz retrievel Success!",View.INVISIBLE);
-					_activity.gotoQuizPage(data.dataFromServlet);
+					synchronized (ApplicationContext.class) {
+						Question question = ApplicationContext.getThreadSafeQuestion();
+						question.questionContent = (String)data.dataFromServlet.get("questionContent");
+						question.quesType = (int)data.dataFromServlet.get("quesType");
+						question.options = (JSONArray) data.dataFromServlet.get("options");
+					}
+					_activity.gotoQuizPage();
 				}else{
 					Toast.makeText(_activity,"Quiz retrieval Failed",Toast.LENGTH_SHORT).show();
 					_activity.updateUI("Quiz retrieval Failed",View.INVISIBLE);

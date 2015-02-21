@@ -71,6 +71,12 @@ public class LoginPage extends Activity{
 		
 	}
 	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		ApplicationContext.invalidateSession();
+	}
+	
 	//Update the status....
 	public void updateUI(String msg){
 		txtvw_status.setText(msg);

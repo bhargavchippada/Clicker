@@ -9,6 +9,7 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
+import support.Question;
 import support.UserSession;
 import support.Utils;
 import android.app.Application;
@@ -20,6 +21,7 @@ public class ApplicationContext extends Application{
 	private static DefaultHttpClient httpClient;
 	private static CookieStore cookieStore;
 	private static UserSession usersession;
+	private static Question question;
 	//private HashMap<String,String> cookiesMap;
 	
 	
@@ -50,6 +52,11 @@ public class ApplicationContext extends Application{
 		if(usersession==null) usersession = new UserSession();
 		return usersession;
 	}
+	
+	public synchronized static Question getThreadSafeQuestion(){
+		if(question==null) question = new Question();
+		return question;
+	}
 
 	/*
 	public synchronized HashMap<String, String> getThreadSafeCookiesMap(){
@@ -76,8 +83,18 @@ public class ApplicationContext extends Application{
 	}
 	*/
 	public synchronized static void invalidateSession(){
-		httpClient.getCookieStore().clear();
-		usersession.clear();
+		if(httpClient!=null) {
+			httpClient.getCookieStore().clear();
+			Utils.logv(classname, "http cookies wiped");
+		}
+		if(usersession!=null) {
+			usersession.clear();
+			Utils.logv(classname, "usersession wiped");
+		}
+		if(question!=null) {
+			question.clear();
+			Utils.logv(classname, "question wiped");
+		}
 		//cookiesMap.clear();
 	}
 	

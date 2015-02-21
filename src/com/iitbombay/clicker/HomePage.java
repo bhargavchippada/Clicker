@@ -1,12 +1,5 @@
 package com.iitbombay.clicker;
 
-import java.util.ArrayList;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import support.Question;
 import support.UserSession;
 import support.Utils;
 import android.app.Activity;
@@ -94,10 +87,7 @@ public class HomePage extends Activity{
 		return txtvw_roll_number.getText().toString();
 	}
 
-	public void gotoQuizPage(JSONObject dataFromServlet) throws JSONException{
-		Question.questionContent = (String)dataFromServlet.get("questionContent");
-		Question.quesType = Integer.parseInt((String) dataFromServlet.get("quesType"));
-		Question.options = (JSONArray) dataFromServlet.get("options");
+	public void gotoQuizPage(){
 		startActivity(new Intent(this,QuizPage.class));
 	}
 
