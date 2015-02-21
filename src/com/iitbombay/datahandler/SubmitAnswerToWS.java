@@ -164,7 +164,7 @@ public class SubmitAnswerToWS {
 			if(((String)dataFromServlet.get("status")).equals("1")){
 			    Toast.makeText(_activity,"Answer submitted!",Toast.LENGTH_SHORT).show();
 			    _activity.updateUI("Answer submitted!");
-			    _activity.displayAnswer(dataFromServlet);
+			    //_activity.displayAnswer(dataFromServlet);
 			    _activity.disableBtns();
 			}else{
 				Toast.makeText(_activity,"Failed to submit answer..",Toast.LENGTH_SHORT).show();

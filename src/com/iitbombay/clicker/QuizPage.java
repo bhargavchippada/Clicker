@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.json.JSONException;
+
 import support.Question;
 import support.UserSession;
 import support.Utils;
@@ -22,7 +24,7 @@ import android.widget.Toast;
 import com.iitbombay.datahandler.SubmitAnswerToWS;
 
 public class QuizPage extends Activity{
-	String ClassName = "QuizPage";
+	String classname = "QuizPage";
 	
 	TextView txtvw_username;
 	TextView txtvw_quizContent;
@@ -52,9 +54,14 @@ public class QuizPage extends Activity{
 		
 		txtvw_username.setText(userSession.username);
 		txtvw_quizContent.setText(Question.questionContent);
-		for(int i=0;i<Question.options.size();i++){
+		for(int i=0;i<Question.options.length();i++){
 			RadioButton row = (RadioButton) getLayoutInflater().inflate(R.layout.singleoption_radiobtn, rg_options, false);
-			row.setText(Question.options.get(i));
+			try {
+				row.setText(Question.options.get(i).toString());
+			} catch (JSONException e) {
+				Utils.logv(classname,"JSon Error while setting the options", e);
+				e.printStackTrace();
+			}
 			rg_options.addView(row);
 			optionIds.put(row.getId(), i+1);
 		}
@@ -63,7 +70,7 @@ public class QuizPage extends Activity{
 			
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				Utils.logv(ClassName, checkedId+" is checked now");
+				Utils.logv(classname, checkedId+" is checked now");
 				userSession.answers.clear();
 				userSession.answers.add(optionIds.get(checkedId)+"");
 			}
@@ -74,7 +81,7 @@ public class QuizPage extends Activity{
 			@Override
 			public void onClick(View v) {
 				if(userSession.answers.size()!=0){
-					new SubmitAnswerToWS().execute(QuizPage.this);
+					//new SubmitAnswerToWS().execute(QuizPage.this);
 				}else{
 					Toast.makeText(getBaseContext(),"Please Select an Option...", Toast.LENGTH_SHORT).show();
 				}
@@ -101,7 +108,7 @@ public class QuizPage extends Activity{
 		txtvw_status.setText(msg);
 	}
 	
-	public void displayAnswer(HashMap<String, Serializable> dataFromServlet){
+	public void displayAnswer(HashMap<String, Serializable> dataFromServlet) throws JSONException{
 		ArrayList<String> answer = (ArrayList<String>) dataFromServlet.get("answer");
 		String eval;
 		if(dataFromServlet.get("correct").equals("1")) eval="correct";

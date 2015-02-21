@@ -17,7 +17,7 @@ import com.iitbombay.clicker.ApplicationContext;
 import com.iitbombay.clicker.LoginPage;
 
 
-// This class connects to the Ping Servlet and sends a String and gets a String.
+// This class is for authentication and connecting to the server
 public class AuthenticateWS {
 	String classname = "AuthenticateWS";
 

@@ -2,7 +2,6 @@ package com.iitbombay.clicker;
 
 import org.apache.http.client.CookieStore;
 import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.conn.params.ConnManagerParams;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
@@ -34,7 +33,7 @@ public class ApplicationContext extends Application{
 	    HttpConnectionParams.setStaleCheckingEnabled(params, false);
 	    HttpConnectionParams.setConnectionTimeout(params, NetworkConnectionTimeout_ms);
 	    HttpConnectionParams.setSoTimeout(params, NetworkConnectionTimeout_ms);
-	    ConnManagerParams.setMaxTotalConnections(params, 5);
+	    //ConnManagerParams.setMaxTotalConnections(params, 5);
 	    
 	    //creating cookie
 	    if(cookieStore == null)  cookieStore = new BasicCookieStore();
