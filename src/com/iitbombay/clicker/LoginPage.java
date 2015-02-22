@@ -16,13 +16,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.iitbombay.datahandler.AuthenticateWS;
 
 //connection settings page, uses ConnectWebService class 
 
 public class LoginPage extends Activity{
-	public static String ClassName = "LoginPage";
+	public static String classname = "LoginPage";
 	
 	EditText edtxt_ipaddress;
 	EditText edtxt_port;
@@ -34,6 +35,10 @@ public class LoginPage extends Activity{
 	
 	Button btn_connect;
 	TextView txtvw_status;
+	
+	//to control the click event
+	double lastTime = -5.0;
+	int clickTime = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +69,21 @@ public class LoginPage extends Activity{
 					updateSharedPref(0);
 				}
 				
+				double present_time  = System.currentTimeMillis()/1000;
+				final int diff_time = (int)(present_time-lastTime);
+				if(diff_time<5 && clickTime!=diff_time){
+					clickTime=diff_time;
+					Utils.logv(classname,clickTime+"");
+					Toast.makeText(getBaseContext(), "Wait for "+(5-diff_time)+" secs before trying", Toast.LENGTH_SHORT).show();
+					return;
+				}else if(diff_time<5){
+					return;
+				}
+
+				clickTime = 0;
+				lastTime = present_time;
 				new AuthenticateWS().execute(LoginPage.this);
-				Utils.logv(ClassName, "Login button is pressed",null);
+				Utils.logv(classname, "Login button is pressed",null);
 			}
 		});
 		

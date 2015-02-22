@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.iitbombay.datahandler.LoadQuizFromWS;
 
@@ -27,14 +28,14 @@ public class HomePage extends Activity{
 
 	UserSession usersession;
 
-	int status; //0 means start button can ask server, 1 means it can't ask
-
+	//to control the click event
 	double lastTime = -5.0;
+	int clickTime = 0;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.home);
+		setContentView(R.layout.home_page);
 
 		txtvw_roll_number = (TextView) findViewById(R.id.txtvw_roll_number);
 		txtvw_name = (TextView) findViewById(R.id.txtvw_name);
@@ -62,18 +63,20 @@ public class HomePage extends Activity{
 			@Override
 			public void onClick(View v) {
 				double present_time  = System.currentTimeMillis()/1000;
-				int diff_time = (int)(present_time-lastTime);
-				if(diff_time<5){
-					updateUI("Wait for "+(5-diff_time)+" secs before trying", View.INVISIBLE);
+				final int diff_time = (int)(present_time-lastTime);
+				if(diff_time<5 && clickTime!=diff_time){
+					clickTime=diff_time;
+					Utils.logv(classname,clickTime+"");
+					Toast.makeText(getBaseContext(), "Wait for "+(5-diff_time)+" secs before trying", Toast.LENGTH_SHORT).show();
+					return;
+				}else if(diff_time<5){
+					return;
 				}
 
+				clickTime = 0;
 				lastTime = present_time;
-				if(status==0){
-					new LoadQuizFromWS().execute(HomePage.this);
-					pbar_startquiz.setVisibility(View.VISIBLE);
-				}else{
-					pbar_startquiz.setVisibility(View.INVISIBLE);
-				}
+				new LoadQuizFromWS().execute(HomePage.this);
+				pbar_startquiz.setVisibility(View.VISIBLE);
 			}
 		});
 	}
@@ -95,5 +98,11 @@ public class HomePage extends Activity{
 		Intent intent = new Intent(this,LoginPage.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		txtvw_status.setText("Click to start quiz");
 	}
 }
