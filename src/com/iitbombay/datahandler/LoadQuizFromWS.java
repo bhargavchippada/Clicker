@@ -91,14 +91,14 @@ public class LoadQuizFromWS {
 			_activity.updateUI("Trying to start quiz..",View.VISIBLE);
 		}else{
 			if (data.dataFromServlet != null){
-				int status = (int)data.dataFromServlet.get("status");
+				Integer status = (Integer)data.dataFromServlet.get("status");
 				if(status==1){
 					Toast.makeText(_activity,"Quiz retrievel Success!",Toast.LENGTH_SHORT).show();
 					_activity.updateUI("Quiz retrievel Success!",View.INVISIBLE);
 					synchronized (ApplicationContext.class) {
 						Question question = ApplicationContext.getThreadSafeQuestion();
 						question.questionContent = (String)data.dataFromServlet.get("questionContent");
-						question.quesType = (int)data.dataFromServlet.get("quesType");
+						question.quesType = (Integer)data.dataFromServlet.get("quesType");
 						question.options = (JSONArray) data.dataFromServlet.get("options");
 					}
 					_activity.gotoQuizPage();

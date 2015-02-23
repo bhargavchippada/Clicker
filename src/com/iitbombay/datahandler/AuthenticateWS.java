@@ -81,7 +81,7 @@ public class AuthenticateWS {
 
 			if (data.dataFromServlet != null){
 				try {
-					int status = (int)data.dataFromServlet.get("status");
+					Integer status = (Integer)data.dataFromServlet.get("status");
 					if(status==0){
 						Toast.makeText(_activity,"Server is not ready, Wait!",Toast.LENGTH_SHORT).show();
 						_activity.updateUI("Server is not ready, Wait!");

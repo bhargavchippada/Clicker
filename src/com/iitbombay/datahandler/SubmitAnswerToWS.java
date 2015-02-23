@@ -93,7 +93,7 @@ public class SubmitAnswerToWS {
 			_activity.updateUI("Trying to submit answer..");
 		}else{
 			if (data.dataFromServlet != null){
-				int status = (int)data.dataFromServlet.get("status");
+				Integer status = (Integer)data.dataFromServlet.get("status");
 				if(status==0){
 					Toast.makeText(_activity,"Failed to submit answer",Toast.LENGTH_SHORT).show();
 					_activity.updateUI("Failed to submit answer");
@@ -102,7 +102,7 @@ public class SubmitAnswerToWS {
 					_activity.updateUI("Answer submitted!");
 					JSONArray answer = (JSONArray) data.dataFromServlet.get("answer");
 					String eval;
-					if((int) data.dataFromServlet.get("correct")==1) eval="correct";
+					if((Integer) data.dataFromServlet.get("correct")==1) eval="correct";
 					else eval="wrong";
 					String output="Your answer is "+eval+"\nCorrect answer:";
 					int op;

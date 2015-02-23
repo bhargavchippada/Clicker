@@ -2,6 +2,7 @@ package com.iitbombay.clicker;
 
 import java.util.HashMap;
 
+import android.widget.*;
 import org.json.JSONException;
 
 import support.Question;
@@ -12,12 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.iitbombay.datahandler.SubmitAnswerToWS;
 
@@ -84,7 +80,7 @@ public class QuizPage extends Activity{
 				if(userSession.answers.size()!=0){
 					new SubmitAnswerToWS().execute(QuizPage.this);
 				}else{
-					Toast.makeText(getBaseContext(),"Please Select an Option...", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getBaseContext(), "Please Select an Option...", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
