@@ -1,7 +1,5 @@
 package support;
 
-import java.util.ArrayList;
-
 import org.json.JSONArray;
 
 public class UserSession {
@@ -11,6 +9,7 @@ public class UserSession {
 	public String password;
 	public String name;
 	public String clsnm;
+	public String ip;
 	public JSONArray answers = new JSONArray();
 	
 	public void clear(){

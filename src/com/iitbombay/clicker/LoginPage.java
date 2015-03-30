@@ -140,7 +140,7 @@ public class LoginPage extends Activity{
 		return edtxt_password.getText().toString();
 	}
 	
-	public void gotoHomePage(JSONObject dataFromServlet) throws JSONException{
+	public void gotoHomePage() {
 		Intent intent = new Intent(this,HomePage.class);
 		startActivity(intent);
 	}

@@ -78,7 +78,6 @@ public class AuthenticateWS {
 		if(uiStatus==0){
 			_activity.updateUI("Trying to connect to Server..");
 		}else{
-
 			if (data.dataFromServlet != null){
 				try {
 					Integer status = (Integer)data.dataFromServlet.get("status");
@@ -98,8 +97,9 @@ public class AuthenticateWS {
 							usersession.password = _activity.getPassword();
 							usersession.name = data.dataFromServlet.getString("name");
 							usersession.clsnm = data.dataFromServlet.getString("clsnm");
+							usersession.ip = data.dataFromServlet.getString("ip");
 						}
-						_activity.gotoHomePage(data.dataFromServlet);
+						_activity.gotoHomePage();
 					}else if(status==-1){
 						Toast.makeText(_activity,"Server: error processing request",Toast.LENGTH_SHORT).show();
 						_activity.updateUI("Server: error processing request");

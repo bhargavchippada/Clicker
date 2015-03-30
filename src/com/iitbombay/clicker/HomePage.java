@@ -49,11 +49,10 @@ public class HomePage extends Activity{
 			gotoLoginPage();
 		}
 
-		String ipaddress = Utils.getIpAddress(getBaseContext());
 		txtvw_roll_number.setText(usersession.username);
 		txtvw_name.setText(usersession.name);
 		txtvw_clsnm.setText(usersession.clsnm);
-		txtvw_ipaddress.setText(ipaddress);
+		txtvw_ipaddress.setText(usersession.ip);
 
 		btn_startquiz = (Button) findViewById(R.id.btn_startquiz);
 		pbar_startquiz = (ProgressBar) findViewById(R.id.pbar_startquiz);
@@ -84,10 +83,6 @@ public class HomePage extends Activity{
 	public void updateUI(String msg, int pbar_state){
 		txtvw_status.setText(msg);
 		pbar_startquiz.setVisibility(pbar_state);
-	}
-
-	public String getUsername(){
-		return txtvw_roll_number.getText().toString();
 	}
 
 	public void gotoQuizPage(){
