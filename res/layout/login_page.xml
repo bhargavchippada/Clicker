@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
-                android:text="Clicker!"
+                android:text="Clickr!"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -41,8 +41,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="16dp"
-                android:text="Login Information"
+                android:layout_marginBottom="8dp"
+                android:text="Connection Info"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -61,13 +61,15 @@
                 android:hint="Type Port Number"
                 android:inputType="text" />
 
-            <EditText
-                android:id="@+id/edtxt_url"
-                android:layout_width="256dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:hint="Type URL"
-                android:inputType="text" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Login Info"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/edtxt_username"

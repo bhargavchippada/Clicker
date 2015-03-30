@@ -27,7 +27,6 @@ public class LoginPage extends Activity{
 	
 	EditText edtxt_ipaddress;
 	EditText edtxt_port;
-	EditText edtxt_url;
 	EditText edtxt_username;
 	EditText edtxt_password;
 	
@@ -48,7 +47,6 @@ public class LoginPage extends Activity{
 		
 		edtxt_ipaddress = (EditText) findViewById(R.id.edtxt_ipaddress);
 		edtxt_port = (EditText) findViewById(R.id.edtxt_port);
-		edtxt_url = (EditText) findViewById(R.id.edtxt_url);
 		edtxt_username = (EditText) findViewById(R.id.edtxt_username);
 		edtxt_password = (EditText) findViewById(R.id.edtxt_password);
 		cbox_savesettings = (CheckBox) findViewById(R.id.cbox_savesettings);
@@ -102,13 +100,12 @@ public class LoginPage extends Activity{
 	
 	// bool == 0 means nothing is saved, bool == 1 means the settings are saved
 	void updateSharedPref(int bool){
-		String ip="",p="",urlp="";
+		String ip="",p="";
 		String user="",pass="";
 		boolean check = false;
 		if(bool == 1){
 			ip = edtxt_ipaddress.getText().toString();
 			p = edtxt_port.getText().toString();
-			urlp = edtxt_url.getText().toString();
 			user = edtxt_username.getText().toString();
 			pass = edtxt_password.getText().toString();
 			check = true;
@@ -118,14 +115,11 @@ public class LoginPage extends Activity{
 		SharedPreferences.Editor editor = sharedPref.edit();
 		editor.putString(getString(R.string.saved_ipadress),ip);
 		editor.putString(getString(R.string.saved_port),p);
-		editor.putString(getString(R.string.saved_url),urlp);
 		editor.putString(getString(R.string.saved_username),user);
 		editor.putString(getString(R.string.saved_password),pass);
 		editor.putBoolean(getString(R.string.saved_savesettings), check);
 		editor.commit();
-		AppSettings.updateUrl(edtxt_ipaddress.getText().toString(), 
-				edtxt_port.getText().toString(), 
-				edtxt_url.getText().toString());
+		AppSettings.updateUrl(edtxt_ipaddress.getText().toString(), edtxt_port.getText().toString());
 	}
 	
 	void initializeViews(){
@@ -133,7 +127,6 @@ public class LoginPage extends Activity{
 				.getSharedPreferences(AppSettings.preference_file_key, Context.MODE_PRIVATE);
 		edtxt_ipaddress.setText(sharedPref.getString(getString(R.string.saved_ipadress), ""));
 		edtxt_port.setText(sharedPref.getString(getString(R.string.saved_port), ""));
-		edtxt_url.setText(sharedPref.getString(getString(R.string.saved_url), ""));
 		edtxt_username.setText(sharedPref.getString(getString(R.string.saved_username), ""));
 		edtxt_password.setText(sharedPref.getString(getString(R.string.saved_password), ""));
 		cbox_savesettings.setChecked(sharedPref.getBoolean(getString(R.string.saved_savesettings), false));
