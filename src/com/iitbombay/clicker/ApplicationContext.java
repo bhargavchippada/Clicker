@@ -1,8 +1,6 @@
 package com.iitbombay.clicker;
 
-import org.apache.http.client.CookieStore;
 import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
@@ -19,7 +17,6 @@ public class ApplicationContext extends Application{
 	
 	private static int NetworkConnectionTimeout_ms = 5000;
 	private static DefaultHttpClient httpClient;
-	private static CookieStore cookieStore;
 	private static UserSession usersession;
 	private static Question question;	
 	
@@ -35,14 +32,10 @@ public class ApplicationContext extends Application{
 	    HttpConnectionParams.setSoTimeout(params, NetworkConnectionTimeout_ms);
 	    //ConnManagerParams.setMaxTotalConnections(params, 5);
 	    
-	    //creating cookie
-	    if(cookieStore == null)  cookieStore = new BasicCookieStore();
-	    
 	    httpClient = new DefaultHttpClient(params);
 	    ClientConnectionManager mgr = httpClient.getConnectionManager();
 	    httpClient = new DefaultHttpClient(new ThreadSafeClientConnManager(params,
 	    		mgr.getSchemeRegistry()), params);
-	    httpClient.setCookieStore(cookieStore);
         return httpClient;
     }
 	
@@ -55,36 +48,8 @@ public class ApplicationContext extends Application{
 		if(question==null) question = new Question();
 		return question;
 	}
-
-	/*
-	public synchronized HashMap<String, String> getThreadSafeCookiesMap(){
-		if(cookiesMap==null){
-			cookiesMap = new HashMap<String, String>();
-		}
-		updateThreadSafeCookiesMap();
-		return cookiesMap;
-	}
 	
-	public synchronized void updateThreadSafeCookiesMap(){
-		if(cookiesMap==null){
-			cookiesMap = new HashMap<String, String>();
-		}
-		List<Cookie> cookies = httpClient.getCookieStore().getCookies();
-		
-		if(cookies != null)
-        {
-            for(Cookie cookie : cookies)
-            {
-            	cookiesMap.put(cookie.getName(), cookie.getValue());
-            }
-        }
-	}
-	*/
 	public synchronized static void invalidateSession(){
-		if(httpClient!=null) {
-			httpClient.getCookieStore().clear();
-			Utils.logv(classname, "http cookies wiped");
-		}
 		if(usersession!=null) {
 			usersession.clear();
 			Utils.logv(classname, "usersession wiped");
@@ -93,8 +58,5 @@ public class ApplicationContext extends Application{
 			question.clear();
 			Utils.logv(classname, "question wiped");
 		}
-		//cookiesMap.clear();
 	}
-	
-	
 }

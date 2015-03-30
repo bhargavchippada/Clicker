@@ -100,7 +100,7 @@ public class AuthenticateWS {
 							usersession.clsnm = data.dataFromServlet.getString("clsnm");
 						}
 						_activity.gotoHomePage(data.dataFromServlet);
-					}else if(status==3){
+					}else if(status==-1){
 						Toast.makeText(_activity,"Server: error processing request",Toast.LENGTH_SHORT).show();
 						_activity.updateUI("Server: error processing request");
 					}else{
