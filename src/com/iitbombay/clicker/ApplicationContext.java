@@ -21,9 +21,7 @@ public class ApplicationContext extends Application{
 	private static DefaultHttpClient httpClient;
 	private static CookieStore cookieStore;
 	private static UserSession usersession;
-	private static Question question;
-	//private HashMap<String,String> cookiesMap;
-	
+	private static Question question;	
 	
 	// link: http://foo.jasonhudgins.com/2009/08/http-connection-reuse-in-android.html
 	public synchronized static DefaultHttpClient getThreadSafeClient() {

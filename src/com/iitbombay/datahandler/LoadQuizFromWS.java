@@ -97,8 +97,8 @@ public class LoadQuizFromWS {
 					_activity.updateUI("Quiz retrievel Success!",View.INVISIBLE);
 					synchronized (ApplicationContext.class) {
 						Question question = ApplicationContext.getThreadSafeQuestion();
-						question.questionContent = (String)data.dataFromServlet.get("questionContent");
-						question.quesType = (Integer)data.dataFromServlet.get("quesType");
+						question.question = (String)data.dataFromServlet.get("questionContent");
+						question.type = (Integer)data.dataFromServlet.get("quesType");
 						question.options = (JSONArray) data.dataFromServlet.get("options");
 					}
 					_activity.gotoQuizPage();

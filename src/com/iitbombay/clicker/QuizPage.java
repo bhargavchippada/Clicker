@@ -3,6 +3,8 @@ package com.iitbombay.clicker;
 import java.util.HashMap;
 
 import android.widget.*;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 
 import support.Question;
@@ -50,7 +52,7 @@ public class QuizPage extends Activity{
 		btn_exit = (Button) findViewById(R.id.btn_exit);
 
 		txtvw_username.setText(userSession.username);
-		txtvw_quizContent.setText(question.questionContent);
+		txtvw_quizContent.setText(question.question);
 		for(int i=0;i<question.options.length();i++){
 			RadioButton row = (RadioButton) getLayoutInflater().inflate(R.layout.singleoption_radiobtn, rg_options, false);
 			try {
@@ -68,8 +70,8 @@ public class QuizPage extends Activity{
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				Utils.logv(classname, checkedId+" is checked now");
-				userSession.answers.clear();
-				userSession.answers.add(optionIds.get(checkedId)+"");
+				userSession.answers=new JSONArray();
+				userSession.answers.put(optionIds.get(checkedId));
 			}
 		});
 
@@ -77,7 +79,7 @@ public class QuizPage extends Activity{
 
 			@Override
 			public void onClick(View v) {
-				if(userSession.answers.size()!=0){
+				if(userSession.answers.length()!=0){
 					new SubmitAnswerToWS().execute(QuizPage.this);
 				}else{
 					Toast.makeText(getBaseContext(), "Please Select an Option...", Toast.LENGTH_SHORT).show();

@@ -91,10 +91,11 @@ public class AuthenticateWS {
 					}else if(status==2){
 						Toast.makeText(_activity,"Login success",Toast.LENGTH_SHORT).show();
 						_activity.updateUI("Login success");
-						synchronized (ApplicationContext.class) {
+						synchronized (UserSession.class) {
 							UserSession usersession=ApplicationContext.getThreadSafeUserSession();
 							usersession.clear();
 							usersession.username = _activity.getUsername();
+							usersession.password = _activity.getPassword();
 							usersession.name = data.dataFromServlet.getString("name");
 							usersession.clsnm = data.dataFromServlet.getString("clsnm");
 						}
