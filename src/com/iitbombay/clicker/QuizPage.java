@@ -23,7 +23,7 @@ public class QuizPage extends Activity{
 	String classname = "QuizPage";
 
 	TextView txtvw_username;
-	TextView txtvw_quizContent;
+	TextView txtvw_question;
 	TextView txtvw_status;
 	RadioGroup rg_options;
 	Button btn_submit;
@@ -45,14 +45,14 @@ public class QuizPage extends Activity{
 		optionIds = new HashMap<Integer, Integer>();
 
 		txtvw_username = (TextView) findViewById(R.id.txtvw_username);
-		txtvw_quizContent = (TextView) findViewById(R.id.txtvw_quizContent);
+		txtvw_question = (TextView) findViewById(R.id.txtvw_question);
 		txtvw_status = (TextView) findViewById(R.id.txtvw_status);
 		rg_options = (RadioGroup) findViewById(R.id.rg_options);
 		btn_submit = (Button) findViewById(R.id.btn_submit);
 		btn_exit = (Button) findViewById(R.id.btn_exit);
 
 		txtvw_username.setText(userSession.username);
-		txtvw_quizContent.setText(question.question);
+		txtvw_question.setText(question.question);
 		for(int i=0;i<question.options.length();i++){
 			RadioButton row = (RadioButton) getLayoutInflater().inflate(R.layout.singleoption_radiobtn, rg_options, false);
 			try {
@@ -62,7 +62,8 @@ public class QuizPage extends Activity{
 				e.printStackTrace();
 			}
 			rg_options.addView(row);
-			optionIds.put(row.getId(), i+1);
+			optionIds.put(row.getId(), i);
+			Utils.logv(classname, row.getId()+"");
 		}
 
 		rg_options.setOnCheckedChangeListener(new OnCheckedChangeListener() {

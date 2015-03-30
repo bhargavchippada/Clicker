@@ -105,7 +105,7 @@ public class LoadQuizFromWS {
 							question.time = (Integer) data.dataFromServlet.get("time");
 							question.print();
 						}
-						//_activity.gotoQuizPage();
+						_activity.gotoQuizPage();
 					}else{
 						Toast.makeText(_activity,"Invalid satus code",Toast.LENGTH_SHORT).show();
 						_activity.updateUI("Invalid satus code",View.INVISIBLE);
