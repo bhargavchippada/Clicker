@@ -32,24 +32,14 @@ public class LoadQuizFromWS {
 		// performs rendering in the "edt" thread, before background operation starts
 		final Runnable runInUIThread1 = new Runnable() {
 			public void run() {
-				try {
-					_showInUI(0);
-				} catch (JSONException e) {
-					Utils.logv(classname, "Json exception",e);
-					e.printStackTrace();
-				}
+				_showInUI(0);
 			}
 		};
 
 		// performs rendering in the "edt" thread, after background operation is complete
 		final Runnable runInUIThread2 = new Runnable() {
 			public void run() {
-				try {
-					_showInUI(1);
-				} catch (JSONException e) {
-					Utils.logv(classname, "Json exception",e);
-					e.printStackTrace();
-				}
+				_showInUI(1);
 			}
 		};
 
@@ -86,31 +76,50 @@ public class LoadQuizFromWS {
 
 	/** this method is called in the "edt" 
 	 * @throws JSONException */
-	private void _showInUI(int uiStatus) throws JSONException {
+	private void _showInUI(int uiStatus) {
 		if(uiStatus==0){
 			_activity.updateUI("Trying to start quiz..",View.VISIBLE);
 		}else{
 			if (data.dataFromServlet != null){
-				Integer status = (Integer)data.dataFromServlet.get("status");
-				if(status==1){
-					Toast.makeText(_activity,"Quiz retrievel Success!",Toast.LENGTH_SHORT).show();
-					_activity.updateUI("Quiz retrievel Success!",View.INVISIBLE);
-					synchronized (ApplicationContext.class) {
-						Question question = ApplicationContext.getThreadSafeQuestion();
-						question.question = (String)data.dataFromServlet.get("questionContent");
-						question.type = (Integer)data.dataFromServlet.get("quesType");
-						question.options = (JSONArray) data.dataFromServlet.get("options");
+				try{
+					Integer status = (Integer)data.dataFromServlet.get("status");
+					if(status==0){
+						Toast.makeText(_activity,"Not authorized!",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Authorization failed!",View.INVISIBLE);
+						_activity.gotoLoginPage();
+					}else if(status==1){
+						Toast.makeText(_activity,"Quiz hasn't started!",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Quiz hasn't started!",View.INVISIBLE);
+					}else if(status==2){
+						Toast.makeText(_activity,"Quiz retrievel Success!",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Quiz retrievel Success!",View.INVISIBLE);
+						synchronized (Question.class) {
+							Question question = ApplicationContext.getThreadSafeQuestion();
+							question.clear();
+							question.title = (String)data.dataFromServlet.get("title");
+							question.question = (String)data.dataFromServlet.get("question");
+							question.type = (Integer)data.dataFromServlet.get("type");
+							question.options = (JSONArray) data.dataFromServlet.get("options");
+							question.feedback = (boolean) data.dataFromServlet.get("feedback");
+							question.timed = (boolean) data.dataFromServlet.get("timed");
+							question.time = (Integer) data.dataFromServlet.get("time");
+							question.print();
+						}
+						//_activity.gotoQuizPage();
+					}else{
+						Toast.makeText(_activity,"Invalid satus code",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Invalid satus code",View.INVISIBLE);
+						_activity.gotoLoginPage();
 					}
-					_activity.gotoQuizPage();
-				}else{
-					Toast.makeText(_activity,"Quiz retrieval Failed",Toast.LENGTH_SHORT).show();
-					_activity.updateUI("Quiz retrieval Failed",View.INVISIBLE);
+				} catch (JSONException e) {
+					Utils.logv(classname, "dataFromServlet retrieval error!",e);
+					e.printStackTrace();
 				}
 			}else if (data.ex != null){
 				Toast.makeText(_activity,
 						data.ex.getMessage() == null ? "Error" : "Error - " + data.ex.getMessage(),
 								Toast.LENGTH_SHORT).show();
-				_activity.updateUI("Connection failed",View.INVISIBLE);
+				_activity.updateUI("Connection failed!",View.INVISIBLE);
 				_activity.gotoLoginPage();
 			}
 		}

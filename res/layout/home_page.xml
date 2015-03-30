@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:gravity="center_vertical"
-                android:text="Clicker!"
+                android:text="Clickr!"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -137,7 +137,7 @@
                 android:background="@drawable/circle"
                 android:gravity="center"
                 android:text="Start Quiz"
-                android:textColor="@color/app_txtgrey"
+                android:textColor="@android:color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"/>
 
