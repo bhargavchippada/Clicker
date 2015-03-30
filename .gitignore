@@ -51,6 +51,3 @@ Thumbs.db
 bin/
 gen/
 out/
-
-# Local configuration file (sdk path, etc)
-project.properties
