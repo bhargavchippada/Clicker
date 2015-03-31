@@ -11,12 +11,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,6 +37,8 @@ public class QuestionFragment extends Fragment {
 	LinearLayout ll_truefalse;
 	Button btn_true;
 	Button btn_false;
+
+	EditText edtxt_textual;
 
 	Question question;
 	HashMap<Integer,Integer> optionIds = new HashMap<Integer,Integer>();
@@ -57,12 +62,13 @@ public class QuestionFragment extends Fragment {
 
 		question = ApplicationContext.getThreadSafeQuestion();
 		int type = question.type;
-		
+
 		if(type==-1) Toast.makeText(fragactivity, "Invalid Question!", Toast.LENGTH_SHORT).show();
 
 		if(type==0) singleMCQInit();
 		else if(type==1) multipleMCQinit();
 		else if(type==2) truefalseInit();
+		else if(type==3 || type==4) wordTextualInit();
 	}
 
 	void singleMCQInit(){
@@ -109,22 +115,22 @@ public class QuestionFragment extends Fragment {
 			ll_checkboxes.addView(row);
 			row.setId(Utils.generateViewId());
 			optionIds.put(row.getId(), i);
-			
+
 			row.setOnClickListener(new OnClickListener() {
-				
+
 				@Override
 				public void onClick(View view) {
 					boolean checked = ((CheckBox) view).isChecked();
-	
+
 					int checkedid = optionIds.get(view.getId());
-	
+
 					try {
 						question.answers.put(checkedid, checked);
 					} catch (JSONException e) {
 						e.printStackTrace();
 						Utils.logv(classname, "Json oncheckboxclick error: "+checkedid,e);
 					}
-					
+
 					Utils.logv(classname, "checklist: "+question.answers.toString());
 				}
 			});
@@ -132,52 +138,93 @@ public class QuestionFragment extends Fragment {
 			Utils.logv(classname, row.getId()+"");
 		}
 	}
-	
+
 	void truefalseInit(){
 		ll_truefalse = (LinearLayout) fragactivity.findViewById(R.id.ll_truefalse);
 		ll_truefalse.setVisibility(View.VISIBLE);
 		btn_true = (Button) fragactivity.findViewById(R.id.btn_true);
 		btn_false = (Button) fragactivity.findViewById(R.id.btn_false);
-		
-		
+
+
 		btn_true.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				btn_true.setBackgroundResource(R.drawable.btn_green_style);
 				btn_true.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
 				btn_false.setBackgroundResource(R.drawable.btn_grey_style);
 				btn_false.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
-				
+
 				try {
 					question.answers.put(0,true);
 				} catch (JSONException e) {
 					e.printStackTrace();
 					Utils.logv(classname, "Json error!",e);
 				}
-				
+
 				Utils.logv(classname, "answer: "+question.answers.toString());
 			}
 		});
-		
-		
+
+
 		btn_false.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				btn_false.setBackgroundResource(R.drawable.btn_red_style);
 				btn_false.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
 				btn_true.setBackgroundResource(R.drawable.btn_grey_style);
 				btn_true.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
-			
+
 				try {
 					question.answers.put(0,false);
 				} catch (JSONException e) {
 					e.printStackTrace();
 					Utils.logv(classname, "Json error!",e);
 				}
-				
+
 				Utils.logv(classname, "answer: "+question.answers.toString());
+			}
+		});
+	}
+
+	void wordTextualInit(){
+		edtxt_textual = (EditText) fragactivity.findViewById(R.id.edtxt_textual);
+
+		edtxt_textual.setVisibility(View.VISIBLE);
+
+		edtxt_textual.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				String result;
+				if(question.type==3) {
+					result = s.toString().replaceAll(" ", "");
+					if (!s.toString().equals(result)) {
+						edtxt_textual.setText(result);
+						edtxt_textual.setSelection(result.length());
+					}
+				}else if(question.type==4) result = s.toString();
+				else {
+					result="";
+					Utils.logv(classname, "Textual with undefined type!");
+				}
+
+				try {
+					question.answers.put(0, result.trim());
+				} catch (JSONException e) {
+					e.printStackTrace();
+					Utils.logv(classname, "Json error!",e);
+				}
 			}
 		});
 	}
