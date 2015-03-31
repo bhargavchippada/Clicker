@@ -24,14 +24,14 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
-        android:name="com.iitbombay.clicker.ApplicationContext"
+        android:name="clicker.ApplicationContext"
         android:allowBackup="true"
         android:icon="@drawable/launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         
         <activity
-            android:name="com.iitbombay.clicker.LoginPage"
+            android:name="clicker.LoginPage"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -40,9 +40,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity  android:name="com.iitbombay.clicker.HomePage"
+        <activity  android:name="clicker.HomePage"
             	   android:windowSoftInputMode="stateHidden"></activity>
-        <activity  android:name="com.iitbombay.clicker.QuizPage"
+        <activity  android:name="clicker.QuizPage"
             	   android:windowSoftInputMode="stateHidden"></activity>
     </application>
 

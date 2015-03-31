@@ -6,6 +6,7 @@ import org.json.JSONException;
 public class Question{
 	public String classname = "Question";
 	
+	public String ID;
 	public String title;
 	public String question;
 	public int type;
@@ -13,6 +14,8 @@ public class Question{
 	public boolean feedback;
 	public boolean timed;
 	public int time;
+	
+	public JSONArray answers = new JSONArray();
 	
 	public void clear(){
 		title=null;

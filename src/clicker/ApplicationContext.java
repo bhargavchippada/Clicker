@@ -1,4 +1,4 @@
-package com.iitbombay.clicker;
+package clicker;
 
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.impl.client.DefaultHttpClient;

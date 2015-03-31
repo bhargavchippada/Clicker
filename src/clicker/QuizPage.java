@@ -1,35 +1,28 @@
-package com.iitbombay.clicker;
+package clicker;
 
 import java.util.HashMap;
 
-import android.widget.*;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import support.Question;
 import support.UserSession;
-import support.Utils;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import com.iitbombay.datahandler.SubmitAnswerToWS;
+import com.iitbombay.clicker.R;
 
-public class QuizPage extends Activity{
+public class QuizPage extends FragmentActivity{
 	String classname = "QuizPage";
 
 	TextView txtvw_username;
 	TextView txtvw_question;
 	TextView txtvw_status;
-	RadioGroup rg_options;
 	Button btn_submit;
 	Button btn_exit;
-
-	HashMap<Integer,Integer> optionIds;
 
 	UserSession userSession;
 	Question question;
@@ -42,46 +35,21 @@ public class QuizPage extends Activity{
 		userSession = ApplicationContext.getThreadSafeUserSession();
 		question = ApplicationContext.getThreadSafeQuestion();
 
-		optionIds = new HashMap<Integer, Integer>();
-
 		txtvw_username = (TextView) findViewById(R.id.txtvw_username);
 		txtvw_question = (TextView) findViewById(R.id.txtvw_question);
 		txtvw_status = (TextView) findViewById(R.id.txtvw_status);
-		rg_options = (RadioGroup) findViewById(R.id.rg_options);
 		btn_submit = (Button) findViewById(R.id.btn_submit);
 		btn_exit = (Button) findViewById(R.id.btn_exit);
 
 		txtvw_username.setText(userSession.username);
 		txtvw_question.setText(question.question);
-		for(int i=0;i<question.options.length();i++){
-			RadioButton row = (RadioButton) getLayoutInflater().inflate(R.layout.template_radiobtn, rg_options, false);
-			try {
-				row.setText(question.options.get(i).toString());
-			} catch (JSONException e) {
-				Utils.logv(classname,"JSon Error while setting the options", e);
-				e.printStackTrace();
-			}
-			rg_options.addView(row);
-			optionIds.put(row.getId(), i);
-			Utils.logv(classname, row.getId()+"");
-		}
-
-		rg_options.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-
-			@Override
-			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				Utils.logv(classname, checkedId+" is checked now");
-				userSession.answers=new JSONArray();
-				userSession.answers.put(optionIds.get(checkedId));
-			}
-		});
-
+		
 		btn_submit.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				if(userSession.answers.length()!=0){
-					new SubmitAnswerToWS().execute(QuizPage.this);
+				if(question.answers.length()!=0){
+					//new SubmitAnswerToWS().execute(QuizPage.this);
 				}else{
 					Toast.makeText(getBaseContext(), "Please Select an Option...", Toast.LENGTH_SHORT).show();
 				}
@@ -106,9 +74,11 @@ public class QuizPage extends Activity{
 
 	public void disableBtns(){
 		btn_submit.setEnabled(false);
+		/*
 		for (int i = 0; i < rg_options.getChildCount(); i++) {
 			rg_options.getChildAt(i).setEnabled(false);
 		}
+		*/
 	}
 
 	public void gotoLoginPage(){

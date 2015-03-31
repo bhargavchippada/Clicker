@@ -1,4 +1,4 @@
-package com.iitbombay.datahandler;
+package datahandler;
 
 import java.io.UnsupportedEncodingException;
 
@@ -14,8 +14,8 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
-import com.iitbombay.clicker.ApplicationContext;
-import com.iitbombay.clicker.HomePage;
+import clicker.ApplicationContext;
+import clicker.HomePage;
 
 //This class is for loading the quiz from the server
 public class LoadQuizFromWS {

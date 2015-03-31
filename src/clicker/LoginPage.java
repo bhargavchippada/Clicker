@@ -1,4 +1,4 @@
-package com.iitbombay.clicker;
+package clicker;
 
 import support.AppSettings;
 import support.Utils;
@@ -15,7 +15,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.iitbombay.datahandler.AuthenticateWS;
+import com.iitbombay.clicker.R;
+
+import datahandler.AuthenticateWS;
 
 //connection settings page, uses ConnectWebService class 
 

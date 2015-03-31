@@ -1,4 +1,4 @@
-package com.iitbombay.datahandler;
+package datahandler;
 
 import java.io.UnsupportedEncodingException;
 
@@ -12,8 +12,8 @@ import support.Utils;
 import android.os.Handler;
 import android.widget.Toast;
 
-import com.iitbombay.clicker.ApplicationContext;
-import com.iitbombay.clicker.LoginPage;
+import clicker.ApplicationContext;
+import clicker.LoginPage;
 
 
 // This class is for authentication and connecting to the server

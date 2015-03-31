@@ -1,4 +1,4 @@
-package com.iitbombay.clicker;
+package clicker;
 
 import support.UserSession;
 import support.Utils;
@@ -12,7 +12,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.iitbombay.datahandler.LoadQuizFromWS;
+import com.iitbombay.clicker.R;
+
+import datahandler.LoadQuizFromWS;
 
 public class HomePage extends Activity{
 	String classname = "HomePage";

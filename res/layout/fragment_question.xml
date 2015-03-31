@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+    
+    <RadioGroup 
+   	    android:id="@+id/rg_options"
+   	    android:layout_width="match_parent"
+   	    android:layout_height="wrap_content"
+   	    android:layout_marginTop="8dp"
+   	    android:layout_gravity="left"
+   	    android:visibility="visible">
+    </RadioGroup>
+    
+	<LinearLayout
+	    android:id="@+id/ll_truefalse"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:visibility="gone" >
+	
+	    <Button
+	        android:layout_width="128dp"
+	        android:layout_height="48dp"
+	        android:text="True" />
+	    <Button
+	        android:layout_width="128dp"
+	        android:layout_height="48dp"
+	        android:layout_marginLeft="16dp"
+	        android:text="False" />
+	
+	</LinearLayout>
+	
+	<EditText
+	    android:id="@+id/edtxt_textual"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="16dp"
+	    android:layout_marginRight="16dp"
+	    android:inputType="text"
+	    android:hint="Answer"
+	    android:visibility="gone" />
+    
+</FrameLayout>

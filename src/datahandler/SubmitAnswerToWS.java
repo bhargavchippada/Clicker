@@ -1,4 +1,4 @@
-package com.iitbombay.datahandler;
+package datahandler;
 
 import java.io.UnsupportedEncodingException;
 
@@ -13,9 +13,8 @@ import support.UserSession;
 import support.Utils;
 import android.os.Handler;
 import android.widget.Toast;
-
-import com.iitbombay.clicker.ApplicationContext;
-import com.iitbombay.clicker.QuizPage;
+import clicker.ApplicationContext;
+import clicker.QuizPage;
 
 //This class submits answer to the server and receives the response
 public class SubmitAnswerToWS {
@@ -58,8 +57,9 @@ public class SubmitAnswerToWS {
 		final StringEntity req_entity;
 		try {
 			UserSession userSession = ApplicationContext.getThreadSafeUserSession();
+			Question question = ApplicationContext.getThreadSafeQuestion();
 			jsonreq.put("uid", userSession.username);
-			jsonreq.put("answer", new JSONArray(userSession.answers));
+			jsonreq.put("answer", question.answers);
 			req_entity = new StringEntity(jsonreq.toString());
 			Utils.logv(classname, "client request: "+jsonreq.toString());
 		} catch (JSONException e1) {

@@ -1,4 +1,4 @@
-package com.iitbombay.datahandler;
+package datahandler;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +17,7 @@ import org.json.JSONObject;
 import support.AppSettings;
 import support.Utils;
 
-import com.iitbombay.clicker.ApplicationContext;
+import clicker.ApplicationContext;
 
 public class GetDataFromWebServer {
 	String classname;

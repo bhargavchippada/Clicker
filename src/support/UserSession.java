@@ -10,14 +10,12 @@ public class UserSession {
 	public String name;
 	public String clsnm;
 	public String ip;
-	public JSONArray answers = new JSONArray();
 	
 	public void clear(){
 		username = null;
 		password = null;
 		name= null;
 		clsnm= null;
-		answers=new JSONArray();
 	}
 	
 	public boolean isSessionValid(){
@@ -28,7 +26,7 @@ public class UserSession {
 	
 	public void print(){
 		if(isSessionValid()){
-			Utils.logv(classname, username+","+password+","+name+","+clsnm+","+answers);
+			Utils.logv(classname, username+","+password+","+name+","+clsnm);
 		}
 	}
 }
