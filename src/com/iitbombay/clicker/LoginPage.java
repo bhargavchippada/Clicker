@@ -1,8 +1,5 @@
 package com.iitbombay.clicker;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import support.AppSettings;
 import support.Utils;
 import android.app.Activity;
@@ -43,7 +40,7 @@ public class LoginPage extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ApplicationContext appcontext = (ApplicationContext)getApplicationContext();
-		setContentView(R.layout.login_page);
+		setContentView(R.layout.layout_login);
 		
 		edtxt_ipaddress = (EditText) findViewById(R.id.edtxt_ipaddress);
 		edtxt_port = (EditText) findViewById(R.id.edtxt_port);

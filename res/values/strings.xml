@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Clicker</string>
+    <string name="app_name">Clickr</string>
 	<string name="saved_ipadress">ipaddress</string>
 	<string name="saved_port">portnumber</string>
 	<string name="saved_url">urlpath</string>

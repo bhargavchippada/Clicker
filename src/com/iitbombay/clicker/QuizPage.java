@@ -37,7 +37,7 @@ public class QuizPage extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.quiz_page);
+		setContentView(R.layout.layout_quiz);
 
 		userSession = ApplicationContext.getThreadSafeUserSession();
 		question = ApplicationContext.getThreadSafeQuestion();
@@ -54,7 +54,7 @@ public class QuizPage extends Activity{
 		txtvw_username.setText(userSession.username);
 		txtvw_question.setText(question.question);
 		for(int i=0;i<question.options.length();i++){
-			RadioButton row = (RadioButton) getLayoutInflater().inflate(R.layout.singleoption_radiobtn, rg_options, false);
+			RadioButton row = (RadioButton) getLayoutInflater().inflate(R.layout.template_radiobtn, rg_options, false);
 			try {
 				row.setText(question.options.get(i).toString());
 			} catch (JSONException e) {

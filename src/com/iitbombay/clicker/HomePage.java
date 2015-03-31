@@ -35,7 +35,7 @@ public class HomePage extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.home_page);
+		setContentView(R.layout.layout_home);
 
 		txtvw_roll_number = (TextView) findViewById(R.id.txtvw_roll_number);
 		txtvw_name = (TextView) findViewById(R.id.txtvw_name);
