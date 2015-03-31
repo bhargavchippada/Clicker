@@ -13,7 +13,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
@@ -21,14 +25,18 @@ import android.widget.Toast;
 
 import com.iitbombay.clicker.R;
 
-public class QuestionFragment extends Fragment{
+public class QuestionFragment extends Fragment {
 
 	private String classname = "QuestionFragment";
 
 	RadioGroup rg_options;
-	Question question;
+	LinearLayout ll_checkboxes;
+	LinearLayout ll_truefalse;
+	Button btn_true;
+	Button btn_false;
 
-	HashMap<Integer,Integer> optionIds;
+	Question question;
+	HashMap<Integer,Integer> optionIds = new HashMap<Integer,Integer>();
 
 	LayoutInflater layoutinflater;
 
@@ -47,17 +55,19 @@ public class QuestionFragment extends Fragment{
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		optionIds = new HashMap<Integer, Integer>();
-
 		question = ApplicationContext.getThreadSafeQuestion();
+		int type = question.type;
+		
+		if(type==-1) Toast.makeText(fragactivity, "Invalid Question!", Toast.LENGTH_SHORT).show();
 
-		if(question.type==-1) Toast.makeText(fragactivity, "Invalid Question!", Toast.LENGTH_SHORT).show();
-
-		if(question.type==0) singleMCQInit();
+		if(type==0) singleMCQInit();
+		else if(type==1) multipleMCQinit();
+		else if(type==2) truefalseInit();
 	}
 
 	void singleMCQInit(){
 		rg_options = (RadioGroup) fragactivity.findViewById(R.id.rg_options);
+		rg_options.setVisibility(View.VISIBLE);
 
 		for(int i=0;i<question.options.length();i++){
 			RadioButton row = (RadioButton) layoutinflater.inflate(R.layout.template_radiobtn, rg_options, false);
@@ -79,6 +89,95 @@ public class QuestionFragment extends Fragment{
 				Utils.logv(classname, checkedId+" is checked now");
 				question.answers=new JSONArray();
 				question.answers.put(optionIds.get(checkedId));
+				Utils.logv(classname, "clicked: "+optionIds.get(checkedId));
+			}
+		});
+	}
+
+	void multipleMCQinit(){
+		ll_checkboxes = (LinearLayout) fragactivity.findViewById(R.id.ll_checkboxes);
+		ll_checkboxes.setVisibility(View.VISIBLE);
+
+		for(int i=0;i<question.options.length();i++){
+			CheckBox row = (CheckBox) layoutinflater.inflate(R.layout.template_checkbox, ll_checkboxes, false);
+			try {
+				row.setText(question.options.get(i).toString());
+			} catch (JSONException e) {
+				Utils.logv(classname,"Json Error while setting the options", e);
+				e.printStackTrace();
+			}
+			ll_checkboxes.addView(row);
+			row.setId(Utils.generateViewId());
+			optionIds.put(row.getId(), i);
+			
+			row.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View view) {
+					boolean checked = ((CheckBox) view).isChecked();
+	
+					int checkedid = optionIds.get(view.getId());
+	
+					try {
+						question.answers.put(checkedid, checked);
+					} catch (JSONException e) {
+						e.printStackTrace();
+						Utils.logv(classname, "Json oncheckboxclick error: "+checkedid,e);
+					}
+					
+					Utils.logv(classname, "checklist: "+question.answers.toString());
+				}
+			});
+			question.answers.put(false);
+			Utils.logv(classname, row.getId()+"");
+		}
+	}
+	
+	void truefalseInit(){
+		ll_truefalse = (LinearLayout) fragactivity.findViewById(R.id.ll_truefalse);
+		ll_truefalse.setVisibility(View.VISIBLE);
+		btn_true = (Button) fragactivity.findViewById(R.id.btn_true);
+		btn_false = (Button) fragactivity.findViewById(R.id.btn_false);
+		
+		
+		btn_true.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				btn_true.setBackgroundResource(R.drawable.btn_green_style);
+				btn_true.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
+				btn_false.setBackgroundResource(R.drawable.btn_grey_style);
+				btn_false.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
+				
+				try {
+					question.answers.put(0,true);
+				} catch (JSONException e) {
+					e.printStackTrace();
+					Utils.logv(classname, "Json error!",e);
+				}
+				
+				Utils.logv(classname, "answer: "+question.answers.toString());
+			}
+		});
+		
+		
+		btn_false.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				btn_false.setBackgroundResource(R.drawable.btn_red_style);
+				btn_false.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
+				btn_true.setBackgroundResource(R.drawable.btn_grey_style);
+				btn_true.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
+			
+				try {
+					question.answers.put(0,false);
+				} catch (JSONException e) {
+					e.printStackTrace();
+					Utils.logv(classname, "Json error!",e);
+				}
+				
+				Utils.logv(classname, "answer: "+question.answers.toString());
 			}
 		});
 	}

@@ -1,11 +1,10 @@
 package clicker;
 
-import java.util.HashMap;
-
 import support.Question;
 import support.UserSession;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,7 +14,7 @@ import android.widget.Toast;
 
 import com.iitbombay.clicker.R;
 
-public class QuizPage extends FragmentActivity{
+public class QuizPage extends FragmentActivity {
 	String classname = "QuizPage";
 
 	TextView txtvw_username;
@@ -26,6 +25,8 @@ public class QuizPage extends FragmentActivity{
 
 	UserSession userSession;
 	Question question;
+
+	Fragment  fragment_question;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +42,11 @@ public class QuizPage extends FragmentActivity{
 		btn_submit = (Button) findViewById(R.id.btn_submit);
 		btn_exit = (Button) findViewById(R.id.btn_exit);
 
+		fragment_question = getSupportFragmentManager().findFragmentById(R.id.frag_question);
+
 		txtvw_username.setText(userSession.username);
 		txtvw_question.setText(question.question);
-		
+
 		btn_submit.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -78,7 +81,7 @@ public class QuizPage extends FragmentActivity{
 		for (int i = 0; i < rg_options.getChildCount(); i++) {
 			rg_options.getChildAt(i).setEnabled(false);
 		}
-		*/
+		 */
 	}
 
 	public void gotoLoginPage(){

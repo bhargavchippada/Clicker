@@ -9,23 +9,36 @@
    	    android:layout_height="wrap_content"
    	    android:layout_marginTop="8dp"
    	    android:layout_gravity="left"
-   	    android:visibility="visible">
+   	    android:visibility="gone">
     </RadioGroup>
+    
+    <LinearLayout
+        android:id="@+id/ll_checkboxes"
+	    android:orientation="vertical"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:visibility="gone">
+	</LinearLayout>
     
 	<LinearLayout
 	    android:id="@+id/ll_truefalse"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:orientation="horizontal"
-	    android:visibility="gone" >
+	    android:layout_gravity="center"
+	    android:visibility="visible" >
 	
 	    <Button
+	        android:id="@+id/btn_true"
 	        android:layout_width="128dp"
-	        android:layout_height="48dp"
+	        android:layout_height="42dp"
+	        android:background="@drawable/btn_grey_style"
 	        android:text="True" />
 	    <Button
+	        android:id="@+id/btn_false"
 	        android:layout_width="128dp"
-	        android:layout_height="48dp"
+	        android:layout_height="42dp"
+	        android:background="@drawable/btn_grey_style"
 	        android:layout_marginLeft="16dp"
 	        android:text="False" />
 	

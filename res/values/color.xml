@@ -3,4 +3,7 @@
     <color name="app_background">#27ae60</color>
     <color name="app_background_transparent">#9027ae60</color>
     <color name="app_txtgrey">#888888</color>
+    <color name="app_green">#5CB85C</color>
+    <color name="app_red">#D9534F</color>
+    <color name="app_grey">#E0E0E0</color>
 </resources>
