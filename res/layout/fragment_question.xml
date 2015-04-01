@@ -56,6 +56,6 @@
     	android:maxLines="10"
     	android:scrollbars="vertical"
 	    android:hint="Answer"
-	    android:visibility="visible" />
+	    android:visibility="gone" />
     
 </FrameLayout>

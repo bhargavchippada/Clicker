@@ -1,6 +1,7 @@
 package clicker;
 
 import support.AppSettings;
+import support.UserSession;
 import support.Utils;
 import android.app.Activity;
 import android.content.Context;
@@ -40,8 +41,8 @@ public class LoginPage extends Activity{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		ApplicationContext appcontext = (ApplicationContext)getApplicationContext();
+		super.onCreate(savedInstanceState);	
+		
 		setContentView(R.layout.layout_login);
 		
 		edtxt_ipaddress = (EditText) findViewById(R.id.edtxt_ipaddress);

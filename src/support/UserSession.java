@@ -14,8 +14,9 @@ public class UserSession {
 	public void clear(){
 		username = null;
 		password = null;
-		name= null;
-		clsnm= null;
+		name = null;
+		clsnm = null;
+		ip = null;
 	}
 	
 	public boolean isSessionValid(){

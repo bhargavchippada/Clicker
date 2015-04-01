@@ -22,6 +22,7 @@ public class Question{
 		question=null;
 		type=-1;
 		options = new JSONArray();
+		answers = new JSONArray();
 		feedback=false;
 		timed=false;
 		time=-1;

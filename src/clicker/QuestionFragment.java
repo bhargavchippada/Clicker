@@ -225,6 +225,8 @@ public class QuestionFragment extends Fragment {
 					e.printStackTrace();
 					Utils.logv(classname, "Json error!",e);
 				}
+				
+				Utils.logv(classname, "answer: "+question.answers.toString());
 			}
 		});
 	}
