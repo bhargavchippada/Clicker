@@ -156,7 +156,7 @@ public class QuestionFragment extends Fragment {
 				btn_false.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
 
 				try {
-					question.answers.put(0,true);
+					question.answers.put(0,1);
 				} catch (JSONException e) {
 					e.printStackTrace();
 					Utils.logv(classname, "Json error!",e);
@@ -177,7 +177,7 @@ public class QuestionFragment extends Fragment {
 				btn_true.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
 
 				try {
-					question.answers.put(0,false);
+					question.answers.put(0,0);
 				} catch (JSONException e) {
 					e.printStackTrace();
 					Utils.logv(classname, "Json error!",e);
@@ -229,6 +229,26 @@ public class QuestionFragment extends Fragment {
 				Utils.logv(classname, "answer: "+question.answers.toString());
 			}
 		});
+	}
+	
+	public void disableBtns(){
+		question = ApplicationContext.getThreadSafeQuestion();
+		int type = question.type;
+		
+		if(type==0) {
+			for (int i = 0; i < rg_options.getChildCount(); i++) {
+				rg_options.getChildAt(i).setEnabled(false);
+			}
+		}else if(type==1){
+			for (int i = 0; i < ll_checkboxes.getChildCount(); i++) {
+				ll_checkboxes.getChildAt(i).setEnabled(false);
+			}
+		}else if(type==2){
+			btn_true.setEnabled(false);
+			btn_false.setEnabled(false);
+		}else if(type==3 || type==4){
+			edtxt_textual.setEnabled(false);
+		}
 	}
 
 }

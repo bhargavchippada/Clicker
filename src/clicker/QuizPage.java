@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.iitbombay.clicker.R;
 
+import datahandler.SubmitAnswerToWS;
+
 public class QuizPage extends FragmentActivity {
 	String classname = "QuizPage";
 
@@ -26,7 +28,7 @@ public class QuizPage extends FragmentActivity {
 	UserSession userSession;
 	Question question;
 
-	Fragment  fragment_question;
+	QuestionFragment  fragment_question;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +44,7 @@ public class QuizPage extends FragmentActivity {
 		btn_submit = (Button) findViewById(R.id.btn_submit);
 		btn_exit = (Button) findViewById(R.id.btn_exit);
 
-		fragment_question = getSupportFragmentManager().findFragmentById(R.id.frag_question);
+		fragment_question = (QuestionFragment) getSupportFragmentManager().findFragmentById(R.id.frag_question);
 
 		txtvw_username.setText(userSession.username);
 		txtvw_question.setText(question.question);
@@ -52,9 +54,9 @@ public class QuizPage extends FragmentActivity {
 			@Override
 			public void onClick(View v) {
 				if(question.answers.length()!=0){
-					//new SubmitAnswerToWS().execute(QuizPage.this);
+					new SubmitAnswerToWS().execute(QuizPage.this);
 				}else{
-					Toast.makeText(getBaseContext(), "Please Select an Option...", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getBaseContext(), "Please answer...", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
@@ -77,11 +79,7 @@ public class QuizPage extends FragmentActivity {
 
 	public void disableBtns(){
 		btn_submit.setEnabled(false);
-		/*
-		for (int i = 0; i < rg_options.getChildCount(); i++) {
-			rg_options.getChildAt(i).setEnabled(false);
-		}
-		 */
+		fragment_question.disableBtns();
 	}
 
 	public void gotoLoginPage(){

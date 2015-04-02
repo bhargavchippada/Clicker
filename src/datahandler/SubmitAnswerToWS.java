@@ -31,24 +31,14 @@ public class SubmitAnswerToWS {
 		// performs rendering in the "edt" thread, before background operation starts
 		final Runnable runInUIThread1 = new Runnable() {
 			public void run() {
-				try {
-					_showInUI(0);
-				} catch (JSONException e) {
-					Utils.logv(classname, "Json exception",e);
-					e.printStackTrace();
-				}
+				_showInUI(0);
 			}
 		};
 
 		// performs rendering in the "edt" thread, after background operation is complete
 		final Runnable runInUIThread2 = new Runnable() {
 			public void run() {
-				try {
-					_showInUI(1);
-				} catch (JSONException e) {
-					Utils.logv(classname, "Json exception",e);
-					e.printStackTrace();
-				}
+				_showInUI(1);
 			}
 		};
 
@@ -59,7 +49,7 @@ public class SubmitAnswerToWS {
 			UserSession userSession = ApplicationContext.getThreadSafeUserSession();
 			Question question = ApplicationContext.getThreadSafeQuestion();
 			jsonreq.put("uid", userSession.username);
-			jsonreq.put("answer", question.answers);
+			jsonreq.put("myanswer", question.answers);
 			req_entity = new StringEntity(jsonreq.toString());
 			Utils.logv(classname, "client request: "+jsonreq.toString());
 		} catch (JSONException e1) {
@@ -88,36 +78,41 @@ public class SubmitAnswerToWS {
 
 	/** this method is called in the "edt" 
 	 * @throws JSONException */
-	private void _showInUI(int uiStatus) throws JSONException {
+	private void _showInUI(int uiStatus) {
 		if(uiStatus==0){
 			_activity.updateUI("Trying to submit answer..");
 		}else{
 			if (data.dataFromServlet != null){
-				Integer status = (Integer)data.dataFromServlet.get("status");
-				if(status==0){
-					Toast.makeText(_activity,"Failed to submit answer",Toast.LENGTH_SHORT).show();
-					_activity.updateUI("Failed to submit answer");
-				}else if(status==1){
-					Toast.makeText(_activity,"Answer submitted!",Toast.LENGTH_SHORT).show();
-					_activity.updateUI("Answer submitted!");
-					JSONArray answer = (JSONArray) data.dataFromServlet.get("answer");
-					String eval;
-					if((Integer) data.dataFromServlet.get("correct")==1) eval="correct";
-					else eval="wrong";
-					String output="Your answer is "+eval+"\nCorrect answer:";
-					int op;
-					synchronized (ApplicationContext.class) {
-						Question question = ApplicationContext.getThreadSafeQuestion();
-						for(int i=0;i<answer.length();i++){
-							op = Integer.parseInt((String)answer.get(i));
-							output+="\n"+op+": "+question.options.get(op-1);
-						}
-						_activity.updateUI(output);
+				try{
+					Integer status = (Integer)data.dataFromServlet.get("status");
+					if(status==-1){
+						Toast.makeText(_activity,"Failed to submit answer",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Failed to submit answer");
+					}else if(status==0){
+						Toast.makeText(_activity,"Your are not authorized!",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Your are not authorized!");
+						_activity.gotoLoginPage();
+					}else if(status==1){
+						Toast.makeText(_activity,"Quiz has changed!",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Quiz has changed!");
+						_activity.gotoLoginPage();
+					}else if(status==2){
+						Toast.makeText(_activity,"You have already submitted",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("You have already submitted");
+					}else if(status==3){
+						Toast.makeText(_activity,"Answer submitted!",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Answer submitted!");
+						String feedback = (String) data.dataFromServlet.get("feedback");
+						_activity.updateUI(feedback);
+						_activity.disableBtns();
+					}else {
+						Toast.makeText(_activity,"Invalid status code!",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Invalid status code!");
+						_activity.gotoLoginPage();
 					}
-					_activity.disableBtns();
-				}else if(status==2){
-					Toast.makeText(_activity,"You have already submitted",Toast.LENGTH_SHORT).show();
-					_activity.updateUI("You have already submitted");
+				} catch (JSONException e) {
+					Utils.logv(classname, "dataFromServlet retrieval error!",e);
+					e.printStackTrace();
 				}
 			}else if (data.ex != null){
 				Toast.makeText(_activity,
