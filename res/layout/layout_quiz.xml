@@ -29,12 +29,14 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/txtvw_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="Question:"
+                android:text="Title"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <TextView
                 android:id="@+id/txtvw_question"
@@ -42,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginTop="8dp"
-                android:text="lorem ipsum blah baldahdbadn jadnajdn jadnadn ajndad jnadakdnadjandjaadma"
+                android:text="Q) lorem ipsum blah baldahdbadn jadnajdn jadnadn ajndad jnadakdnadjandjaadma"
                 android:textSize="18sp" />
 
             <fragment
