@@ -4,6 +4,7 @@ import support.Question;
 import support.UserSession;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
 import android.view.View;
@@ -22,6 +23,7 @@ public class QuizPage extends FragmentActivity {
 	TextView txtvw_username;
 	TextView txtvw_title;
 	TextView txtvw_question;
+	TextView txtvw_timer;
 	TextView txtvw_status;
 	Button btn_submit;
 	Button btn_exit;
@@ -42,6 +44,7 @@ public class QuizPage extends FragmentActivity {
 		txtvw_username = (TextView) findViewById(R.id.txtvw_username);
 		txtvw_title = (TextView) findViewById(R.id.txtvw_title);
 		txtvw_question = (TextView) findViewById(R.id.txtvw_question);
+		txtvw_timer = (TextView) findViewById(R.id.txtvw_timer);
 		txtvw_status = (TextView) findViewById(R.id.txtvw_status);
 		btn_submit = (Button) findViewById(R.id.btn_submit);
 		btn_exit = (Button) findViewById(R.id.btn_exit);
@@ -52,9 +55,23 @@ public class QuizPage extends FragmentActivity {
 			txtvw_title.setVisibility(View.VISIBLE);
 			txtvw_title.setText(question.title);
 		}
-			
+
 		txtvw_username.setText(userSession.username);
 		txtvw_question.setText(Html.fromHtml("<b>Q) </b>"+question.question));
+
+		if(question.timed){
+			txtvw_timer.setText(question.time+"");
+			new CountDownTimer(question.time*1000, 1000) {
+
+				public void onTick(long millisUntilFinished) {
+					txtvw_timer.setText(""+millisUntilFinished / 1000);
+				}
+
+				public void onFinish() {
+					txtvw_timer.setText("Up!");
+				}
+			}.start();
+		}
 
 		btn_submit.setOnClickListener(new OnClickListener() {
 

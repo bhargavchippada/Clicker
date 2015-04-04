@@ -134,7 +134,7 @@
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:layout_gravity="center"
-                android:background="@drawable/circle"
+                android:background="@drawable/green_circle"
                 android:gravity="center"
                 android:text="Start Quiz"
                 android:textColor="@android:color/white"
