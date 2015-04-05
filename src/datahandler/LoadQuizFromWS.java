@@ -96,6 +96,7 @@ public class LoadQuizFromWS {
 						synchronized (Question.class) {
 							Question question = ApplicationContext.getThreadSafeQuestion();
 							question.clear();
+							question.ID = (String)data.dataFromServlet.get("qid");
 							question.title = (String)data.dataFromServlet.get("title");
 							question.question = (String)data.dataFromServlet.get("question");
 							question.type = (Integer)data.dataFromServlet.get("type");

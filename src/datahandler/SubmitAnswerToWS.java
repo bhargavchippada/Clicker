@@ -1,9 +1,9 @@
 package datahandler;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 
 import org.apache.http.entity.StringEntity;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -50,6 +50,12 @@ public class SubmitAnswerToWS {
 			Question question = ApplicationContext.getThreadSafeQuestion();
 			jsonreq.put("uid", userSession.username);
 			jsonreq.put("myanswer", question.answers);
+			jsonreq.put("qid", question.ID);
+			question.submitTime = new Date().getTime();
+			question.timeTook = question.submitTime - question.startTime;
+			jsonreq.put("starttime", (long) question.startTime/1000);
+			jsonreq.put("submittime", (long) question.submitTime/1000);
+			jsonreq.put("timetook", (long) question.timeTook/1000);
 			req_entity = new StringEntity(jsonreq.toString());
 			Utils.logv(classname, "client request: "+jsonreq.toString());
 		} catch (JSONException e1) {

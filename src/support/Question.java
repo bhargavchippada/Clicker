@@ -15,6 +15,10 @@ public class Question{
 	public boolean timed;
 	public int time;
 	
+	public long startTime;
+	public long timeTook;
+	public long submitTime;
+	
 	public JSONArray answers = new JSONArray();
 	
 	public void clear(){

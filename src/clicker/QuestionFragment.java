@@ -1,5 +1,6 @@
 package clicker;
 
+import java.util.Date;
 import java.util.HashMap;
 
 import org.json.JSONArray;
@@ -63,8 +64,10 @@ public class QuestionFragment extends Fragment {
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
+		
 		question = ApplicationContext.getThreadSafeQuestion();
+		
+		question.startTime = new Date().getTime();
 
 		txtvw_title = (TextView) fragactivity.findViewById(R.id.txtvw_title);
 		txtvw_question = (TextView) fragactivity.findViewById(R.id.txtvw_question);
@@ -171,7 +174,7 @@ public class QuestionFragment extends Fragment {
 				btn_false.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
 
 				try {
-					question.answers.put(0,1);
+					question.answers.put(0,true);
 				} catch (JSONException e) {
 					e.printStackTrace();
 					Utils.logv(classname, "Json error!",e);
@@ -192,7 +195,7 @@ public class QuestionFragment extends Fragment {
 				btn_true.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
 
 				try {
-					question.answers.put(0,0);
+					question.answers.put(0,false);
 				} catch (JSONException e) {
 					e.printStackTrace();
 					Utils.logv(classname, "Json error!",e);
