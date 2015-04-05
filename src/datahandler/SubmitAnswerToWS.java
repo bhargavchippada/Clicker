@@ -111,6 +111,10 @@ public class SubmitAnswerToWS {
 						String feedback = (String) data.dataFromServlet.get("feedback");
 						_activity.updateUI(feedback);
 						_activity.disableBtns();
+					}else if(status==4){
+						Toast.makeText(_activity,"Sorry, this quiz was over!",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("Sorry, this quiz was over!");
+						_activity.gotoLoginPage();
 					}else {
 						Toast.makeText(_activity,"Invalid status code!",Toast.LENGTH_SHORT).show();
 						_activity.updateUI("Invalid status code!");
