@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.FragmentActivity;
-import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -21,8 +20,6 @@ public class QuizPage extends FragmentActivity {
 	String classname = "QuizPage";
 
 	TextView txtvw_username;
-	TextView txtvw_title;
-	TextView txtvw_question;
 	TextView txtvw_timer;
 	TextView txtvw_status;
 	Button btn_submit;
@@ -42,8 +39,6 @@ public class QuizPage extends FragmentActivity {
 		question = ApplicationContext.getThreadSafeQuestion();
 
 		txtvw_username = (TextView) findViewById(R.id.txtvw_username);
-		txtvw_title = (TextView) findViewById(R.id.txtvw_title);
-		txtvw_question = (TextView) findViewById(R.id.txtvw_question);
 		txtvw_timer = (TextView) findViewById(R.id.txtvw_timer);
 		txtvw_status = (TextView) findViewById(R.id.txtvw_status);
 		btn_submit = (Button) findViewById(R.id.btn_submit);
@@ -51,13 +46,7 @@ public class QuizPage extends FragmentActivity {
 
 		fragment_question = (QuestionFragment) getSupportFragmentManager().findFragmentById(R.id.frag_question);
 
-		if(!question.title.equals("")){
-			txtvw_title.setVisibility(View.VISIBLE);
-			txtvw_title.setText(question.title);
-		}
-
 		txtvw_username.setText(userSession.username);
-		txtvw_question.setText(Html.fromHtml("<b>Q) </b>"+question.question));
 
 		if(question.timed){
 			txtvw_timer.setText(question.time+"");

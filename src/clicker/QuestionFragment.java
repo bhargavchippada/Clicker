@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.iitbombay.clicker.R;
@@ -32,6 +34,8 @@ public class QuestionFragment extends Fragment {
 
 	private String classname = "QuestionFragment";
 
+	TextView txtvw_title;
+	TextView txtvw_question;
 	RadioGroup rg_options;
 	LinearLayout ll_checkboxes;
 	LinearLayout ll_truefalse;
@@ -61,6 +65,17 @@ public class QuestionFragment extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 
 		question = ApplicationContext.getThreadSafeQuestion();
+
+		txtvw_title = (TextView) fragactivity.findViewById(R.id.txtvw_title);
+		txtvw_question = (TextView) fragactivity.findViewById(R.id.txtvw_question);
+
+		if(!question.title.equals("")){
+			txtvw_title.setVisibility(View.VISIBLE);
+			txtvw_title.setText(question.title);
+		}
+
+		txtvw_question.setText(Html.fromHtml("<b>Q) </b>"+question.question));
+
 		int type = question.type;
 
 		if(type==-1) Toast.makeText(fragactivity, "Invalid Question!", Toast.LENGTH_SHORT).show();
@@ -225,16 +240,16 @@ public class QuestionFragment extends Fragment {
 					e.printStackTrace();
 					Utils.logv(classname, "Json error!",e);
 				}
-				
+
 				Utils.logv(classname, "answer: "+question.answers.toString());
 			}
 		});
 	}
-	
+
 	public void disableBtns(){
 		question = ApplicationContext.getThreadSafeQuestion();
 		int type = question.type;
-		
+
 		if(type==0) {
 			for (int i = 0; i < rg_options.getChildCount(); i++) {
 				rg_options.getChildAt(i).setEnabled(false);

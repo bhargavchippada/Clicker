@@ -20,33 +20,33 @@
                 android:id="@+id/imgvw_logo"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_margin="8dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
+                android:layout_margin="8dp"
                 android:background="@drawable/launcher" />
 
             <TextView
-                android:layout_toRightOf="@+id/imgvw_logo"
                 android:id="@+id/txtvw_username"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_toRightOf="@+id/imgvw_logo"
                 android:gravity="center_vertical"
                 android:text="1200xxxxxx"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
-            
+
             <TextView
                 android:id="@+id/txtvw_timer"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginRight="8dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/white_circle"
                 android:gravity="center"
-                android:text="&#8734;"
+                android:text="∞"
                 android:textColor="@color/app_red"
-                android:textSize="14sp"
-                android:background="@drawable/white_circle" />
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -55,30 +55,10 @@
             android:layout_margin="24dp"
             android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/txtvw_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:text="Title"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/txtvw_question"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left"
-                android:layout_marginTop="8dp"
-                android:text="Q) lorem ipsum blah baldahdbadn jadnajdn jadnadn ajndad jnadakdnadjandjaadma"
-                android:textSize="18sp" />
-
             <fragment
                 android:id="@+id/frag_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 class="clicker.QuestionFragment" />
 
             <Button

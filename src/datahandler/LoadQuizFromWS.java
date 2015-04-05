@@ -106,6 +106,9 @@ public class LoadQuizFromWS {
 							question.print();
 						}
 						_activity.gotoQuizPage();
+					}else if(status==3){
+						Toast.makeText(_activity,"You already attempted the quiz!",Toast.LENGTH_SHORT).show();
+						_activity.updateUI("You already attempted the quiz!",View.INVISIBLE);
 					}else{
 						Toast.makeText(_activity,"Invalid satus code",Toast.LENGTH_SHORT).show();
 						_activity.updateUI("Invalid satus code",View.INVISIBLE);

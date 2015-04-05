@@ -31,7 +31,7 @@ public class HomePage extends Activity{
 	UserSession usersession;
 
 	//to control the click event
-	double lastTime = -5.0;
+	double lastTime = -2.0;
 	int clickTime = 0;
 
 	@Override
@@ -65,12 +65,12 @@ public class HomePage extends Activity{
 			public void onClick(View v) {
 				double present_time  = System.currentTimeMillis()/1000;
 				final int diff_time = (int)(present_time-lastTime);
-				if(diff_time<5 && clickTime!=diff_time){
+				if(diff_time<2 && clickTime!=diff_time){
 					clickTime=diff_time;
 					Utils.logv(classname,clickTime+"");
-					Toast.makeText(getBaseContext(), "Wait for "+(5-diff_time)+" secs before trying", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getBaseContext(), "Wait before trying", Toast.LENGTH_SHORT).show();
 					return;
-				}else if(diff_time<5){
+				}else if(diff_time<2){
 					return;
 				}
 
