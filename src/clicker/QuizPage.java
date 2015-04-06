@@ -31,7 +31,7 @@ public class QuizPage extends FragmentActivity {
 	CountDownTimer countdowntimer;
 
 	QuestionFragment  fragment_question;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -103,8 +103,13 @@ public class QuizPage extends FragmentActivity {
 		fragment_question.disableBtns();
 	}
 
+	@Override
+	protected void onStop() {
+		super.onStop();
+		disableBtns();
+	}
+	
 	public void gotoLoginPage(){
-		if(countdowntimer!=null) countdowntimer.cancel();
 		Intent intent = new Intent(this,LoginPage.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
