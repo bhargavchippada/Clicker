@@ -156,6 +156,14 @@
             android:text="Click to start quiz"
             android:textSize="20sp"
             android:textStyle="italic" />
+        
+        <Button
+            android:id="@+id/btn_exit"
+            android:layout_width="128dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="Exit" />
     </LinearLayout>
 
 </ScrollView>

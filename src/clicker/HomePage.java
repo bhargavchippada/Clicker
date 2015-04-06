@@ -27,6 +27,7 @@ public class HomePage extends Activity{
 
 	Button btn_startquiz;
 	ProgressBar pbar_startquiz;
+	Button btn_exit;
 
 	UserSession usersession;
 
@@ -44,6 +45,7 @@ public class HomePage extends Activity{
 		txtvw_ipaddress = (TextView) findViewById(R.id.txtvw_ipaddress);
 		txtvw_clsnm = (TextView) findViewById(R.id.txtvw_clsnm);
 		txtvw_status = (TextView) findViewById(R.id.txtvw_status);
+		btn_exit = (Button) findViewById(R.id.btn_exit);
 
 		usersession = ApplicationContext.getThreadSafeUserSession();
 		if(!usersession.isSessionValid()){
@@ -80,6 +82,16 @@ public class HomePage extends Activity{
 				pbar_startquiz.setVisibility(View.VISIBLE);
 			}
 		});
+		
+		btn_exit.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getBaseContext(), LoginPage.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(intent);
+			}
+		});
 	}
 
 	public void updateUI(String msg, int pbar_state){
@@ -88,7 +100,9 @@ public class HomePage extends Activity{
 	}
 
 	public void gotoQuizPage(){
-		startActivity(new Intent(this,QuizPage.class));
+		Intent intent = new Intent(this,QuizPage.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
 	}
 
 	public void gotoLoginPage(){
