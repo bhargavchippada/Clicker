@@ -27,6 +27,8 @@ public class QuizPage extends FragmentActivity {
 
 	UserSession userSession;
 	Question question;
+	
+	CountDownTimer countdowntimer;
 
 	QuestionFragment  fragment_question;
 
@@ -50,14 +52,19 @@ public class QuizPage extends FragmentActivity {
 
 		if(question.timed){
 			txtvw_timer.setText(question.time+"");
-			new CountDownTimer(question.time*1000, 1000) {
+			countdowntimer = new CountDownTimer(question.time*1000, 1000) {
 
 				public void onTick(long millisUntilFinished) {
-					txtvw_timer.setText(""+millisUntilFinished / 1000);
+					long secs = millisUntilFinished / 1000;
+					long minsleft = secs/60;
+					long secsleft = secs % 60; 
+					txtvw_timer.setText(minsleft+":"+secsleft);
 				}
 
 				public void onFinish() {
 					txtvw_timer.setText("Up!");
+					fragment_question.disableBtns();
+					new SubmitAnswerToWS().execute(QuizPage.this);
 				}
 			}.start();
 		}
@@ -92,6 +99,7 @@ public class QuizPage extends FragmentActivity {
 
 	public void disableBtns(){
 		btn_submit.setEnabled(false);
+		countdowntimer.cancel();
 		fragment_question.disableBtns();
 	}
 
