@@ -104,6 +104,7 @@ public class QuizPage extends FragmentActivity {
 	}
 
 	public void gotoLoginPage(){
+		if(countdowntimer!=null) countdowntimer.cancel();
 		Intent intent = new Intent(this,LoginPage.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
