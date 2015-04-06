@@ -99,7 +99,7 @@ public class QuizPage extends FragmentActivity {
 
 	public void disableBtns(){
 		btn_submit.setEnabled(false);
-		countdowntimer.cancel();
+		if(countdowntimer!=null) countdowntimer.cancel();
 		fragment_question.disableBtns();
 	}
 
