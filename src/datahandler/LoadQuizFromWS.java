@@ -49,13 +49,10 @@ public class LoadQuizFromWS {
 		try {
 			jsonreq.put("uid", ApplicationContext.getThreadSafeUserSession().username);
 			req_entity = new StringEntity(jsonreq.toString());
-			Utils.logv(classname, "client request: "+jsonreq.toString());
 		} catch (JSONException e1) {
-			Utils.logv(classname, "JSON object creation error!",e1);
 			e1.printStackTrace();
 			return;
 		} catch (UnsupportedEncodingException e) {
-			Utils.logv(classname, "JSON object creation error: UnsupportedEncodingException!",e);
 			e.printStackTrace();
 			return;
 		}
@@ -104,7 +101,6 @@ public class LoadQuizFromWS {
 							question.feedback = (boolean) data.dataFromServlet.get("feedback");
 							question.timed = (boolean) data.dataFromServlet.get("timed");
 							question.time = (Integer) data.dataFromServlet.get("time");
-							question.print();
 						}
 						_activity.gotoQuizPage();
 					}else if(status==3){
@@ -116,7 +112,6 @@ public class LoadQuizFromWS {
 						_activity.gotoLoginPage();
 					}
 				} catch (JSONException e) {
-					Utils.logv(classname, "dataFromServlet retrieval error!",e);
 					e.printStackTrace();
 				}
 			}else if (data.ex != null){

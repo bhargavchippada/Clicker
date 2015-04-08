@@ -72,7 +72,6 @@ public class LoginPage extends Activity{
 				final int diff_time = (int)(present_time-lastTime);
 				if(diff_time<2 && clickTime!=diff_time){
 					clickTime=diff_time;
-					Utils.logv(classname,clickTime+"");
 					Toast.makeText(getBaseContext(), "Wait before trying", Toast.LENGTH_SHORT).show();
 					return;
 				}else if(diff_time<2){
@@ -82,7 +81,6 @@ public class LoginPage extends Activity{
 				clickTime = 0;
 				lastTime = present_time;
 				new AuthenticateWS().execute(LoginPage.this);
-				Utils.logv(classname, "Login button is pressed",null);
 			}
 		});
 		

@@ -98,22 +98,18 @@ public class QuestionFragment extends Fragment {
 			try {
 				row.setText(question.options.get(i).toString());
 			} catch (JSONException e) {
-				Utils.logv(classname,"Json Error while setting the options", e);
 				e.printStackTrace();
 			}
 			rg_options.addView(row);
 			optionIds.put(row.getId(), i);
-			Utils.logv(classname, row.getId()+"");
 		}
 
 		rg_options.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				Utils.logv(classname, checkedId+" is checked now");
 				question.answers=new JSONArray();
 				question.answers.put(optionIds.get(checkedId));
-				Utils.logv(classname, "clicked: "+optionIds.get(checkedId));
 			}
 		});
 	}
@@ -127,7 +123,6 @@ public class QuestionFragment extends Fragment {
 			try {
 				row.setText(question.options.get(i).toString());
 			} catch (JSONException e) {
-				Utils.logv(classname,"Json Error while setting the options", e);
 				e.printStackTrace();
 			}
 			ll_checkboxes.addView(row);
@@ -146,14 +141,11 @@ public class QuestionFragment extends Fragment {
 						question.answers.put(checkedid, checked);
 					} catch (JSONException e) {
 						e.printStackTrace();
-						Utils.logv(classname, "Json oncheckboxclick error: "+checkedid,e);
 					}
 
-					Utils.logv(classname, "checklist: "+question.answers.toString());
 				}
 			});
 			question.answers.put(false);
-			Utils.logv(classname, row.getId()+"");
 		}
 	}
 
@@ -177,10 +169,8 @@ public class QuestionFragment extends Fragment {
 					question.answers.put(0,true);
 				} catch (JSONException e) {
 					e.printStackTrace();
-					Utils.logv(classname, "Json error!",e);
 				}
 
-				Utils.logv(classname, "answer: "+question.answers.toString());
 			}
 		});
 
@@ -198,10 +188,8 @@ public class QuestionFragment extends Fragment {
 					question.answers.put(0,false);
 				} catch (JSONException e) {
 					e.printStackTrace();
-					Utils.logv(classname, "Json error!",e);
 				}
 
-				Utils.logv(classname, "answer: "+question.answers.toString());
 			}
 		});
 	}
@@ -234,17 +222,14 @@ public class QuestionFragment extends Fragment {
 				}else if(question.type==4) result = s.toString();
 				else {
 					result="";
-					Utils.logv(classname, "Textual with undefined type!");
 				}
 
 				try {
 					question.answers.put(0, result.trim());
 				} catch (JSONException e) {
 					e.printStackTrace();
-					Utils.logv(classname, "Json error!",e);
 				}
 
-				Utils.logv(classname, "answer: "+question.answers.toString());
 			}
 		});
 	}

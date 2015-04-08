@@ -27,7 +27,6 @@ public class GetDataFromWebServer {
 
 	// this method is called in a non-"edt" thread
 	public void doInBackgroundPost(String path, StringEntity req_entity) {
-		Utils.logv(classname, "background task - start");
 		long startTime = System.currentTimeMillis();
 
 		try {
@@ -49,15 +48,11 @@ public class GetDataFromWebServer {
 						try {
 							String resp_str = EntityUtils.toString(resp_entity);
 							dataFromServlet = new JSONObject(resp_str);
-							Utils.logv(classname,"data size from servlet=" + resp_entity.getContentLength());
-							Utils.logv(classname,"json data from servlet=" + dataFromServlet);
 						}catch (Exception e) {
 							ex = e;
-							Utils.logv(classname,"problem processing post response",e);
 							e.printStackTrace();
 						}
 					}else {
-						Utils.logv(classname,"No response entity");
 						throw new IOException(
 								new StringBuffer()
 								.append("HTTP response : ").append(response.getStatusLine())
@@ -69,13 +64,10 @@ public class GetDataFromWebServer {
 
 		}catch (Exception e) {
 			ex = e;
-			Utils.logv(classname,"Error processing the request/response",e);
 			e.printStackTrace();
 		}
 
-		Utils.logv(classname,"background task - end");
 		long stopTime = System.currentTimeMillis();
 		long elapsedTime = stopTime - startTime;
-		Utils.logv(classname,elapsedTime+"ms");
 	}
 }

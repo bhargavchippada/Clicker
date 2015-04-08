@@ -31,21 +31,4 @@ public class Question{
 		timed=false;
 		time=-1;
 	}
-	
-	public void print() {
-		Utils.logv(classname, "title: "+title);
-		Utils.logv(classname, "question: "+question);
-		Utils.logv(classname, "type: "+type);
-		Utils.logv(classname, "options: ");
-		for(int i=0; i<options.length();i++)
-			try {
-				Utils.logv(classname, options.get(i).toString());
-			} catch (JSONException e) {
-				Utils.logv(classname, "json array error: ",e);
-				e.printStackTrace();
-			}
-		Utils.logv(classname, "feedback: "+feedback);
-		Utils.logv(classname, "timed: "+timed);
-		Utils.logv(classname, "time: "+time);
-	}
 }

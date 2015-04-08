@@ -48,13 +48,10 @@ public class AuthenticateWS {
 			jsonreq.put("uid", _activity.getUsername());
 			jsonreq.put("pwd", _activity.getPassword());		
 			req_entity = new StringEntity(jsonreq.toString());
-			Utils.logv(classname, "client request: "+jsonreq.toString());
 		} catch (JSONException e1) {
-			Utils.logv(classname, "JSON object creation error!",e1);
 			e1.printStackTrace();
 			return;
 		} catch (UnsupportedEncodingException e) {
-			Utils.logv(classname, "JSON object creation error: UnsupportedEncodingException!",e);
 			e.printStackTrace();
 			return;
 		}
@@ -108,7 +105,6 @@ public class AuthenticateWS {
 						_activity.updateUI("Invalid satus code");
 					}
 				} catch (JSONException e) {
-					Utils.logv(classname, "dataFromServlet retrieval error!",e);
 					e.printStackTrace();
 				}
 			}else if (data.ex != null){

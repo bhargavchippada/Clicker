@@ -18,6 +18,5 @@ public class AppSettings{
 	
 	public static synchronized void updateUrl(String ip, String p){
 		LoginServiceUri = "http://"+ip+":"+p+"/"+"ClickrServer/";
-		Utils.logv(classname,LoginServiceUri, null);
 	}
 }

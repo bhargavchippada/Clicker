@@ -15,17 +15,6 @@ public class Utils {
 
 	private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
 
-	public static void logv(String classname, String s, Exception e){
-		if(e!=null) Log.v("Clicker", classname+": "+s, e);
-		else{
-			Log.v("Clicker", classname+": "+s);
-		}
-	}
-
-	public static void logv(String classname, String msg){
-		Log.v("Clicker",classname+" : "+msg);
-	}
-
 	public static String getIpAddress(Context context){
 		WifiManager wifiMan = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
 		WifiInfo wifiInf = wifiMan.getConnectionInfo();

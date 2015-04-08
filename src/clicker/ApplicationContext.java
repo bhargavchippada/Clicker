@@ -23,7 +23,6 @@ public class ApplicationContext extends Application{
 	// link: http://foo.jasonhudgins.com/2009/08/http-connection-reuse-in-android.html
 	public synchronized static DefaultHttpClient getThreadSafeClient() {
 		if(httpClient!=null) return httpClient;
-		Utils.logv(classname, "New httpClient is created");
 
 		// set params for connection...
 		HttpParams params = new BasicHttpParams();
@@ -52,11 +51,9 @@ public class ApplicationContext extends Application{
 	public synchronized static void invalidateSession(){
 		if(usersession!=null) {
 			usersession.clear();
-			Utils.logv(classname, "usersession wiped");
 		}
 		if(question!=null) {
 			question.clear();
-			Utils.logv(classname, "question wiped");
 		}
 	}
 }

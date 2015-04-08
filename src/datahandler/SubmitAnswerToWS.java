@@ -57,13 +57,10 @@ public class SubmitAnswerToWS {
 			jsonreq.put("submittime", (long) question.submitTime/1000);
 			jsonreq.put("timetook", (long) question.timeTook/1000);
 			req_entity = new StringEntity(jsonreq.toString());
-			Utils.logv(classname, "client request: "+jsonreq.toString());
 		} catch (JSONException e1) {
-			Utils.logv(classname, "JSON object creation error!",e1);
 			e1.printStackTrace();
 			return;
 		} catch (UnsupportedEncodingException e) {
-			Utils.logv(classname, "JSON object creation error: UnsupportedEncodingException!",e);
 			e.printStackTrace();
 			return;
 		}
@@ -117,7 +114,6 @@ public class SubmitAnswerToWS {
 						_activity.gotoLoginPage();
 					}
 				} catch (JSONException e) {
-					Utils.logv(classname, "dataFromServlet retrieval error!",e);
 					e.printStackTrace();
 				}
 			}else if (data.ex != null){

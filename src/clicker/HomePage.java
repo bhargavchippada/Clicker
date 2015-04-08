@@ -49,7 +49,6 @@ public class HomePage extends Activity{
 
 		usersession = ApplicationContext.getThreadSafeUserSession();
 		if(!usersession.isSessionValid()){
-			Utils.logv(classname, "UserSession is invalid");
 			gotoLoginPage();
 		}
 
@@ -69,7 +68,6 @@ public class HomePage extends Activity{
 				final int diff_time = (int)(present_time-lastTime);
 				if(diff_time<2 && clickTime!=diff_time){
 					clickTime=diff_time;
-					Utils.logv(classname,clickTime+"");
 					Toast.makeText(getBaseContext(), "Wait before trying", Toast.LENGTH_SHORT).show();
 					return;
 				}else if(diff_time<2){

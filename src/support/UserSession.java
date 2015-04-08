@@ -23,10 +23,4 @@ public class UserSession {
 			return false;
 		}else return true;
 	}
-
-	public void print(){
-		if(isSessionValid()){
-			Utils.logv(classname, username+","+password+","+name+","+clsnm);
-		}
-	}
 }
