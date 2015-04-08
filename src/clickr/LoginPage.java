@@ -1,7 +1,6 @@
-package clicker;
+package clickr;
 
 import support.AppSettings;
-import support.Utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.iitbombay.clicker.R;
+import com.iitbombay.clickr.R;
 
 import datahandler.AuthenticateWS;
 

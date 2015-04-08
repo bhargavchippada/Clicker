@@ -1,7 +1,6 @@
-package clicker;
+package clickr;
 
 import support.UserSession;
-import support.Utils;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.iitbombay.clicker.R;
+import com.iitbombay.clickr.R;
 
 import datahandler.LoadQuizFromWS;
 
