@@ -1,4 +1,4 @@
-package clicker;
+package clickr;
 
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.impl.client.DefaultHttpClient;

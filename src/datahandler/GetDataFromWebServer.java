@@ -14,7 +14,7 @@ import org.json.JSONObject;
 
 import support.AppSettings;
 import support.Utils;
-import clicker.ApplicationContext;
+import clickr.ApplicationContext;
 
 public class GetDataFromWebServer {
 	String classname;

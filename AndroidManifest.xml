@@ -1,11 +1,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.iitbombay.clicker"
+    package="com.iitbombay.clickr"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="21" />
+        android:targetSdkVersion="22" />
     
     <!-- GLOBAL PERMISSIONS FOR THE ENTIRE APP -->
 
@@ -19,19 +19,16 @@
     <!-- wifi radio access -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <!-- gps access -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
-        android:name="clicker.ApplicationContext"
+        android:name="clickr.ApplicationContext"
         android:allowBackup="true"
         android:icon="@drawable/inverted_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         
         <activity
-            android:name="clicker.LoginPage"
+            android:name="clickr.LoginPage"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -40,10 +37,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity  android:name="clicker.HomePage"
+        <activity  android:name="clickr.HomePage"
             	   android:windowSoftInputMode="stateHidden"></activity>
-        <activity  android:name="clicker.QuizPage"
-            	   android:windowSoftInputMode="stateHidden"></activity>
+        <activity  android:name="clickr.QuizPage"
+            	   android:windowSoftInputMode="stateHidden"
+            	   android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

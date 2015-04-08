@@ -1,4 +1,4 @@
-package clicker;
+package clickr;
 
 import support.AppSettings;
 import support.Utils;
@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.iitbombay.clicker.R;
+import com.iitbombay.clickr.R;
 
 import datahandler.AuthenticateWS;
 

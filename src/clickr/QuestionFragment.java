@@ -1,4 +1,4 @@
-package clicker;
+package clickr;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -29,7 +29,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.iitbombay.clicker.R;
+import com.iitbombay.clickr.R;
 
 public class QuestionFragment extends Fragment {
 

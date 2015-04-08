@@ -1,4 +1,4 @@
-package clicker;
+package clickr;
 
 import support.Question;
 import support.UserSession;
@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.iitbombay.clicker.R;
+import com.iitbombay.clickr.R;
 
 import datahandler.SubmitAnswerToWS;
 

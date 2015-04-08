@@ -14,8 +14,8 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
-import clicker.ApplicationContext;
-import clicker.HomePage;
+import clickr.ApplicationContext;
+import clickr.HomePage;
 
 //This class is for loading the quiz from the server
 public class LoadQuizFromWS {

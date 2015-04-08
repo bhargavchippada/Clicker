@@ -12,8 +12,8 @@ import support.Utils;
 import android.os.Handler;
 import android.widget.Toast;
 
-import clicker.ApplicationContext;
-import clicker.LoginPage;
+import clickr.ApplicationContext;
+import clickr.LoginPage;
 
 
 // This class is for authentication and connecting to the server

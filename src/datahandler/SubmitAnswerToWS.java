@@ -13,8 +13,8 @@ import support.UserSession;
 import support.Utils;
 import android.os.Handler;
 import android.widget.Toast;
-import clicker.ApplicationContext;
-import clicker.QuizPage;
+import clickr.ApplicationContext;
+import clickr.QuizPage;
 
 //This class submits answer to the server and receives the response
 public class SubmitAnswerToWS {
