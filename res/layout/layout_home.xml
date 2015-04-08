@@ -8,6 +8,7 @@
         android:id="@+id/ll_actionbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_52"
+        android:layout_marginBottom="@dimen/dimen_16"
         android:background="@drawable/action_bar"
         android:orientation="horizontal" >
 

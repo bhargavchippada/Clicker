@@ -89,7 +89,7 @@ public class HomePage extends Activity{
 
 			@Override
 			public void onClick(View v) {
-				showDialog();
+				dialogGoToLoginPage();
 			}
 		});
 	}
@@ -117,7 +117,7 @@ public class HomePage extends Activity{
 		txtvw_status.setText("Click to start quiz");
 	}
 	
-	private void showDialog(){
+	private void dialogGoToLoginPage(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
 	    builder.setTitle("Confirm");
@@ -150,6 +150,6 @@ public class HomePage extends Activity{
 	
 	@Override
 	public void onBackPressed() {
-		showDialog();
+		dialogGoToLoginPage();
 	}
 }

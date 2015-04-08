@@ -7,6 +7,7 @@
     <dimen name="dimen_8">12dp</dimen>
     <dimen name="dimen_16">24dp</dimen>
     <dimen name="dimen_32">48dp</dimen>
+    <dimen name="dimen_40">60dp</dimen>
     <dimen name="dimen_48">72dp</dimen>
     <dimen name="dimen_52">78dp</dimen>
     <dimen name="dimen_96">144dp</dimen>

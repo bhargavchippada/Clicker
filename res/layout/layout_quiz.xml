@@ -1,92 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<customview.VerticalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white" >
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/ll_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_52"
+        android:layout_marginBottom="@dimen/dimen_16"
+        android:background="@drawable/action_bar"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:id="@+id/imgvw_logo"
+            android:layout_width="@dimen/dimen_32"
+            android:layout_height="@dimen/dimen_32"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/dimen_8"
+            android:background="@drawable/launcher" />
+
+        <TextView
+            android:id="@+id/txtvw_username"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dimen_48"
+            android:layout_toRightOf="@+id/imgvw_logo"
+            android:gravity="center_vertical"
+            android:text="1200xxxxxx"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/font_20" />
+
+        <TextView
+            android:id="@+id/txtvw_timer"
+            android:layout_width="@dimen/dimen_40"
+            android:layout_height="@dimen/dimen_40"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimen_4"
+            android:background="@drawable/white_circle"
+            android:gravity="center"
+            android:text="∞"
+            android:textColor="@color/app_red"
+            android:textSize="@dimen/font_14" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical" >
+        android:layout_below="@+id/ll_actionbar" >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:background="@color/app_background"
-            android:orientation="horizontal" >
-
-            <ImageView
-                android:id="@+id/imgvw_logo"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="8dp"
-                android:background="@drawable/launcher" />
-
-            <TextView
-                android:id="@+id/txtvw_username"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_toRightOf="@+id/imgvw_logo"
-                android:gravity="center_vertical"
-                android:text="1200xxxxxx"
-                android:textColor="@android:color/white"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/txtvw_timer"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="8dp"
-                android:background="@drawable/white_circle"
-                android:gravity="center"
-                android:text="∞"
-                android:textColor="@color/app_red"
-                android:textSize="14sp" />
-        </RelativeLayout>
-
-        <LinearLayout
+        <customview.VerticalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="24dp"
-            android:orientation="vertical" >
+            android:layout_centerInParent="true" >
 
-            <fragment
-                android:id="@+id/frag_question"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                class="clicker.QuestionFragment" />
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/btn_submit"
-                android:layout_width="128dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="24dp"
-                android:text="Submit" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dimen_32"
+                    android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/txtvw_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="8dp"
-                android:text="Press &apos;Submit&apos; to Submit..."
-                android:textSize="20sp"
-                android:textStyle="italic" />
+                    <fragment
+                        android:id="@+id/frag_question"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dimen_32"
+                        android:layout_marginRight="@dimen/dimen_32"
+                        class="clicker.QuestionFragment" />
 
-            <Button
-                android:id="@+id/btn_exit"
-                android:layout_width="128dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="8dp"
-                android:text="Exit" />
-        </LinearLayout>
-    </LinearLayout>
+                    <Button
+                        android:id="@+id/btn_submit"
+                        android:layout_width="@dimen/dimen_128"
+                        android:layout_height="@dimen/dimen_48"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/dimen_32"
+                        android:text="Submit"
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/font_20"
+                        android:textStyle="normal" />
 
-</customview.VerticalScrollView>
+                    <TextView
+                        android:id="@+id/txtvw_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/dimen_8"
+                        android:text="Press &apos;Submit&apos; to Submit..."
+                        android:textSize="@dimen/font_20"
+                        android:textStyle="italic" />
+
+                    <Button
+                        android:id="@+id/btn_exit"
+                        android:layout_width="@dimen/dimen_128"
+                        android:layout_height="@dimen/dimen_48"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/dimen_32"
+                        android:text="Exit"
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/font_20"
+                        android:textStyle="normal" />
+                </LinearLayout>
+            </LinearLayout>
+        </customview.VerticalScrollView>
+    </RelativeLayout>
+
+</RelativeLayout>
