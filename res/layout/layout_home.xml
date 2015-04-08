@@ -175,11 +175,11 @@
                     android:layout_width="@dimen/dimen_128"
                     android:layout_height="@dimen/dimen_48"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/dimen_16"
+                    android:layout_marginTop="@dimen/dimen_32"
                     android:textSize="@dimen/font_20"
                     android:textStyle="normal"
                     android:textAllCaps="false"
-                    android:text="Exit" />
+                    android:text="Log out" />
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>
