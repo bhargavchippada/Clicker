@@ -120,7 +120,7 @@ public class HomePage extends Activity{
 	private void dialogGoToLoginPage(){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-	    builder.setTitle("Confirm");
+	    builder.setTitle("Log out confirmation");
 	    builder.setMessage("Are you sure?");
 
 	    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
