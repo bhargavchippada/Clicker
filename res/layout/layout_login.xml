@@ -7,9 +7,9 @@
     <LinearLayout
         android:id="@+id/ll_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_52"
+        android:layout_height="@dimen/dimen_64"
+        android:layout_marginBottom="@dimen/dimen_4"
         android:background="@drawable/action_bar"
-        android:layout_marginBottom="@dimen/dimen_16"
         android:orientation="horizontal" >
 
         <ImageView
@@ -65,8 +65,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen_48"
                         android:hint="Type IP address"
-                        android:textSize="@dimen/font_20"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:textSize="@dimen/font_20" />
 
                     <EditText
                         android:id="@+id/edtxt_port"
@@ -74,15 +74,15 @@
                         android:layout_height="@dimen/dimen_48"
                         android:layout_marginTop="@dimen/dimen_8"
                         android:hint="Type Port Number"
-                        android:textSize="@dimen/font_20"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:textSize="@dimen/font_20" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="@dimen/dimen_8"
-                        android:layout_marginTop="@dimen/dimen_32"
+                        android:layout_marginTop="@dimen/dimen_16"
                         android:text="Login Info"
                         android:textSize="@dimen/font_24"
                         android:textStyle="bold" />
@@ -92,8 +92,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen_48"
                         android:hint="Username"
-                        android:textSize="@dimen/font_20"
-                        android:inputType="text" />
+                        android:inputType="text"
+                        android:textSize="@dimen/font_20" />
 
                     <EditText
                         android:id="@+id/edtxt_password"
@@ -101,27 +101,44 @@
                         android:layout_height="@dimen/dimen_48"
                         android:layout_marginTop="@dimen/dimen_8"
                         android:hint="Password"
-                        android:textSize="@dimen/font_20"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:textSize="@dimen/font_20" />
 
                     <CheckBox
                         android:id="@+id/cbox_savesettings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_8"
-                        android:textSize="@dimen/font_20"
-                        android:text="Save settings" />
+                        android:text="Save settings"
+                        android:textSize="@dimen/font_20" />
 
-                    <Button
-                        android:id="@+id/btn_connect"
-                        android:layout_width="@dimen/dimen_128"
-                        android:layout_height="@dimen/dimen_48"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/dimen_8"
-                        android:textSize="@dimen/font_20"
-                        android:textStyle="normal"
-                        android:textAllCaps="false"
-                        android:text="Login" />
+                        android:layout_marginTop="@dimen/dimen_32"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <Button
+                            android:id="@+id/btn_connect"
+                            android:layout_width="@dimen/dimen_128"
+                            android:layout_height="@dimen/dimen_48"
+                            android:text="Login"
+                            android:textAllCaps="false"
+                            android:textSize="@dimen/font_20"
+                            android:textStyle="normal" />
+
+                        <Button
+                            android:id="@+id/btn_exit"
+                            android:layout_width="@dimen/dimen_128"
+                            android:layout_height="@dimen/dimen_48"
+                            android:layout_marginLeft="@dimen/dimen_16"
+                            android:text="Exit"
+                            android:textAllCaps="false"
+                            android:textSize="@dimen/font_20"
+                            android:textStyle="normal" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <TextView
@@ -129,8 +146,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/dimen_8"
                     android:layout_marginBottom="@dimen/dimen_16"
+                    android:layout_marginTop="@dimen/dimen_8"
                     android:text="Click to login"
                     android:textSize="@dimen/font_20"
                     android:textStyle="italic" />

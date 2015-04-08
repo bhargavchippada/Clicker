@@ -32,6 +32,7 @@ public class LoginPage extends Activity{
 	CheckBox cbox_savesettings;
 
 	Button btn_connect;
+	Button btn_exit;
 	TextView txtvw_status;
 
 	//to control the click event
@@ -51,6 +52,7 @@ public class LoginPage extends Activity{
 		cbox_savesettings = (CheckBox) findViewById(R.id.cbox_savesettings);
 
 		btn_connect = (Button) findViewById(R.id.btn_connect);
+		btn_exit = (Button) findViewById(R.id.btn_exit);
 		txtvw_status = (TextView) findViewById(R.id.txtvw_status);
 
 		//initializes view values
@@ -81,6 +83,14 @@ public class LoginPage extends Activity{
 				lastTime = present_time;
 				new AuthenticateWS().execute(LoginPage.this);
 				Utils.logv(classname, "Login button is pressed",null);
+			}
+		});
+		
+		btn_exit.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				finish();
 			}
 		});
 

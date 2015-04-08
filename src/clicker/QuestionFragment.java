@@ -171,7 +171,7 @@ public class QuestionFragment extends Fragment {
 				btn_true.setBackgroundResource(R.drawable.btn_green_style);
 				btn_true.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
 				btn_false.setBackgroundResource(R.drawable.btn_grey_style);
-				btn_false.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
+				btn_false.setTextColor(fragactivity.getResources().getColor(android.R.color.black));
 
 				try {
 					question.answers.put(0,true);
@@ -192,7 +192,7 @@ public class QuestionFragment extends Fragment {
 				btn_false.setBackgroundResource(R.drawable.btn_red_style);
 				btn_false.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
 				btn_true.setBackgroundResource(R.drawable.btn_grey_style);
-				btn_true.setTextColor(fragactivity.getResources().getColor(android.R.color.white));
+				btn_true.setTextColor(fragactivity.getResources().getColor(android.R.color.black));
 
 				try {
 					question.answers.put(0,false);

@@ -3,6 +3,8 @@
     <dimen name="font_14">21sp</dimen>
     <dimen name="font_20">30sp</dimen>
     <dimen name="font_24">36sp</dimen>
+    <dimen name="dimen_1">1.5dp</dimen>
+    <dimen name="dimen_2">3dp</dimen>
     <dimen name="dimen_4">6dp</dimen>
     <dimen name="dimen_8">12dp</dimen>
     <dimen name="dimen_16">24dp</dimen>
@@ -10,6 +12,7 @@
     <dimen name="dimen_40">60dp</dimen>
     <dimen name="dimen_48">72dp</dimen>
     <dimen name="dimen_52">78dp</dimen>
+    <dimen name="dimen_64">96dp</dimen>
     <dimen name="dimen_96">144dp</dimen>
     <dimen name="dimen_128">192dp</dimen>
     <dimen name="dimen_256">384dp</dimen>

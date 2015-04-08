@@ -2,13 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white" >
+    android:background="@android:color/white"
+    android:keepScreenOn="true" >
 
     <RelativeLayout
         android:id="@+id/ll_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_52"
-        android:layout_marginBottom="@dimen/dimen_16"
+        android:layout_height="@dimen/dimen_64"
+        android:layout_marginBottom="@dimen/dimen_4"
         android:background="@drawable/action_bar"
         android:orientation="horizontal" >
 
@@ -88,8 +89,8 @@
                         android:id="@+id/frag_question"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/dimen_32"
-                        android:layout_marginRight="@dimen/dimen_32"
+                        android:layout_marginLeft="@dimen/dimen_16"
+                        android:layout_marginRight="@dimen/dimen_16"
                         class="clicker.QuestionFragment" />
 
                     <Button
