@@ -43,7 +43,7 @@
                 android:orientation="vertical" >
 
                 <LinearLayout
-                    android:layout_width="256dp"
+                    android:layout_width="@dimen/dimen_256"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
 
@@ -51,9 +51,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="16dp"
+                        android:layout_marginBottom="@dimen/dimen_16"
                         android:text="Your Information"
-                        android:textSize="24sp"
+                        android:textSize="@dimen/font_24"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -66,8 +66,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Username: "
-                            android:textSize="20sp" />
+                            android:text="Username:"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/font_20" />
 
                         <TextView
                             android:id="@+id/txtvw_roll_number"
@@ -75,13 +76,13 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="1200xxxx"
-                            android:textSize="20sp" />
+                            android:textSize="@dimen/font_20" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/dimen_8"
                         android:orientation="horizontal"
                         android:weightSum="2" >
 
@@ -89,8 +90,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Name: "
-                            android:textSize="20sp" />
+                            android:text="Name:"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/font_20" />
 
                         <TextView
                             android:id="@+id/txtvw_name"
@@ -98,13 +100,13 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Bhargavxxxxx"
-                            android:textSize="20sp" />
+                            android:textSize="@dimen/font_20" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/dimen_8"
                         android:orientation="horizontal"
                         android:weightSum="2" >
 
@@ -112,8 +114,9 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="IP-address: "
-                            android:textSize="20sp" />
+                            android:text="IP-address:"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/font_20" />
 
                         <TextView
                             android:id="@+id/txtvw_ipaddress"
@@ -121,7 +124,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="10.42.0.xx"
-                            android:textSize="20sp" />
+                            android:textSize="@dimen/font_20" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -130,25 +133,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/dimen_32"
                     android:text="xxxx Class"
-                    android:textSize="24sp"
+                    android:textSize="@dimen/font_24"
                     android:textStyle="bold" />
 
                 <FrameLayout
-                    android:layout_width="128dp"
-                    android:layout_height="128dp" >
+                    android:layout_width="@dimen/dimen_128"
+                    android:layout_height="@dimen/dimen_128" >
 
                     <Button
                         android:id="@+id/btn_startquiz"
-                        android:layout_width="96dp"
-                        android:layout_height="96dp"
+                        android:layout_width="@dimen/dimen_96"
+                        android:layout_height="@dimen/dimen_96"
                         android:layout_gravity="center"
                         android:background="@drawable/green_circle"
                         android:gravity="center"
                         android:text="Start Quiz"
                         android:textColor="@android:color/white"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/font_14"
                         android:textStyle="bold" />
 
                     <ProgressBar
@@ -164,16 +167,18 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Click to start quiz"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/font_20"
                     android:textStyle="italic" />
 
                 <Button
                     android:id="@+id/btn_exit"
-                    android:layout_width="128dp"
-                    android:layout_height="48dp"
+                    android:layout_width="@dimen/dimen_128"
+                    android:layout_height="@dimen/dimen_48"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/dimen_16"
                     android:textSize="@dimen/font_20"
+                    android:textStyle="normal"
+                    android:textAllCaps="false"
                     android:text="Exit" />
             </LinearLayout>
         </ScrollView>
