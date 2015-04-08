@@ -1,14 +1,12 @@
 package datahandler;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
@@ -16,7 +14,6 @@ import org.json.JSONObject;
 
 import support.AppSettings;
 import support.Utils;
-
 import clicker.ApplicationContext;
 
 public class GetDataFromWebServer {
@@ -32,7 +29,7 @@ public class GetDataFromWebServer {
 	public void doInBackgroundPost(String path, StringEntity req_entity) {
 		Utils.logv(classname, "background task - start");
 		long startTime = System.currentTimeMillis();
-		
+
 		try {
 			// create the post method
 			HttpPost postMethod = new HttpPost(path);
@@ -46,19 +43,7 @@ public class GetDataFromWebServer {
 			httpClient.execute(postMethod, new ResponseHandler<Void>() {
 				public Void handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
 					HttpEntity resp_entity = response.getEntity();
-					
-					List<Cookie> cookies = httpClient.getCookieStore().getCookies();
-					if(cookies != null)
-		            {
-		                for(Cookie cookie : cookies)
-		                {
-		                    String cookieString = cookie.getName() + "=" + cookie.getValue() + ";";                     
-		                    Utils.logv(classname, cookieString);  
-		                }
-		            }
-					
-					//((ApplicationContext)_activity.getApplicationContext()).updateThreadSafeCookiesMap();
-					
+
 					if (resp_entity != null) {
 
 						try {

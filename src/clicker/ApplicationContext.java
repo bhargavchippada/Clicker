@@ -13,7 +13,7 @@ import support.Utils;
 import android.app.Application;
 
 public class ApplicationContext extends Application{
-	public static String classname = "ApplicationContext";
+	private static String classname = "ApplicationContext";
 
 	private static int NetworkConnectionTimeout_ms = 5000;
 	private static DefaultHttpClient httpClient;

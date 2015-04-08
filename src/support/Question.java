@@ -4,7 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 public class Question{
-	public String classname = "Question";
+	private String classname = "Question";
 	
 	public String ID;
 	public String title;
