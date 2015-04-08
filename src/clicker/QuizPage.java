@@ -2,6 +2,8 @@ package clicker;
 
 import support.Question;
 import support.UserSession;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -27,11 +29,11 @@ public class QuizPage extends FragmentActivity {
 
 	UserSession userSession;
 	Question question;
-	
+
 	CountDownTimer countdowntimer;
 
 	QuestionFragment  fragment_question;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -73,11 +75,7 @@ public class QuizPage extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				if(question.answers.length()!=0){
-					new SubmitAnswerToWS().execute(QuizPage.this);
-				}else{
-					Toast.makeText(getBaseContext(), "Please answer...", Toast.LENGTH_SHORT).show();
-				}
+				submitQuizDialog();
 			}
 		});
 
@@ -85,9 +83,7 @@ public class QuizPage extends FragmentActivity {
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(getBaseContext(), LoginPage.class);
-				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(intent);
+				exitQuizDialog();
 			}
 		});
 
@@ -108,10 +104,77 @@ public class QuizPage extends FragmentActivity {
 		super.onStop();
 		disableBtns();
 	}
-	
+
 	public void gotoLoginPage(){
 		Intent intent = new Intent(this,LoginPage.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(intent);
+	}
+
+	private void submitQuizDialog(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		builder.setTitle("Submit Quiz");
+		builder.setMessage("Are you sure?");
+
+		builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialog, int which) {
+				// Do nothing but close the dialog
+				dialog.dismiss();
+				if(question.answers.length()!=0){
+					new SubmitAnswerToWS().execute(QuizPage.this);
+				}else{
+					Toast.makeText(getBaseContext(), "Please answer...", Toast.LENGTH_SHORT).show();
+				}
+			}
+
+		});
+
+		builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// Do nothing
+				dialog.dismiss();
+			}
+		});
+
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+
+	private void exitQuizDialog(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+		builder.setTitle("Exit quiz confirmation");
+		builder.setMessage("Are you sure?");
+
+		builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+			public void onClick(DialogInterface dialog, int which) {
+				// Do nothing but close the dialog
+				dialog.dismiss();
+				gotoLoginPage();
+			}
+
+		});
+
+		builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// Do nothing
+				dialog.dismiss();
+			}
+		});
+
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
+
+	@Override
+	public void onBackPressed() {
+		exitQuizDialog();
 	}
 }

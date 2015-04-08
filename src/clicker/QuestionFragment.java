@@ -64,9 +64,9 @@ public class QuestionFragment extends Fragment {
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		
+
 		question = ApplicationContext.getThreadSafeQuestion();
-		
+
 		question.startTime = new Date().getTime();
 
 		txtvw_title = (TextView) fragactivity.findViewById(R.id.txtvw_title);

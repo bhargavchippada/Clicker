@@ -3,8 +3,6 @@ package clicker;
 import support.UserSession;
 import support.Utils;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -84,12 +82,12 @@ public class HomePage extends Activity{
 				pbar_startquiz.setVisibility(View.VISIBLE);
 			}
 		});
-		
+
 		btn_exit.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				dialogGoToLoginPage();
+				gotoLoginPage();
 			}
 		});
 	}
@@ -115,41 +113,5 @@ public class HomePage extends Activity{
 	protected void onResume() {
 		super.onResume();
 		txtvw_status.setText("Click to start quiz");
-	}
-	
-	private void dialogGoToLoginPage(){
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-	    builder.setTitle("Log out confirmation");
-	    builder.setMessage("Are you sure?");
-
-	    builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
-	        public void onClick(DialogInterface dialog, int which) {
-	            // Do nothing but close the dialog
-	            dialog.dismiss();
-	            Intent intent = new Intent(getApplicationContext(), LoginPage.class);
-	    		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	    		startActivity(intent);
-	        }
-
-	    });
-
-	    builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-
-	        @Override
-	        public void onClick(DialogInterface dialog, int which) {
-	            // Do nothing
-	            dialog.dismiss();
-	        }
-	    });
-
-	    AlertDialog alert = builder.create();
-	    alert.show();
-	}
-	
-	@Override
-	public void onBackPressed() {
-		dialogGoToLoginPage();
 	}
 }
