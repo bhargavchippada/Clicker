@@ -7,23 +7,23 @@
     <LinearLayout
         android:id="@+id/ll_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="52dp"
+        android:layout_height="@dimen/dimen_52"
         android:background="@drawable/action_bar"
         android:orientation="horizontal" >
 
         <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_margin="8dp"
+            android:layout_width="@dimen/dimen_32"
+            android:layout_height="@dimen/dimen_32"
+            android:layout_margin="@dimen/dimen_8"
             android:background="@drawable/launcher" />
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/dimen_48"
             android:gravity="center_vertical"
             android:text="Clickr!"
             android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:textSize="@dimen/font_20" />
     </LinearLayout>
 
     <RelativeLayout
@@ -40,8 +40,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
+                android:layout_marginLeft="@dimen/dimen_32"
+                android:layout_marginRight="@dimen/dimen_32"
                 android:gravity="center"
                 android:orientation="vertical" >
 
@@ -54,23 +54,23 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="@dimen/dimen_8"
                         android:text="Connection Info"
-                        android:textSize="24sp"
+                        android:textSize="@dimen/font_24"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/edtxt_ipaddress"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="@dimen/dimen_48"
                         android:hint="Type IP address"
                         android:inputType="text" />
 
                     <EditText
                         android:id="@+id/edtxt_port"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_height="@dimen/dimen_48"
+                        android:layout_marginTop="@dimen/dimen_8"
                         android:hint="Type Port Number"
                         android:inputType="text" />
 
@@ -78,24 +78,24 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginBottom="@dimen/dimen_8"
+                        android:layout_marginTop="@dimen/dimen_32"
                         android:text="Login Info"
-                        android:textSize="24sp"
+                        android:textSize="@dimen/font_24"
                         android:textStyle="bold" />
 
                     <EditText
                         android:id="@+id/edtxt_username"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="@dimen/dimen_48"
                         android:hint="Username"
                         android:inputType="text" />
 
                     <EditText
                         android:id="@+id/edtxt_password"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_height="@dimen/dimen_48"
+                        android:layout_marginTop="@dimen/dimen_8"
                         android:hint="Password"
                         android:inputType="textPassword" />
 
@@ -103,15 +103,15 @@
                         android:id="@+id/cbox_savesettings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/dimen_8"
                         android:text="Save settings" />
 
                     <Button
                         android:id="@+id/btn_connect"
-                        android:layout_width="128dp"
-                        android:layout_height="48dp"
+                        android:layout_width="@dimen/dimen_128"
+                        android:layout_height="@dimen/dimen_48"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="@dimen/dimen_8"
                         android:text="Login" />
                 </LinearLayout>
 
@@ -120,9 +120,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_margin="4dp"
+                    android:layout_margin="@dimen/dimen_4"
                     android:text="Click to login"
-                    android:textSize="20sp"
+                    android:textSize="@dimen/font_20"
                     android:textStyle="italic" />
             </LinearLayout>
         </ScrollView>
