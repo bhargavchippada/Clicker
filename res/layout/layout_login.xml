@@ -64,6 +64,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen_48"
                         android:hint="Type IP address"
+                        android:textSize="@dimen/font_20"
                         android:inputType="text" />
 
                     <EditText
@@ -72,6 +73,7 @@
                         android:layout_height="@dimen/dimen_48"
                         android:layout_marginTop="@dimen/dimen_8"
                         android:hint="Type Port Number"
+                        android:textSize="@dimen/font_20"
                         android:inputType="text" />
 
                     <TextView
@@ -89,6 +91,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen_48"
                         android:hint="Username"
+                        android:textSize="@dimen/font_20"
                         android:inputType="text" />
 
                     <EditText
@@ -97,6 +100,7 @@
                         android:layout_height="@dimen/dimen_48"
                         android:layout_marginTop="@dimen/dimen_8"
                         android:hint="Password"
+                        android:textSize="@dimen/font_20"
                         android:inputType="textPassword" />
 
                     <CheckBox
@@ -104,6 +108,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_8"
+                        android:textSize="@dimen/font_20"
                         android:text="Save settings" />
 
                     <Button
@@ -112,6 +117,9 @@
                         android:layout_height="@dimen/dimen_48"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="@dimen/dimen_8"
+                        android:textSize="@dimen/font_20"
+                        android:textStyle="normal"
+                        android:textAllCaps="false"
                         android:text="Login" />
                 </LinearLayout>
 
