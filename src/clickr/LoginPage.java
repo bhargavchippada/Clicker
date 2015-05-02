@@ -19,8 +19,11 @@ import com.iitbombay.clickr.R;
 
 import datahandler.AuthenticateWS;
 
-//connection settings page, uses ConnectWebService class 
 
+/**connection settings and login information page
+ * @author bhargav
+ *
+ */
 public class LoginPage extends Activity{
 	public static String classname = "LoginPage";
 
@@ -35,7 +38,7 @@ public class LoginPage extends Activity{
 	Button btn_exit;
 	TextView txtvw_status;
 
-	//to control the click event
+	//To control the click event of the login button, essentially to stop spamming
 	double lastTime = -2.0;
 	int clickTime = 0;
 
@@ -70,6 +73,7 @@ public class LoginPage extends Activity{
 
 				double present_time  = System.currentTimeMillis()/1000;
 				final int diff_time = (int)(present_time-lastTime);
+				//This ensures a gap of 2 secs before reposting data
 				if(diff_time<2 && clickTime!=diff_time){
 					clickTime=diff_time;
 					Utils.logv(classname,clickTime+"");
@@ -99,15 +103,20 @@ public class LoginPage extends Activity{
 	@Override
 	protected void onStart() {
 		super.onStart();
+		//invalidate session and question
 		ApplicationContext.invalidateSession();
 	}
 
-	//Update the status....
+	/**Update the status message textView
+	 * @param msg
+	 */
 	public void updateUI(String msg){
 		txtvw_status.setText(msg);
 	}
 
-	// bool == 0 means nothing is saved, bool == 1 means the settings are saved
+	/**bool == 0 means nothing is saved, bool == 1 means the settings are saved on the device
+	 * @param bool
+	 */
 	void updateSharedPref(int bool){
 		String ip="",p="";
 		String user="",pass="";

@@ -16,16 +16,30 @@ import support.AppSettings;
 import support.Utils;
 import clickr.ApplicationContext;
 
+/**This class is for handling sending and receiving data using post method to the specified url
+ * @author bhargav
+ *
+ */
 public class GetDataFromWebServer {
 	String classname;
 	Exception ex;
 	JSONObject dataFromServlet;
 
+	/**Initializes the classname of this class to the name of the class that created this class's object,
+	 *  this is used for debugging purposes
+	 * @param String clsnm
+	 */
 	public GetDataFromWebServer(String clsnm) {
 		classname = clsnm;
 	}
 
-	// this method is called in a non-"edt" thread
+	/**This method is called in a non-"edt" thread. This method sends the request (req_entity) to the url path
+	 * using post method, it sets the dataFromServlet variable to the response received (which is in json format).
+	 * <br>If there is some exception then dataFromServlet is NULL and ex variable is set to the exception
+	 * occurred.
+	 * @param String path
+	 * @param StringEntity req_entity
+	 */
 	public void doInBackgroundPost(String path, StringEntity req_entity) {
 		Utils.logv(classname, "background task - start");
 		long startTime = System.currentTimeMillis();

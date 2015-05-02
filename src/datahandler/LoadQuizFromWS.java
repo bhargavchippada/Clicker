@@ -13,11 +13,13 @@ import support.Utils;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
-
 import clickr.ApplicationContext;
 import clickr.HomePage;
 
-//This class is for loading the quiz from the server
+/**This class is for loading the quiz from the server
+ * @author bhargav
+ *
+ */
 public class LoadQuizFromWS {
 	String classname = "LoadQuizFromWS";
 
@@ -46,6 +48,7 @@ public class LoadQuizFromWS {
 		// create the request object
 		JSONObject jsonreq = new JSONObject();
 		final StringEntity req_entity;
+		//initialize request parameters
 		try {
 			jsonreq.put("uid", ApplicationContext.getThreadSafeUserSession().username);
 			req_entity = new StringEntity(jsonreq.toString());
@@ -74,8 +77,9 @@ public class LoadQuizFromWS {
 		}.start();
 	}
 
-	/** this method is called in the "edt" 
-	 * @throws JSONException */
+	/**Handles UI changes and response handling. This method is called in the "edt" thread.
+	 * @param int uiStatus (0 means before request is processed, 1 means after receiving response)
+	 */
 	private void _showInUI(int uiStatus) {
 		if(uiStatus==0){
 			_activity.updateUI("Trying to start quiz..",View.VISIBLE);
@@ -93,6 +97,7 @@ public class LoadQuizFromWS {
 					}else if(status==2){
 						Toast.makeText(_activity,"Quiz retrievel Success!",Toast.LENGTH_SHORT).show();
 						_activity.updateUI("Quiz retrievel Success!",View.INVISIBLE);
+						//initialize the Question object
 						synchronized (Question.class) {
 							Question question = ApplicationContext.getThreadSafeQuestion();
 							question.clear();

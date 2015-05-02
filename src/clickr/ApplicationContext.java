@@ -21,6 +21,9 @@ public class ApplicationContext extends Application{
 	private static Question question;	
 
 	// link: http://foo.jasonhudgins.com/2009/08/http-connection-reuse-in-android.html
+	/**creates a httpclient if one doesn't exist for the app, makes sure only a single httpclient is defined for a single run of the app
+	 * @return DefaultHttpClient
+	 */
 	public synchronized static DefaultHttpClient getThreadSafeClient() {
 		if(httpClient!=null) return httpClient;
 		Utils.logv(classname, "New httpClient is created");
@@ -39,16 +42,27 @@ public class ApplicationContext extends Application{
 		return httpClient;
 	}
 
+	
+	/**creates a UserSession object if one doesn't exist for the app, makes sure only a single UserSession object is defined for a single run of the app
+	 * @return UserSession
+	 */
 	public synchronized static UserSession getThreadSafeUserSession(){
 		if(usersession==null) usersession = new UserSession();
 		return usersession;
 	}
-
+	
+	/**creates a Question object if one doesn't exist for the app, makes sure only a single Question object is defined for a single run of the app
+	 * <br> Since the app supports only a single question this is enough
+	 * @return Question
+	 */
 	public synchronized static Question getThreadSafeQuestion(){
 		if(question==null) question = new Question();
 		return question;
 	}
 
+	/** clears usersession and question objects  
+	 * 
+	 */
 	public synchronized static void invalidateSession(){
 		if(usersession!=null) {
 			usersession.clear();

@@ -16,6 +16,10 @@ import com.iitbombay.clickr.R;
 
 import datahandler.LoadQuizFromWS;
 
+/**Home page of the user with option to start quiz
+ * @author bhargav
+ *
+ */
 public class HomePage extends Activity{
 	String classname = "HomePage";
 
@@ -31,7 +35,7 @@ public class HomePage extends Activity{
 
 	UserSession usersession;
 
-	//to control the click event
+	//To control the click event of the login button, essentially to stop spamming
 	double lastTime = -2.0;
 	int clickTime = 0;
 
@@ -67,6 +71,7 @@ public class HomePage extends Activity{
 			public void onClick(View v) {
 				double present_time  = System.currentTimeMillis()/1000;
 				final int diff_time = (int)(present_time-lastTime);
+				//This ensures a gap of 2 secs before reposting data
 				if(diff_time<2 && clickTime!=diff_time){
 					clickTime=diff_time;
 					Utils.logv(classname,clickTime+"");
@@ -92,6 +97,9 @@ public class HomePage extends Activity{
 		});
 	}
 
+	/**Update the status message textView
+	 * @param msg
+	 */
 	public void updateUI(String msg, int pbar_state){
 		txtvw_status.setText(msg);
 		pbar_startquiz.setVisibility(pbar_state);

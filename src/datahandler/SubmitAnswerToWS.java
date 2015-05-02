@@ -16,7 +16,10 @@ import android.widget.Toast;
 import clickr.ApplicationContext;
 import clickr.QuizPage;
 
-//This class submits answer to the server and receives the response
+/**This class submits answer to the server and receives the response
+ * @author bhargav
+ *
+ */
 public class SubmitAnswerToWS {
 	String classname = "SubmitAnswerToWS";
 
@@ -45,6 +48,7 @@ public class SubmitAnswerToWS {
 		// create the request object
 		JSONObject jsonreq = new JSONObject();
 		final StringEntity req_entity;
+		//initialize request parameters
 		try {
 			UserSession userSession = ApplicationContext.getThreadSafeUserSession();
 			Question question = ApplicationContext.getThreadSafeQuestion();
@@ -82,8 +86,9 @@ public class SubmitAnswerToWS {
 		}.start();
 	}
 
-	/** this method is called in the "edt" 
-	 * @throws JSONException */
+	/**Handles UI changes and response handling. This method is called in the "edt" thread.
+	 * @param int uiStatus (0 means before request is processed, 1 means after receiving response)
+	 */
 	private void _showInUI(int uiStatus) {
 		if(uiStatus==0){
 			_activity.updateUI("Trying to submit answer..");

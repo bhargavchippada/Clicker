@@ -11,12 +11,14 @@ import support.UserSession;
 import support.Utils;
 import android.os.Handler;
 import android.widget.Toast;
-
 import clickr.ApplicationContext;
 import clickr.LoginPage;
 
 
-// This class is for authentication and connecting to the server
+/**This class is for authentication
+ * @author bhargav
+ *
+ */
 public class AuthenticateWS {
 	String classname = "AuthenticateWS";
 
@@ -41,9 +43,10 @@ public class AuthenticateWS {
 			}
 		};
 
-		// create the request object
+		//create the request object
 		JSONObject jsonreq = new JSONObject();
 		final StringEntity req_entity;
+		//initialize request parameters
 		try {
 			jsonreq.put("uid", _activity.getUsername());
 			jsonreq.put("pwd", _activity.getPassword());		
@@ -73,7 +76,9 @@ public class AuthenticateWS {
 		}.start();
 	}
 
-	// this method is called in the "edt"
+	/**Handles UI changes and response handling. This method is called in the "edt" thread.
+	 * @param int uiStatus (0 means before request is processed, 1 means after receiving response)
+	 */
 	private void _showInUI(int uiStatus) {
 		if(uiStatus==0){
 			_activity.updateUI("Trying to connect to Server..");

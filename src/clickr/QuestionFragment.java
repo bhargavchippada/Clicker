@@ -31,6 +31,10 @@ import android.widget.Toast;
 
 import com.iitbombay.clickr.R;
 
+/**Fragment to display question for attempting inside activity
+ * @author bhargav
+ *
+ */
 public class QuestionFragment extends Fragment {
 
 	private String classname = "QuestionFragment";
@@ -83,12 +87,16 @@ public class QuestionFragment extends Fragment {
 
 		if(type==-1) Toast.makeText(fragactivity, "Invalid Question!", Toast.LENGTH_SHORT).show();
 
+		//call that particular method according to question type
 		if(type==0) singleMCQInit();
 		else if(type==1) multipleMCQinit();
 		else if(type==2) truefalseInit();
 		else if(type==3 || type==4) wordTextualInit();
 	}
 
+	/**
+	 * Display single mcq question
+	 */
 	void singleMCQInit(){
 		rg_options = (RadioGroup) fragactivity.findViewById(R.id.rg_options);
 		rg_options.setVisibility(View.VISIBLE);
@@ -118,6 +126,9 @@ public class QuestionFragment extends Fragment {
 		});
 	}
 
+	/**
+	 * Display multiple mcq question
+	 */
 	void multipleMCQinit(){
 		ll_checkboxes = (LinearLayout) fragactivity.findViewById(R.id.ll_checkboxes);
 		ll_checkboxes.setVisibility(View.VISIBLE);
@@ -157,6 +168,9 @@ public class QuestionFragment extends Fragment {
 		}
 	}
 
+	/**
+	 * Display true or false question
+	 */
 	void truefalseInit(){
 		ll_truefalse = (LinearLayout) fragactivity.findViewById(R.id.ll_truefalse);
 		ll_truefalse.setVisibility(View.VISIBLE);
@@ -206,6 +220,9 @@ public class QuestionFragment extends Fragment {
 		});
 	}
 
+	/**
+	 * Display word question
+	 */
 	void wordTextualInit(){
 		edtxt_textual = (EditText) fragactivity.findViewById(R.id.edtxt_textual);
 
@@ -249,6 +266,9 @@ public class QuestionFragment extends Fragment {
 		});
 	}
 
+	/**
+	 * disable question options
+	 */
 	public void disableBtns(){
 		question = ApplicationContext.getThreadSafeQuestion();
 		int type = question.type;

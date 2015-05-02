@@ -32,7 +32,7 @@ public class QuizPage extends FragmentActivity {
 
 	CountDownTimer countdowntimer;
 
-	QuestionFragment  fragment_question;
+	QuestionFragment  fragment_question; //Displays the question
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,10 +89,16 @@ public class QuizPage extends FragmentActivity {
 
 	}
 
+	/**Update the status message textView
+	 * @param msg
+	 */
 	public void updateUI(String msg){
 		txtvw_status.setText(msg);
 	}
 
+	/**Disable question options
+	 * @param msg
+	 */
 	public void disableBtns(){
 		btn_submit.setEnabled(false);
 		if(countdowntimer!=null) countdowntimer.cancel();

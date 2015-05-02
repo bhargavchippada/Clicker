@@ -6,6 +6,11 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ScrollView;
 
+/**Had to extend ScrollView so that an Edit textView with max height inside scrollView will be able to
+ * scroll vertically i.e, it's scroll events don't clash with the scroll events of parent ScrollView.
+ * @author bhargav
+ *
+ */
 public class VerticalScrollView extends ScrollView{
 
 	public VerticalScrollView(Context context) {
