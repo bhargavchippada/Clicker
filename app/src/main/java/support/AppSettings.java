@@ -22,7 +22,7 @@ public class AppSettings{
 	/**authentication servlet url path
 	 * 
 	 */
-	public static String authentication = "authentication";
+	public static String authentication = "Authentication";
 	
 	/**load quiz servlet url path
 	 * 

@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.iitbombay.clickr.R;
 
-import datahandler.SubmitAnswerToWS;
+import servercommunication.SubmitAnswerToWS;
 
 public class QuizPage extends FragmentActivity {
 	String classname = "QuizPage";

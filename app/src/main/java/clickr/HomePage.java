@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.iitbombay.clickr.R;
 
-import datahandler.LoadQuizFromWS;
+import servercommunication.LoadQuizFromWS;
 
 /**Home page of the user with option to start quiz
  * @author bhargav
