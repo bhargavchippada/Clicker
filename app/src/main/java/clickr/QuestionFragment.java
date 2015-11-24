@@ -184,7 +184,7 @@ public class QuestionFragment extends Fragment {
                         mcqtemp.put(checkedid, checked);
                         Question.answers = new JSONArray();
                         for (int i = 0; i < mcqtemp.length(); i++) {
-                            if (mcqtemp.getBoolean(i)) Question.answers.put(i + 1);
+                            if (mcqtemp.getBoolean(i)) Question.answers.put(i);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
