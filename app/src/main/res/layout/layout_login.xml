@@ -2,21 +2,21 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white" >
+    android:background="@android:color/white">
 
     <LinearLayout
         android:id="@+id/ll_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_64"
-        android:layout_marginBottom="@dimen/dimen_4"
+        android:layout_height="@dimen/dimen_48"
+        android:layout_marginBottom="@dimen/dimen_8"
         android:background="@drawable/action_bar"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="@dimen/dimen_32"
             android:layout_height="@dimen/dimen_32"
             android:layout_margin="@dimen/dimen_8"
-            android:background="@drawable/launcher" />
+            android:background="@drawable/logo_shadower" />
 
         <TextView
             android:layout_width="match_parent"
@@ -24,18 +24,19 @@
             android:gravity="center_vertical"
             android:text="Clickr!"
             android:textColor="@android:color/white"
+            android:textStyle="italic"
             android:textSize="@dimen/font_20" />
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ll_actionbar" >
+        android:layout_below="@+id/ll_actionbar">
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true" >
+            android:layout_centerInParent="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,47 +45,61 @@
                 android:layout_marginLeft="@dimen/dimen_32"
                 android:layout_marginRight="@dimen/dimen_32"
                 android:gravity="center"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="@dimen/dimen_8"
                         android:text="Connection Info"
-                        android:textSize="@dimen/font_24"
+                        android:textSize="@dimen/font_20"
                         android:textStyle="bold" />
 
-                    <EditText
-                        android:id="@+id/edtxt_ipaddress"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen_48"
-                        android:hint="Type IP address"
-                        android:inputType="text"
-                        android:textSize="@dimen/font_20" />
+                        android:layout_height="@dimen/dimen_48">
+
+                        <EditText
+                            android:id="@+id/edtxt_port"
+                            android:layout_width="@dimen/dimen_64"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentRight="true"
+                            android:hint="Port"
+                            android:inputType="text"
+                            android:textSize="@dimen/font_18" />
+
+                        <EditText
+                            android:id="@+id/edtxt_ipaddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_alignParentLeft="true"
+                            android:layout_toLeftOf="@id/edtxt_port"
+                            android:hint="IP Address"
+                            android:inputType="text"
+                            android:textSize="@dimen/font_18" />
+                    </RelativeLayout>
 
                     <EditText
-                        android:id="@+id/edtxt_port"
+                        android:id="@+id/edtxt_servername"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen_48"
-                        android:layout_marginTop="@dimen/dimen_8"
-                        android:hint="Type Port Number"
+                        android:hint="Server Name"
                         android:inputType="text"
-                        android:textSize="@dimen/font_20" />
+                        android:textSize="@dimen/font_18"
+                        android:layout_marginTop="@dimen/dimen_8" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="@dimen/dimen_8"
-                        android:layout_marginTop="@dimen/dimen_16"
+                        android:layout_marginTop="@dimen/dimen_32"
                         android:text="Login Info"
-                        android:textSize="@dimen/font_24"
+                        android:textSize="@dimen/font_20"
                         android:textStyle="bold" />
 
                     <EditText
@@ -93,7 +108,7 @@
                         android:layout_height="@dimen/dimen_48"
                         android:hint="Username"
                         android:inputType="text"
-                        android:textSize="@dimen/font_20" />
+                        android:textSize="@dimen/font_18" />
 
                     <EditText
                         android:id="@+id/edtxt_password"
@@ -102,7 +117,7 @@
                         android:layout_marginTop="@dimen/dimen_8"
                         android:hint="Password"
                         android:inputType="textPassword"
-                        android:textSize="@dimen/font_20" />
+                        android:textSize="@dimen/font_18" />
 
                     <CheckBox
                         android:id="@+id/cbox_savesettings"
@@ -110,15 +125,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_8"
                         android:text="Save settings"
-                        android:textSize="@dimen/font_20" />
+                        android:textSize="@dimen/font_16"
+                        android:checked="true" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/dimen_32"
+                        android:layout_marginTop="@dimen/dimen_16"
                         android:gravity="center"
-                        android:orientation="horizontal" >
+                        android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/btn_connect"
@@ -126,8 +142,7 @@
                             android:layout_height="@dimen/dimen_48"
                             android:text="Login"
                             android:textAllCaps="false"
-                            android:textSize="@dimen/font_20"
-                            android:textStyle="normal" />
+                            android:textSize="@dimen/font_18" />
 
                         <Button
                             android:id="@+id/btn_exit"
@@ -136,8 +151,7 @@
                             android:layout_marginLeft="@dimen/dimen_16"
                             android:text="Exit"
                             android:textAllCaps="false"
-                            android:textSize="@dimen/font_20"
-                            android:textStyle="normal" />
+                            android:textSize="@dimen/font_18" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -149,7 +163,7 @@
                     android:layout_marginBottom="@dimen/dimen_16"
                     android:layout_marginTop="@dimen/dimen_8"
                     android:text="Click to login"
-                    android:textSize="@dimen/font_20"
+                    android:textSize="@dimen/font_18"
                     android:textStyle="italic" />
             </LinearLayout>
         </ScrollView>

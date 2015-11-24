@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="app_background">#27ae60</color>
+    <color name="app_background">#00aced</color>
     <color name="app_background_transparent">#9027ae60</color>
     <color name="app_background_dark">#209050</color>
     <color name="app_txtgrey">#888888</color>
+    <color name="app_bordergrey">#bdbdbd</color>
     <color name="app_green">#5CB85C</color>
     <color name="app_red">#D9534F</color>
     <color name="app_grey">#E0E0E0</color>

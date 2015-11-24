@@ -7,16 +7,16 @@
     <LinearLayout
         android:id="@+id/ll_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_64"
-        android:layout_marginBottom="@dimen/dimen_4"
+        android:layout_height="@dimen/dimen_48"
+        android:layout_marginBottom="@dimen/dimen_8"
         android:background="@drawable/action_bar"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="@dimen/dimen_32"
             android:layout_height="@dimen/dimen_32"
             android:layout_margin="@dimen/dimen_8"
-            android:background="@drawable/launcher" />
+            android:background="@drawable/logo_shadower" />
 
         <TextView
             android:layout_width="match_parent"
@@ -24,6 +24,7 @@
             android:gravity="center_vertical"
             android:text="Clickr!"
             android:textColor="@android:color/white"
+            android:textStyle="italic"
             android:textSize="@dimen/font_20" />
     </LinearLayout>
 
@@ -54,7 +55,7 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginBottom="@dimen/dimen_16"
                         android:text="Your Information"
-                        android:textSize="@dimen/font_24"
+                        android:textSize="@dimen/font_20"
                         android:textStyle="bold" />
 
                     <LinearLayout
@@ -68,7 +69,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Username:"
-                            android:textSize="@dimen/font_20"
+                            android:textSize="@dimen/font_18"
                             android:textStyle="bold" />
 
                         <TextView
@@ -77,7 +78,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="1200xxxx"
-                            android:textSize="@dimen/font_20" />
+                            android:textSize="@dimen/font_18" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -92,7 +93,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Name:"
-                            android:textSize="@dimen/font_20"
+                            android:textSize="@dimen/font_18"
                             android:textStyle="bold" />
 
                         <TextView
@@ -101,7 +102,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="Bhargavxxxxx"
-                            android:textSize="@dimen/font_20" />
+                            android:textSize="@dimen/font_18" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -116,7 +117,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="IP-address:"
-                            android:textSize="@dimen/font_20"
+                            android:textSize="@dimen/font_18"
                             android:textStyle="bold" />
 
                         <TextView
@@ -136,7 +137,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/dimen_32"
                     android:text="xxxx Class"
-                    android:textSize="@dimen/font_24"
+                    android:textSize="@dimen/font_20"
                     android:textStyle="bold" />
 
                 <FrameLayout
@@ -169,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Click to start quiz"
-                    android:textSize="@dimen/font_20"
+                    android:textSize="@dimen/font_18"
                     android:textStyle="italic" />
 
                 <Button
@@ -181,8 +182,7 @@
                     android:layout_marginTop="@dimen/dimen_32"
                     android:text="Log out"
                     android:textAllCaps="false"
-                    android:textSize="@dimen/font_20"
-                    android:textStyle="normal" />
+                    android:textSize="@dimen/font_18" />
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>

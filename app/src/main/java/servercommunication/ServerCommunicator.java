@@ -9,6 +9,8 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.CookieHandler;
+import java.net.CookieManager;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.logging.Level;
@@ -22,11 +24,13 @@ import java.util.logging.Logger;
 public abstract class ServerCommunicator {
 
     protected final Logger LOGGER = Logger.getLogger(getClass().getName());
-    private String CLASSNAME = "ServerCommunicator";
     private Exception ex;
     private JSONObject dataFromServlet;
     protected final static int BEFORE = 0;
     protected final static int AFTER = 1;
+
+    protected final static int SUCCESS = 1;
+    protected final static int FAIL = 0;
 
     protected Exception getException() {
         return ex;
@@ -34,10 +38,6 @@ public abstract class ServerCommunicator {
 
     protected JSONObject getResponse() {
         return dataFromServlet;
-    }
-
-    protected String getCLASSNAME() {
-        return CLASSNAME;
     }
 
     /**

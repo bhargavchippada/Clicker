@@ -28,11 +28,6 @@ public class SubmitAnswerToWS extends ServerCommunicator {
     private QuizPage _activity;
 
     @Override
-    protected String getCLASSNAME() {
-        return CLASSNAME;
-    }
-
-    @Override
     public void execute(Activity activity) {
 
         _activity = (QuizPage) activity;
@@ -44,7 +39,7 @@ public class SubmitAnswerToWS extends ServerCommunicator {
             Question question = ApplicationContext.getThreadSafeQuestion();
             req_json.put("uid", userSession.username);
             req_json.put("myanswer", question.answers);
-            req_json.put("qid", question.ID);
+            req_json.put("qid", Question.quizid);
             question.submitTime = new Date().getTime();
             question.timeTook = question.submitTime - question.startTime;
             req_json.put("starttime", (long) question.startTime / 1000);

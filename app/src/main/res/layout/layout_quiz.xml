@@ -8,8 +8,8 @@
     <RelativeLayout
         android:id="@+id/ll_actionbar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_64"
-        android:layout_marginBottom="@dimen/dimen_4"
+        android:layout_height="@dimen/dimen_48"
+        android:layout_marginBottom="@dimen/dimen_8"
         android:background="@drawable/action_bar"
         android:orientation="horizontal" >
 
@@ -21,7 +21,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/dimen_8"
-            android:background="@drawable/launcher" />
+            android:background="@drawable/logo_shadower" />
 
         <TextView
             android:id="@+id/txtvw_username"

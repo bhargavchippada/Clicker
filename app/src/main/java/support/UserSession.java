@@ -1,42 +1,47 @@
 package support;
 
 
+import java.util.logging.Logger;
+
 public class UserSession {
-	String classname = "UserSession";
+    private static String CLASSNAME = "UserSession";
+    private final static Logger LOGGER = Logger.getLogger(CLASSNAME);
 
-	public String username; // username of the user
-	public String password; //password of the user
-	public String name; //name of the username
-	public String clsnm; // class name
-	public String ip; // ip-address of the user
+    public static String username; // username of the user
+    public static String name; //name of the username
+    public static String classname; // class name
+    public static String ip; // ip-address of the user
+    public static String servername; // servername
+    public static Integer classid;
 
-	
-	/**
-	 * Clear the user info
-	 */
-	public void clear(){
-		username = null;
-		password = null;
-		name = null;
-		clsnm = null;
-		ip = null;
-	}
 
-	/**
-	 * @return whether or not the userSession is valid or not
-	 */
-	public boolean isSessionValid(){
-		if(username==null || password==null || name==null){
-			return false;
-		}else return true;
-	}
+    /**
+     * Clear the user info
+     */
+    public static void clear() {
+        username = null;
+        name = null;
+        classname = null;
+        ip = null;
+        servername = null;
+        classid = null;
+    }
 
-	/**Print the userSession details
-	 *
-	 */
-	public void print(){
-		if(isSessionValid()){
-			Utils.logv(classname, username+","+password+","+name+","+clsnm);
-		}
-	}
+    /**
+     * @return whether or not the userSession is valid or not
+     */
+    public static boolean isSessionValid() {
+        if (username == null || name == null || servername == null) {
+            return false;
+        } else return true;
+    }
+
+    /**
+     * Print the userSession details
+     */
+    public static void print() {
+        if (isSessionValid()) {
+            LOGGER.info(username + "," + name + "," + classname + "," + servername);
+        }
+    }
 }

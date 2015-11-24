@@ -1,7 +1,5 @@
 package clickr;
 
-import support.AppSettings;
-import support.Utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,20 +15,24 @@ import android.widget.Toast;
 
 import com.iitbombay.clickr.R;
 
-import servercommunication.Authentication;
+import java.util.logging.Logger;
 
+import servercommunication.Authentication;
+import support.AppSettings;
 
 /**connection settings and login information page
  * @author bhargav
  *
  */
 public class LoginPage extends Activity{
-	public static String classname = "LoginPage";
+
+	protected final Logger LOGGER = Logger.getLogger(getClass().getName());
 
 	EditText edtxt_ipaddress;
 	EditText edtxt_port;
 	EditText edtxt_username;
 	EditText edtxt_password;
+	EditText edtxt_servername;
 
 	CheckBox cbox_savesettings;
 
@@ -52,6 +54,7 @@ public class LoginPage extends Activity{
 		edtxt_port = (EditText) findViewById(R.id.edtxt_port);
 		edtxt_username = (EditText) findViewById(R.id.edtxt_username);
 		edtxt_password = (EditText) findViewById(R.id.edtxt_password);
+		edtxt_servername = (EditText) findViewById(R.id.edtxt_servername);
 		cbox_savesettings = (CheckBox) findViewById(R.id.cbox_savesettings);
 
 		btn_connect = (Button) findViewById(R.id.btn_connect);
@@ -76,7 +79,7 @@ public class LoginPage extends Activity{
 				//This ensures a gap of 2 secs before reposting data
 				if(diff_time<2 && clickTime!=diff_time){
 					clickTime=diff_time;
-					Utils.logv(classname,clickTime+"");
+					LOGGER.info(clickTime+"");
 					Toast.makeText(getBaseContext(), "Wait before trying", Toast.LENGTH_SHORT).show();
 					return;
 				}else if(diff_time<2){
@@ -86,7 +89,7 @@ public class LoginPage extends Activity{
 				clickTime = 0;
 				lastTime = present_time;
 				new Authentication().execute(LoginPage.this);
-				Utils.logv(classname, "Login button is pressed",null);
+				LOGGER.info("Login button is pressed");
 			}
 		});
 		
@@ -119,13 +122,14 @@ public class LoginPage extends Activity{
 	 */
 	void updateSharedPref(int bool){
 		String ip="",p="";
-		String user="",pass="";
+		String user="",pass="",servername="";
 		boolean check = false;
 		if(bool == 1){
 			ip = edtxt_ipaddress.getText().toString();
 			p = edtxt_port.getText().toString();
 			user = edtxt_username.getText().toString();
 			pass = edtxt_password.getText().toString();
+			servername = edtxt_servername.getText().toString();
 			check = true;
 		}
 		SharedPreferences sharedPref = getBaseContext()
@@ -135,6 +139,7 @@ public class LoginPage extends Activity{
 		editor.putString(getString(R.string.saved_port),p);
 		editor.putString(getString(R.string.saved_username),user);
 		editor.putString(getString(R.string.saved_password),pass);
+		editor.putString(getString(R.string.saved_servername),servername);
 		editor.putBoolean(getString(R.string.saved_savesettings), check);
 		editor.commit();
 		AppSettings.updateUrl(edtxt_ipaddress.getText().toString(), edtxt_port.getText().toString());
@@ -147,6 +152,7 @@ public class LoginPage extends Activity{
 		edtxt_port.setText(sharedPref.getString(getString(R.string.saved_port), ""));
 		edtxt_username.setText(sharedPref.getString(getString(R.string.saved_username), ""));
 		edtxt_password.setText(sharedPref.getString(getString(R.string.saved_password), ""));
+		edtxt_servername.setText(sharedPref.getString(getString(R.string.saved_servername), ""));
 		cbox_savesettings.setChecked(sharedPref.getBoolean(getString(R.string.saved_savesettings), false));
 	}
 
@@ -158,8 +164,13 @@ public class LoginPage extends Activity{
 		return edtxt_password.getText().toString();
 	}
 
+	public String getServerName(){
+		return edtxt_servername.getText().toString();
+	}
+
 	public void gotoHomePage() {
-		Intent intent = new Intent(this,HomePage.class);
+		LOGGER.info("Open Home Page");
+		Intent intent = new Intent(getApplication(),HomePage.class);
 		startActivity(intent);
 	}
 

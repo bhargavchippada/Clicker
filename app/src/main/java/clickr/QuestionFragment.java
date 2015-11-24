@@ -68,7 +68,7 @@ public class QuestionFragment extends Fragment {
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
+	/*
 		question = ApplicationContext.getThreadSafeQuestion();
 
 		question.startTime = new Date().getTime();
@@ -84,7 +84,8 @@ public class QuestionFragment extends Fragment {
 		txtvw_question.setText(Html.fromHtml("<b>Q) </b>"+question.question));
 
 		int type = question.type;
-
+*/
+		int type = -1;
 		if(type==-1) Toast.makeText(fragactivity, "Invalid Question!", Toast.LENGTH_SHORT).show();
 
 		//call that particular method according to question type
@@ -241,7 +242,8 @@ public class QuestionFragment extends Fragment {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				String result;
+				String result ="";
+				/*
 				if(question.type==3) {
 					result = s.toString().replaceAll(" ", "");
 					if (!s.toString().equals(result)) {
@@ -253,6 +255,7 @@ public class QuestionFragment extends Fragment {
 					result="";
 					Utils.logv(classname, "Textual with undefined type!");
 				}
+				*/
 
 				try {
 					question.answers.put(0, result.trim());
@@ -270,6 +273,7 @@ public class QuestionFragment extends Fragment {
 	 * disable question options
 	 */
 	public void disableBtns(){
+		/*
 		question = ApplicationContext.getThreadSafeQuestion();
 		int type = question.type;
 
@@ -287,6 +291,7 @@ public class QuestionFragment extends Fragment {
 		}else if(type==3 || type==4){
 			edtxt_textual.setEnabled(false);
 		}
+		*/
 	}
 
 }

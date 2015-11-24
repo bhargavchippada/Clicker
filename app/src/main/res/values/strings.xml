@@ -6,5 +6,6 @@
 	<string name="saved_savesettings">checkbox_ss</string>
 	<string name="saved_username">username</string>
 	<string name="saved_password">password</string>
+	<string name="saved_servername">servername</string>
 	<string name="saved_savedetails">checkbox_sd</string>
 </resources>
