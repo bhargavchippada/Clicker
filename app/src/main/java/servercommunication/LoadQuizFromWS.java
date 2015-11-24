@@ -71,30 +71,29 @@ public class LoadQuizFromWS extends ServerCommunicator {
                             _activity.gotoLoginPage();
                         } else if (statuscode == LOGGEDOFF) {
                             Toast.makeText(_activity, "Please Login!!", Toast.LENGTH_SHORT).show();
-                            _activity.updateUI("Login failed!!", View.INVISIBLE);
+                            _activity.updateUI("Please Login again!!", View.INVISIBLE);
                             _activity.gotoLoginPage();
                         } else if (statuscode == QUIZOFF) {
                             Toast.makeText(_activity, "Quiz hasn't started yet!!", Toast.LENGTH_SHORT).show();
                             _activity.updateUI("Quiz hasn't started yet!!", View.INVISIBLE);
                         } else if (statuscode == ATTEMPTED) {
                             Toast.makeText(_activity, "Quiz already attempted!!", Toast.LENGTH_SHORT).show();
-                            _activity.updateUI("Login failed!!", View.INVISIBLE);
-                            _activity.gotoLoginPage();
+                            _activity.updateUI("Quiz already attempted!!", View.INVISIBLE);
                         } else if (statuscode == RETRIEVED) {
                             Toast.makeText(_activity, "Quiz retrievel Success!", Toast.LENGTH_SHORT).show();
                             _activity.updateUI("Quiz retrievel Success!", View.INVISIBLE);
 
                             synchronized (Question.class) {
                                 Question.clear();
-                                Question.quizid = Integer.parseInt((String) getResponse().get("quizid"));
+                                Question.quizid = (Integer) getResponse().get("quizid");
                                 Question.question = (JSONObject) getResponse().get("question");
                                 Question.options = (JSONArray) getResponse().get("options");
-                                Question.feedback = Boolean.parseBoolean((String) getResponse().get("feedback"));
-                                Question.timedquiz = Boolean.parseBoolean((String) getResponse().get("timedquiz"));
-                                Question.quiztime = Integer.parseInt((String) getResponse().get("quiztime"));
+                                Question.feedback = (Boolean) getResponse().get("feedback");
+                                Question.timedquiz = (Boolean) getResponse().get("timedquiz");
+                                Question.quiztime = (Integer) getResponse().get("quiztime");
                                 Question.print();
                             }
-                            //_activity.gotoQuizPage();
+                            _activity.gotoQuizPage();
                         } else {
                             Toast.makeText(_activity, "Invalid status code!", Toast.LENGTH_SHORT).show();
                             _activity.updateUI("Invalid status code!", View.INVISIBLE);

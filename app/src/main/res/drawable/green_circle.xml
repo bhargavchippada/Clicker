@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:state_pressed="true"><layer-list>
-            <item><shape android:innerRadius="0dp" android:shape="ring" android:thicknessRatio="2" android:useLevel="false">
+    <item android:state_pressed="true">
+        <layer-list>
+            <item>
+                <shape android:innerRadius="0dp" android:shape="ring" android:thicknessRatio="2" android:useLevel="false">
                     <solid android:color="#ddd" />
-                </shape></item>
-            <item android:bottom="@dimen/dimen_4" android:left="@dimen/dimen_4" android:right="@dimen/dimen_4" android:top="@dimen/dimen_4"><shape android:innerRadius="0dp" android:shape="ring" android:thicknessRatio="2" android:useLevel="false">
+                </shape>
+            </item>
+            <item android:bottom="@dimen/dimen_4" android:left="@dimen/dimen_4" android:right="@dimen/dimen_4" android:top="@dimen/dimen_4">
+                <shape android:innerRadius="0dp" android:shape="ring" android:thicknessRatio="2" android:useLevel="false">
                     <solid android:color="@color/app_background_dark" />
-                </shape></item>
-        </layer-list></item>
-    <item><layer-list>
-            <item><shape android:innerRadius="0dp" android:shape="ring" android:thicknessRatio="2" android:useLevel="false">
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item>
+        <layer-list>
+            <item>
+                <shape android:innerRadius="0dp" android:shape="ring" android:thicknessRatio="2" android:useLevel="false">
                     <solid android:color="#ddd" />
-                </shape></item>
-            <item android:bottom="@dimen/dimen_4" android:left="@dimen/dimen_4" android:right="@dimen/dimen_4" android:top="@dimen/dimen_4"><shape android:innerRadius="0dp" android:shape="ring" android:thicknessRatio="2" android:useLevel="false">
+                </shape>
+            </item>
+            <item android:bottom="@dimen/dimen_4" android:left="@dimen/dimen_4" android:right="@dimen/dimen_4" android:top="@dimen/dimen_4">
+                <shape android:innerRadius="0dp" android:shape="ring" android:thicknessRatio="2" android:useLevel="false">
                     <solid android:color="@color/app_background" />
-                </shape></item>
-        </layer-list></item>
+                </shape>
+            </item>
+        </layer-list>
+    </item>
 
 </selector>

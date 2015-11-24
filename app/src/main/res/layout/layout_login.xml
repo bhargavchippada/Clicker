@@ -24,8 +24,8 @@
             android:gravity="center_vertical"
             android:text="Clickr!"
             android:textColor="@android:color/white"
-            android:textStyle="italic"
-            android:textSize="@dimen/font_20" />
+            android:textSize="@dimen/font_20"
+            android:textStyle="italic" />
     </LinearLayout>
 
     <RelativeLayout
@@ -88,10 +88,10 @@
                         android:id="@+id/edtxt_servername"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dimen_48"
+                        android:layout_marginTop="@dimen/dimen_8"
                         android:hint="Server Name"
                         android:inputType="text"
-                        android:textSize="@dimen/font_18"
-                        android:layout_marginTop="@dimen/dimen_8" />
+                        android:textSize="@dimen/font_18" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -124,9 +124,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/dimen_8"
+                        android:checked="true"
                         android:text="Save settings"
-                        android:textSize="@dimen/font_16"
-                        android:checked="true" />
+                        android:textSize="@dimen/font_16" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

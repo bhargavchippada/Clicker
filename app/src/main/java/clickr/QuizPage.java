@@ -1,14 +1,12 @@
 package clickr;
 
-import support.Question;
-import support.UserSession;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.FragmentActivity;
+import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -20,6 +18,8 @@ import com.iitbombay.clickr.R;
 import java.util.logging.Logger;
 
 import servercommunication.SubmitAnswerToWS;
+import support.Question;
+import support.UserSession;
 
 public class QuizPage extends FragmentActivity {
     private static String CLASSNAME = "QuizPage";
@@ -93,7 +93,7 @@ public class QuizPage extends FragmentActivity {
      * @param msg
      */
     public void updateUI(String msg) {
-        txtvw_status.setText(msg);
+        txtvw_status.setText(Html.fromHtml(msg));
     }
 
     /**
@@ -128,7 +128,7 @@ public class QuizPage extends FragmentActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // Do nothing but close the dialog
                 dialog.dismiss();
-                if (question.answers.length() != 0) {
+                if (Question.answers.length() != 0) {
                     new SubmitAnswerToWS().execute(QuizPage.this);
                 } else {
                     Toast.makeText(getBaseContext(), "Please answer...", Toast.LENGTH_SHORT).show();

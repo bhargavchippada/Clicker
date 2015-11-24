@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@drawable/card_style"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dimen_32"
     android:paddingLeft="@dimen/dimen_16"
     android:paddingRight="@dimen/dimen_16"
-    android:paddingTop="@dimen/dimen_16"
-    android:paddingBottom="@dimen/dimen_32" >
+    android:paddingTop="@dimen/dimen_16">
 
     <TextView
         android:id="@+id/txtvw_title"
@@ -34,16 +34,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:visibility="gone" >
-    </RadioGroup>
+        android:visibility="gone"></RadioGroup>
 
     <LinearLayout
         android:id="@+id/ll_checkboxes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone" >
-    </LinearLayout>
+        android:visibility="gone"></LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_truefalse"
@@ -51,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal"
-        android:visibility="gone" >
+        android:visibility="gone">
 
         <Button
             android:id="@+id/btn_true"
@@ -60,7 +58,7 @@
             android:background="@drawable/btn_grey_style"
             android:text="True"
             android:textAllCaps="false"
-            android:textSize="@dimen/font_20"
+            android:textSize="@dimen/font_18"
             android:textStyle="normal" />
 
         <Button
@@ -71,7 +69,7 @@
             android:background="@drawable/btn_grey_style"
             android:text="False"
             android:textAllCaps="false"
-            android:textSize="@dimen/font_20"
+            android:textSize="@dimen/font_18"
             android:textStyle="normal" />
     </LinearLayout>
 
@@ -83,11 +81,11 @@
         android:layout_marginRight="@dimen/dimen_16"
         android:gravity="top|left"
         android:hint="Answer"
-        android:textSize="@dimen/font_20"
         android:inputType="textMultiLine"
         android:maxLines="10"
         android:minLines="1"
         android:scrollbars="vertical"
+        android:textSize="@dimen/font_20"
         android:visibility="gone" />
 
 </LinearLayout>
