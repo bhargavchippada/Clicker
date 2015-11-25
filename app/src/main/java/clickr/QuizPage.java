@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.iitbombay.clickr.R;
 
+import org.json.JSONArray;
+
 import java.util.logging.Logger;
 
 import servercommunication.SubmitAnswerToWS;
@@ -64,7 +66,13 @@ public class QuizPage extends FragmentActivity {
                 public void onFinish() {
                     txtvw_timer.setText("Up!");
                     fragment_question.disableBtns();
-                    new SubmitAnswerToWS().execute(QuizPage.this);
+
+                    if (Question.answers != null && Question.answers.length() > 0)
+                        new SubmitAnswerToWS().execute(QuizPage.this);
+                    else {
+                        Question.answers = new JSONArray();
+                        new SubmitAnswerToWS().execute(QuizPage.this);
+                    }
                 }
             }.start();
         }
@@ -161,6 +169,8 @@ public class QuizPage extends FragmentActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // Do nothing but close the dialog
                 dialog.dismiss();
+                Question.answers = new JSONArray();
+                new SubmitAnswerToWS().execute(QuizPage.this);
                 gotoLoginPage();
             }
 

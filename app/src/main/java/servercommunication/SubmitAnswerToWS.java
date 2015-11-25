@@ -1,7 +1,6 @@
 package servercommunication;
 
 import android.app.Activity;
-import android.text.Html;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -88,7 +87,7 @@ public class SubmitAnswerToWS extends ServerCommunicator {
                         } else if (statuscode == SUBMITTED) {
                             Toast.makeText(_activity, "Answers submitted!", Toast.LENGTH_SHORT).show();
                             _activity.updateUI("Answer submitted!");
-                            if(getResponse().has("feedback")){
+                            if (getResponse().has("feedback")) {
                                 String feedback = (String) getResponse().get("feedback");
                                 _activity.updateUI(feedback);
                             }

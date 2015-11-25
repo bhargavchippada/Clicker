@@ -6,57 +6,59 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ScrollView;
 
-/**Had to extend ScrollView so that an Edit textView with max height inside scrollView will be able to
+/**
+ * Had to extend ScrollView so that an Edit textView with max height inside scrollView will be able to
  * scroll vertically i.e, it's scroll events don't clash with the scroll events of parent ScrollView.
- * @author bhargav
  *
+ * @author bhargav
  */
-public class VerticalScrollView extends ScrollView{
+public class VerticalScrollView extends ScrollView {
 
-	public VerticalScrollView(Context context) {
-		super(context);
-	}
+    public VerticalScrollView(Context context) {
+        super(context);
+    }
 
-	public VerticalScrollView(Context context, AttributeSet attrs) {
-		super(context, attrs);
-	}
+    public VerticalScrollView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
 
-	public VerticalScrollView(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-	}
+    public VerticalScrollView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+    }
 
-	@Override
-	public boolean onInterceptTouchEvent(MotionEvent ev) {
-		final int action = ev.getAction();
-		switch (action)
-		{
-		case MotionEvent.ACTION_DOWN:
-			Log.i("VerticalScrollview", "onInterceptTouchEvent: DOWN super false" );
-			super.onTouchEvent(ev);
-			break;
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        final int action = ev.getAction();
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                Log.i("VerticalScrollview", "onInterceptTouchEvent: DOWN super false");
+                super.onTouchEvent(ev);
+                break;
 
-		case MotionEvent.ACTION_MOVE:
-			return false; // redirect MotionEvents to ourself
+            case MotionEvent.ACTION_MOVE:
+                return false; // redirect MotionEvents to ourself
 
-		case MotionEvent.ACTION_CANCEL:
-			Log.i("VerticalScrollview", "onInterceptTouchEvent: CANCEL super false" );
-			super.onTouchEvent(ev);
-			break;
+            case MotionEvent.ACTION_CANCEL:
+                Log.i("VerticalScrollview", "onInterceptTouchEvent: CANCEL super false");
+                super.onTouchEvent(ev);
+                break;
 
-		case MotionEvent.ACTION_UP:
-			Log.i("VerticalScrollview", "onInterceptTouchEvent: UP super false" );
-			return false;
+            case MotionEvent.ACTION_UP:
+                Log.i("VerticalScrollview", "onInterceptTouchEvent: UP super false");
+                return false;
 
-		default: Log.i("VerticalScrollview", "onInterceptTouchEvent: " + action ); break;
-		}
+            default:
+                Log.i("VerticalScrollview", "onInterceptTouchEvent: " + action);
+                break;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public boolean onTouchEvent(MotionEvent ev) {
-		super.onTouchEvent(ev);
-		Log.i("VerticalScrollview", "onTouchEvent. action: " + ev.getAction() );
-		return true;
-	}
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        super.onTouchEvent(ev);
+        Log.i("VerticalScrollview", "onTouchEvent. action: " + ev.getAction());
+        return true;
+    }
 }

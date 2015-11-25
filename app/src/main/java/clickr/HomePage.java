@@ -1,7 +1,5 @@
 package clickr;
 
-import support.UserSession;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +15,7 @@ import com.iitbombay.clickr.R;
 import java.util.logging.Logger;
 
 import servercommunication.LoadQuizFromWS;
+import support.UserSession;
 
 /**
  * Home page of the user with option to start quiz

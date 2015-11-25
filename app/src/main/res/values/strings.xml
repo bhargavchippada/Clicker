@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Clickr</string>
-	<string name="saved_ipadress">ipaddress</string>
-	<string name="saved_port">portnumber</string>
-	<string name="saved_url">urlpath</string>
-	<string name="saved_savesettings">checkbox_ss</string>
-	<string name="saved_username">username</string>
-	<string name="saved_password">password</string>
-	<string name="saved_servername">servername</string>
-	<string name="saved_savedetails">checkbox_sd</string>
+    <string name="saved_ipadress">ipaddress</string>
+    <string name="saved_port">portnumber</string>
+    <string name="saved_url">urlpath</string>
+    <string name="saved_savesettings">checkbox_ss</string>
+    <string name="saved_username">username</string>
+    <string name="saved_password">password</string>
+    <string name="saved_servername">servername</string>
+    <string name="saved_savedetails">checkbox_sd</string>
 </resources>
