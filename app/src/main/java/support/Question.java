@@ -23,6 +23,8 @@ public class Question {
     public static long timeTook; //time taken to submit answer (submitTime - startTime)
     public static long submitTime; //quiz submit time
 
+    public static boolean submitted = false;
+
     public static JSONArray answers;
 
     /**
@@ -39,6 +41,7 @@ public class Question {
         timeTook = -1;
         submitTime = -1;
         answers = null;
+        submitted = false;
     }
 
     /**

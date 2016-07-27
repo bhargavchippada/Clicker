@@ -67,11 +67,13 @@ public class QuizPage extends FragmentActivity {
                     txtvw_timer.setText("Up!");
                     fragment_question.disableBtns();
 
-                    if (Question.answers != null && Question.answers.length() > 0)
-                        new SubmitAnswerToWS().execute(QuizPage.this);
-                    else {
-                        Question.answers = new JSONArray();
-                        new SubmitAnswerToWS().execute(QuizPage.this);
+                    if (!Question.submitted) {
+                        if (Question.answers != null && Question.answers.length() > 0)
+                            new SubmitAnswerToWS().execute(QuizPage.this);
+                        else {
+                            Question.answers = new JSONArray();
+                            new SubmitAnswerToWS().execute(QuizPage.this);
+                        }
                     }
                 }
             }.start();
@@ -169,8 +171,10 @@ public class QuizPage extends FragmentActivity {
             public void onClick(DialogInterface dialog, int which) {
                 // Do nothing but close the dialog
                 dialog.dismiss();
-                Question.answers = new JSONArray();
-                new SubmitAnswerToWS().execute(QuizPage.this);
+                if (!Question.submitted) {
+                    Question.answers = new JSONArray();
+                    new SubmitAnswerToWS().execute(QuizPage.this);
+                }
                 gotoLoginPage();
             }
 

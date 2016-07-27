@@ -126,7 +126,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="10.42.0.xx"
-                            android:textSize="@dimen/font_20" />
+                            android:textSize="@dimen/font_18" />
                     </LinearLayout>
                 </LinearLayout>
 

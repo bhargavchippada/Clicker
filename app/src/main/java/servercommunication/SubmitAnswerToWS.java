@@ -87,6 +87,7 @@ public class SubmitAnswerToWS extends ServerCommunicator {
                         } else if (statuscode == SUBMITTED) {
                             Toast.makeText(_activity, "Answers submitted!", Toast.LENGTH_SHORT).show();
                             _activity.updateUI("Answer submitted!");
+                            Question.submitted = true;
                             if (getResponse().has("feedback")) {
                                 String feedback = (String) getResponse().get("feedback");
                                 _activity.updateUI(feedback);
